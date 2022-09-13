@@ -24,11 +24,12 @@ const Login = () => {
         const body = {
             username: values.username,
             password: values.password,
+            chapta_token: values.chapta_token,
         };
 
         await authenticationRepository.api.login(body);
         message.success("Login Successfully");
-        await router.push("/home");
+        await router.push("/");
         } catch (err) {
         console.log({ err });
         message.error(err.response.data.message[0]);
@@ -49,6 +50,7 @@ const Login = () => {
                     <Form.Item name={'username'} label={label('Username')} rules={[{
                         required: true,
                         message: "Please input Username!",
+                        type: 'string',
                     }]}>
                         <Input placeholder={'Masukan username'}/>
                     </Form.Item>
