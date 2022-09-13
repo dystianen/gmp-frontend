@@ -9,3 +9,15 @@ body {
 body {
   background-color: #e3e8ee;
 }
+
+.ant-menu-horizontal > .ant-menu-item::after,
+.ant-menu-horizontal > .ant-menu-submenu::after {
+  border-bottom: none !important;
+  transition: none !important;
+}
+
+.ant-menu > .ant-menu-item:hover,
+.ant-menu > .ant-menu-submenu:hover,
+.ant-menu-item-selected {
+  color: #FFBF00 !important;
+}
