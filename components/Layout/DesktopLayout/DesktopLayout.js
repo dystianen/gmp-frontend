@@ -3,35 +3,19 @@ import ParticlesLayout from "../ParticlesLayout";
 import {Layout, Typography} from "antd";
 import DesktopLayoutHeader from "./DesktopLayoutHeader";
 import DesktopLayoutMenu from "./DesktopLayoutMenu";
+import {DesktopLayoutNavigation} from "./DesktopLayoutNavigation";
 
-const {Sider, Header, Content, Footer} = Layout;
-const {Paragraph, Text} = Typography;
+const {Content} = Layout;
 
 const DesktopLayout = ({children}) => {
     return <ParticlesLayout>
         <Layout
             theme={"light"}
-            className={"transparent"}
+            className={"transparent h-screen max-w-md mx-auto"}
             hasSider={true}>
-            <Sider
-                className={"transparent"}
-                width={240}
-                style={{
-                }}
-            >
-                <div
-                    className={"mt-6 mr-0 mb-12 ml-12 font-semibold p-0 text-xl"}
-                >
-                    Boilerplate
-                </div>
-                <DesktopLayoutMenu/>
-            </Sider>
-            <Layout>
-                <DesktopLayoutHeader/>
-                <Content className={"pr-4"}>
-                    {children}
-                </Content>
-            </Layout>
+            <Content className={"pr-4"}>
+                {children}
+            </Content>
         </Layout>
     </ParticlesLayout>
 }

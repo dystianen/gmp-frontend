@@ -1,8 +1,10 @@
 import {Button, Card, Form, Image, Input, message} from "antd";
 import {authenticationRepository} from "../../repository/authentication";
-import {router} from "next/client";
+import {useRouter} from "next/router";
+import Link from "next/link";
 
-export default function Register() {
+const Register = () => {
+    const router = useRouter();
     const [form] = Form.useForm();
 
     const label = (text) => (
@@ -30,15 +32,14 @@ export default function Register() {
     };
 
     return (
-        <div className={'flex flex-col items-center h-screen'}>
-            <div
-                className={'flex justify-center items-center bg-[url("/assets/background/BG.png")] bg-center h-3/5 w-full'}>
-                <Image className={'w-32'} src={'/assets/logo/logo.png'}/>
+        <div className={'flex flex-col items-center h-screen max-w-lg mx-auto'}>
+            <div className={'flex justify-center items-center bg-[url("/assets/background/BG.png")] bg-center h-3/5 w-full'}>
+                <Image className={'w-32'} src={'/assets/logo/logo.png'} preview={false}/>
             </div>
             <Card className={'w-full h-4/5 rounded-2xl -mt-10'}>
                 <div className={'flex flex-col items-center mb-10'}>
                     <h1 className={'text-xl font-bold'}>REGISTRASI</h1>
-                    <span className={'text-base text-center opacity-50'}>Silahkan isi email aktif anda sebagai <br /> kode verifikasi</span>
+                    <span className={'text-base text-center opacity-50'}>Silahkan isi email aktif anda sebagai <br/> kode verifikasi</span>
                 </div>
                 <Form form={form} layout={'vertical'}>
                     <Form.Item name={'username'} label={label('Username')} rules={[{
@@ -56,10 +57,12 @@ export default function Register() {
                     <Form.Item className={'text-center pt-5'}>
                         <Button type={'primary'} className={'rounded-md mb-2'} size={'large'} block
                                 onClick={handleSubmit}>Buat Akun</Button>
-                        <span>Sudah punya akun? <a>Login</a></span>
+                        <span>Sudah punya akun? <Link href={'/login'}>Login</Link></span>
                     </Form.Item>
                 </Form>
             </Card>
         </div>
     )
 }
+
+export default Register;
