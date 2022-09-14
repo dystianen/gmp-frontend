@@ -1,16 +1,17 @@
-import { Image, Card, Button, Row, Col } from "antd";
-import { observer } from "mobx-react-lite";
+import {Image, Card, Button, Row, Col} from "antd";
+import {observer} from "mobx-react-lite";
 import Link from "next/link";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import { DesktopLayoutNavigation } from "../../components/Layout/DesktopLayout/DesktopLayoutNavigation";
+import {DesktopLayoutNavigation} from "../../components/Layout/DesktopLayout/DesktopLayoutNavigation";
+
 const Wallet = observer(() => {
     return (
         <>
-            <div className={"flex flex-col max-w-lg mx-auto px-8 bg-[#FAFAFA] overflow-visible"}>
-                <div className={'absolute top-0 left-0 md:left-[185px] lg:left-[451px]'}>
+            <div className={"relative min-h-screen flex flex-col max-w-lg mx-auto px-8 bg-[#FAFAFA] overflow-hidden"}>
+                <div className={'absolute top-0 left-0'}>
                     <Image src={'/assets/icons/Ellipse1.svg'} preview={false}/>
                 </div>
-                <div className={'absolute top-11 right-0 md:right-[186px] lg:right-[450px]'}>
+                <div className={'absolute top-11 right-0'}>
                     <Image src={'/assets/icons/Ellipse3.svg'} preview={false}/>
                 </div>
                 <div className={"flex w-full mt-10"}>
@@ -18,7 +19,7 @@ const Wallet = observer(() => {
                         <button className={'flex items-center justify-center rounded-lg w-10 h-10 bg-[#D4AC2B]'}>
                             <Link href={'/login'}>
                                 <a><Image src={'/assets/icons/arrow-left.svg'} preview={false}/></a>
-                            </Link>                         
+                            </Link>
                         </button>
                     </div>
                     <p className={'text-center w-full font-bold text-3xl leading-8 text-[#FFBF00]'}>
@@ -35,9 +36,9 @@ const Wallet = observer(() => {
                     </div>
                     <div className={'flex justify-between'}>
                         <span className={'text-white font-semibold text-3xl leading-8'}>USDT</span>
-                        <Button 
-                            className={'bg-transparent text-white w-[99px] h-[34px] border-solid border-2 border-white'} 
-                            style={{ borderRadius: '50px' }}>
+                        <Button
+                            className={'bg-transparent text-white w-[99px] h-[34px] border-solid border-2 border-white'}
+                            style={{borderRadius: '50px'}}>
                             <Link href={'#'}>
                                 <a>Detail</a>
                             </Link>
@@ -51,7 +52,8 @@ const Wallet = observer(() => {
                     </h2>
                 </Card>
 
-                <Card className={"mt-10 h-40 bg-[#FFBF00] rounded-xl bg-[url('/assets/icons/Ellipse5.svg')] bg-no-repeat"}>
+                <Card
+                    className={"mt-10 h-40 bg-[#FFBF00] rounded-xl bg-[url('/assets/icons/Ellipse5.svg')] bg-no-repeat"}>
                     <div className={'absolute top-0 left-0'}>
                         <Image src={'/assets/icons/Ellipse2.svg'} preview={false}/>
                     </div>
@@ -60,9 +62,9 @@ const Wallet = observer(() => {
                     </div>
                     <div className={'flex justify-between'}>
                         <span className={'text-white font-semibold text-3xl leading-8'}>GMP</span>
-                        <Button 
-                            className={'bg-transparent text-white w-[99px] h-[34px] border-solid border-2 border-white'} 
-                            style={{ borderRadius: '50px' }}>
+                        <Button
+                            className={'bg-transparent text-white w-[99px] h-[34px] border-solid border-2 border-white'}
+                            style={{borderRadius: '50px'}}>
                             <Link href={'#'}>
                                 <a>Detail</a>
                             </Link>
@@ -81,14 +83,15 @@ const Wallet = observer(() => {
                     <Row justify={"start"}>
                         <Col span={4}>
                             <Button className={'bg-[#FFBF00] w-12 h-12 rounded-full'}>
-                                <Image src={'/assets/icons/empty-wallet-tick.svg'} className={'absolute right-1'} width={25} height={25} alt={'icon'} preview={false}/>
-                            </Button> 
+                                <Image src={'/assets/icons/empty-wallet-tick.svg'} className={'absolute right-1'}
+                                       width={25} height={25} alt={'icon'} preview={false}/>
+                            </Button>
                         </Col>
                         <Col span={12} className={'flex items-center ml-3'}>
                             <div className={'font-medium text-lg'}>
                                 <Link href={'#'}>
                                     <a className={'text-black hover:text-[#FFBF00]'}>Riwayat Transaksi</a>
-                                </Link>    
+                                </Link>
                             </div>
                         </Col>
                     </Row>
@@ -96,8 +99,9 @@ const Wallet = observer(() => {
                     <Row justify={"start"} className={'mt-4 mb-40'}>
                         <Col span={4}>
                             <Button className={'bg-[#FFBF00] w-12 h-12 rounded-full'}>
-                                <Image src={'/assets/icons/empty-wallet-tick.svg'} className={'absolute right-1'} width={25} height={25} alt={'icon'} preview={false}/>
-                            </Button> 
+                                <Image src={'/assets/icons/empty-wallet-tick.svg'} className={'absolute right-1'}
+                                       width={25} height={25} alt={'icon'} preview={false}/>
+                            </Button>
                         </Col>
                         <Col span={12} className={'flex items-center ml-3'}>
                             <div className={'font-medium text-lg'}>
@@ -106,7 +110,7 @@ const Wallet = observer(() => {
                                 </Link>
                             </div>
                         </Col>
-                    </Row>                 
+                    </Row>
                 </div>
 
 
