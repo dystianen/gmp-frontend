@@ -13,7 +13,7 @@ export const DesktopLayoutNavigation = () => {
         {
             id: 1,
             name: "Menu",
-            url: "/paket_investasi",
+            url: "/investment_package",
             icon: <BiHomeAlt style={styles.icon}/>
         },
         {

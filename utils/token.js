@@ -12,16 +12,11 @@ export class TokenUtil {
         }
 
         const accessToken = localStorage.getItem('access_token');
-        const refreshToken = localStorage.getItem('refresh_token');
         const username = localStorage.getItem('username');
         const password = localStorage.getItem('password');
 
         if (accessToken) {
             TokenUtil.setAccessToken(accessToken);
-        }
-
-        if (refreshToken) {
-            TokenUtil.setRefreshToken(refreshToken);
         }
 
         if (username) {
@@ -39,20 +34,10 @@ export class TokenUtil {
         } else {
             localStorage.removeItem('access_token');
         }
-
-        if (TokenUtil.refreshToken != null) {
-            localStorage.setItem('refresh_token', TokenUtil.refreshToken);
-        } else {
-            localStorage.removeItem('refresh_token');
-        }
     }
 
     static setAccessToken(accessToken) {
         TokenUtil.accessToken = accessToken;
-    }
-
-    static setRefreshToken(refreshToken) {
-        TokenUtil.refreshToken = refreshToken;
     }
 
     static setUsername(username) {
@@ -65,24 +50,6 @@ export class TokenUtil {
 
     static clearAccessToken() {
         TokenUtil.accessToken = null;
-    }
-
-    static clearRefreshToken() {
-        TokenUtil.refreshToken = null;
-    }
-
-    static setRememberMe() {
-        if (TokenUtil.username != null) {
-            localStorage.setItem('username', TokenUtil.username);
-        } else {
-            localStorage.removeItem('username');
-        }
-
-        if (TokenUtil.password != null) {
-            localStorage.setItem('password', TokenUtil.password);
-        } else {
-            localStorage.removeItem('password');
-        }
     }
 
     static decodedToken() {

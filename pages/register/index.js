@@ -2,8 +2,9 @@ import {Button, Card, Form, Image, Input, message} from "antd";
 import {authenticationRepository} from "../../repository/authentication";
 import {useRouter} from "next/router";
 import Link from "next/link";
+import {observer} from "mobx-react-lite";
 
-const Register = () => {
+const Register = observer(() => {
     const router = useRouter();
     const [form] = Form.useForm();
 
@@ -63,6 +64,6 @@ const Register = () => {
             </Card>
         </div>
     )
-}
+});
 
 export default Register;

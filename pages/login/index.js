@@ -1,10 +1,12 @@
-import {authenticationRepository} from "../../repository/authentication";
 import {useRouter} from "next/router";
-import { Button, Card, Form, Image, Input, message, Checkbox } from "antd";
+import {Button, Card, Form, Image, Input, message, Checkbox} from "antd";
 import Link from "next/link";
+import {useStore} from "../../components/StoreProvider";
+import {observer} from "mobx-react-lite";
 
-const Login = () => {
+const Login = observer(() => {
     const router = useRouter();
+    const store = useStore();
     const [form] = Form.useForm();
 
     const label = (text) => (
@@ -13,32 +15,29 @@ const Login = () => {
         </span>
     )
 
-    const onChange = (e) => {
-        console.log(`checked = ${e.target.checked}`);
-    };
-
     const handleSubmit = async () => {
         try {
-        const values = await form.validateFields();
+            const values = await form.validateFields();
 
-        const body = {
-            username: values.username,
-            password: values.password,
-            chapta_token: values.chapta_token,
-        };
+            const body = {
+                username: values.username,
+                password: values.password,
+            };
 
-        await authenticationRepository.api.login(body);
-        message.success("Login Successfully");
-        await router.push("/");
+            await store.authentication.login(body);
+            form.resetFields();
+            message.success("Login Successfully");
+            await router.push("/investment_package");
         } catch (err) {
-        console.log({ err });
-        message.error(err.response.data.message[0]);
+            console.log({err});
+            message.error(err.response.data.message);
         }
     };
 
     return (
         <div className={'flex flex-col items-center h-screen max-w-lg mx-auto'}>
-            <div className={'flex justify-center items-center bg-cover bg-[url("/assets/background/BG2.svg")] bg-center h-3/5 rounded-b-3xl w-full z-10'}>
+            <div
+                className={'flex justify-center items-center bg-cover bg-[url("/assets/background/BG2.svg")] bg-center h-3/5 rounded-b-3xl w-full z-10'}>
                 <Image className={'w-32'} src={'/assets/logo/logo.png'} preview={false}/>
             </div>
             <Card className={'w-full h-4/5 -mt-10'}>
@@ -61,9 +60,9 @@ const Login = () => {
                         <Input.Password placeholder={'Masukan password'}/>
                     </Form.Item>
                     <Form.Item>
-                        <Checkbox onChange={onChange}>Ingatkan saya</Checkbox>
+                        {/*<Checkbox onChange={onChange}>Ingatkan saya</Checkbox>*/}
                         <Link href="#">
-                            <a className={'float-right'}>Lupa Password</a>
+                            <a className={'float-right text-black font-semibold'}>Lupa Password?</a>
                         </Link>
                     </Form.Item>
                     <Form.Item className={'text-center pt-1.5'}>
@@ -75,5 +74,6 @@ const Login = () => {
             </Card>
         </div>
     );
-};
+});
+
 export default Login;

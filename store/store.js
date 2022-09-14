@@ -1,14 +1,10 @@
-import { action, observable, computed, runInAction, makeObservable } from 'mobx'
-import { enableStaticRendering } from 'mobx-react-lite';
-import { useMemo } from 'react'
-import {Sample, SampleStore} from "./sample";
-// eslint-disable-next-line react-hooks/rules-of-hooks
+import {enableStaticRendering} from 'mobx-react-lite';
+import {AuthenticationStore} from "./authentication";
+
 enableStaticRendering(typeof window === 'undefined')
 
-let store;
-
 export class Store {
-    sample = new SampleStore(this);
+    authentication = new AuthenticationStore(this);
 
     constructor() {
     }
