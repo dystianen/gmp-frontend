@@ -1,14 +1,16 @@
 import { Image, Card, Button, Row, Col } from "antd";
+import { observer } from "mobx-react-lite";
 import Link from "next/link";
+import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
 import { DesktopLayoutNavigation } from "../../components/Layout/DesktopLayout/DesktopLayoutNavigation";
-const Wallet = () => {
+const Wallet = observer(() => {
     return (
         <>
             <div className={"flex flex-col max-w-lg mx-auto px-8 bg-[#FAFAFA] overflow-visible"}>
-                <div className={'absolute top-0 left-0 md:left-[152px] lg:left-[419px]'}>
+                <div className={'absolute top-0 left-0 md:left-[185px] lg:left-[451px]'}>
                     <Image src={'/assets/icons/Ellipse1.svg'} preview={false}/>
                 </div>
-                <div className={'absolute top-11 right-0 md:right-[155px] lg:right-[418px]'}>
+                <div className={'absolute top-11 right-0 md:right-[186px] lg:right-[450px]'}>
                     <Image src={'/assets/icons/Ellipse3.svg'} preview={false}/>
                 </div>
                 <div className={"flex w-full mt-10"}>
@@ -19,9 +21,9 @@ const Wallet = () => {
                             </Link>                         
                         </button>
                     </div>
-                    <div className={'flex justify-center items-center w-full font-bold text-3xl leading-8 text-[#FFBF00]'}>
+                    <p className={'text-center w-full font-bold text-3xl leading-8 text-[#FFBF00]'}>
                         Dompet
-                    </div>
+                    </p>
                 </div>
 
                 <Card className={"mt-9 h-40 bg-[#4461F2] rounded-xl"}>
@@ -112,5 +114,9 @@ const Wallet = () => {
             </div>
         </>
     )
-}
+})
+
+Wallet.getLayout = function Layout(page) {
+    return <DesktopLayout>{page}</DesktopLayout>;
+};
 export default Wallet;

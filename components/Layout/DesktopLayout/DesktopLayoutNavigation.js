@@ -25,7 +25,7 @@ export const DesktopLayoutNavigation = () => {
         {
             id: 3,
             name: "Dompet",
-            url: "/dompet",
+            url: "/wallet",
             icon: <BsCreditCard2Back style={styles.icon}/>
         },
         {
