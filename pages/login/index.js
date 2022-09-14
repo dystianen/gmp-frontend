@@ -42,7 +42,7 @@ const Login = observer(() => {
             </div>
             <Card className={'w-full h-4/5 -mt-10'}>
                 <div className={'flex flex-col items-center mb-10 mt-8'}>
-                    <h1 className={'text-xl font-bold'}>Selamat Datang</h1>
+                    <h1 className={'text-xl font-bold'}>SELAMAT DATANG</h1>
                     <span className={'text-base text-center opacity-50'}>Masuk Untuk Mengelola Akun Anda</span>
                 </div>
                 <Form form={form} layout={'vertical'}>
