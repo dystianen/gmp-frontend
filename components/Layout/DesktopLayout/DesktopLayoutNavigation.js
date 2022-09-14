@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {BiHomeAlt, BiUser} from "react-icons/bi";
 import {BsCreditCard2Back} from "react-icons/bs";
 import {HiOutlineUsers} from "react-icons/hi";
@@ -6,12 +7,13 @@ import {Menu} from "antd";
 
 export const DesktopLayoutNavigation = () => {
     const router = useRouter();
+    const [setKeys, setSetKeys] = useState(['1']);
 
     const menu = [
         {
             id: 1,
             name: "Menu",
-            url: "/home",
+            url: "/paket_investasi",
             icon: <BiHomeAlt style={styles.icon}/>
         },
         {
@@ -34,8 +36,14 @@ export const DesktopLayoutNavigation = () => {
         }
     ];
 
-    return <div className="rounded-b-lg fixed bg-white drop-shadow-2xl h-20 max-w-lg mx-auto inset-x-0 bottom-0 z-10">
-        <Menu mode="horizontal" className="flex justify-around items-center mt-5 border-none">
+    return <div className="max-w-md mx-auto rounded-b-lg fixed bg-white drop-shadow-2xl h-20 inset-x-0 bottom-0 z-10">
+        <Menu
+            mode="horizontal"
+            inlineIndent={0}
+            className="flex justify-around items-center h-20 pt-3 border-none"
+            defaultSelectedKeys={['1']}
+            selectedKeys={setKeys}
+            onSelect={({selectedKeys}) => setSetKeys(selectedKeys)}>
             {menu.map(it => (
                 <Menu.Item key={it.id} onClick={() => router.push(it.url)}>
                     <div className={'-mb-2'}>{it.icon}</div>
