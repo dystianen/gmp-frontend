@@ -1,0 +1,55 @@
+variables:
+  REGISTRY_URL: registry-harbor.app.bangun-kreatif.com
+  REGISTRY_IMAGE: $REGISTRY_URL/gmp/gmp-frontend
+  VERSION_STAGING: $CI_COMMIT_REF_NAME-$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA
+  VERSION_PRODUCTION: $CI_COMMIT_REF_NAME-$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA-production
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay2
+  STAGING_BASE_URL: https://gmp-backend.k3s.bangun-kreatif.com
+
+stages:
+  - build-staging
+  - deploy-staging
+  - build-production
+  - deploy-production
+  
+build-staging:
+  stage: build-staging
+  image: appuio/gitlab-runner-oc:3.11.0
+  only:
+    - devops-staging
+  services:
+    - docker:dind
+  script:
+    - docker login $REGISTRY_URL -u $BKA_REGISTRY_USER -p $BKA_REGISTRY_PASS
+    - docker build -t $REGISTRY_IMAGE:$VERSION_STAGING . --build-arg NEXT_PUBLIC_BASE_URL=$STAGING_BASE_URL --build-arg NEXT_PUBLIC_AUTH_SERVICE=$STAGING_AUTH_SERVICE --build-arg NEXT_PUBLIC_GOOGLE_ANALYTICS=$STAGING_GOOGLE_ANALYTICS --build-arg NEXT_PUBLIC_SITEKEYCAPTCHA=$STAGING_SITEKEYCAPTCHA --build-arg NEXT_PUBLIC_MIDDLEWARE_URL=$STAGING_BASE_URL
+    - docker push $REGISTRY_IMAGE:$VERSION_STAGING
+    - docker rmi $REGISTRY_IMAGE:$VERSION_STAGING
+
+deploy-staging:
+  stage: deploy-staging
+  image: dtzar/helm-kubectl
+  only:
+    - devops-staging
+  script:
+    - kubectl config set-cluster k8s --server="${BKA_CLUSTER_HOST}"
+    - kubectl config set clusters.k8s.certificate-authority-data ${BKA_CLUSTER_CA}
+    - kubectl config set-credentials gitlab --token="${BKA_CLUSTER_TOKEN}"
+    - kubectl config set-context default --cluster=k8s --user=gitlab
+    - kubectl config use-context default
+    - sed -i "s/<VERSION>/${VERSION_STAGING}/g" k8s/staging/deployment.yaml
+    - kubectl apply -f k8s/staging/deployment.yaml
+
+build-production:
+  stage: build-production
+  image: appuio/gitlab-runner-oc:3.11.0
+  only:
+    - devops-production
+  services:
+    - docker:dind
+  script:
+    - docker login $REGISTRY_URL -u $BKA_REGISTRY_USER -p $BKA_REGISTRY_PASS
+    - docker build -f Dockerfile.production -t $REGISTRY_IMAGE_PROD:$VERSION_PRODUCTION . --build-arg NEXT_PUBLIC_BASE_URL=$PRODUCTION_BASE_URL --build-arg NEXT_PUBLIC_AUTH_SERVICE=$STAGING_AUTH_SERVICE --build-arg NEXT_PUBLIC_GOOGLE_ANALYTICS=$STAGING_GOOGLE_ANALYTICS --build-arg NEXT_PUBLIC_SITEKEYCAPTCHA=$STAGING_SITEKEYCAPTCHA  --build-arg NEXT_PUBLIC_MIDDLEWARE_URL=$PRODUCTION_MIDDLEWARE_URL
+    - docker push $REGISTRY_IMAGE_PROD:$VERSION_PRODUCTION
+    - docker rmi $REGISTRY_IMAGE_PROD:$VERSION_PRODUCTION
