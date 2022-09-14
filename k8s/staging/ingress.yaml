@@ -17,7 +17,7 @@ spec:
               service:
                 name: gmp-frontend
                 port:
-                  number: 5000
+                  number: 3000
   tls:
     - hosts:
         - "gmp-frontend.k3s.bangun-kreatif.com"

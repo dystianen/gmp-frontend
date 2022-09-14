@@ -17,10 +17,7 @@ spec:
         - name: gmp-frontend
           image: registry-harbor.app.bangun-kreatif.com/gmp/gmp-frontend:<VERSION>
           ports:
-            - containerPort: 5000
-          envFrom:
-            - secretRef:
-                name: gmp-frontend-env
+            - containerPort: 3000
       imagePullSecrets:
         - name: regcred
 
