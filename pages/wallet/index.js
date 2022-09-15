@@ -16,7 +16,7 @@ const Wallet = observer(() => {
                 </div>
                 <div className={"flex w-full mt-10"}>
                     <div>
-                        <button className={'flex items-center justify-center rounded-lg w-10 h-10 bg-[#D4AC2B]'}>
+                        <button className={'flex items-center justify-center rounded-lg w-10 h-10 bg-[#FFBF00]'}>
                             <Link href={'/login'}>
                                 <a><Image src={'/assets/icons/arrow-left.svg'} preview={false}/></a>
                             </Link>
@@ -89,7 +89,7 @@ const Wallet = observer(() => {
                         </Col>
                         <Col span={12} className={'flex items-center ml-3'}>
                             <div className={'font-medium text-lg'}>
-                                <Link href={'#'}>
+                                <Link href={'/wallet_details'}>
                                     <a className={'text-black hover:text-[#FFBF00]'}>Riwayat Transaksi</a>
                                 </Link>
                             </div>

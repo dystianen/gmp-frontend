@@ -35,7 +35,7 @@ const Login = observer(() => {
         } catch (err) {
             console.log({err});
             setIsLoading(false)
-            message.error(err.response.data.message);
+            message.error(err.response.data);
         }
     };
 
