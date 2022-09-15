@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite";
-import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
+import DesktopLayout from "../../../components/Layout/DesktopLayout/DesktopLayout";
 import {Card, Image} from "antd";
 import Link from "next/link";
 
@@ -46,30 +46,36 @@ const WalletDetails = observer(() => {
                 <p className={'text-center text-2xl font-bold text-[#FFBF00] pt-[54px]'}>GMP</p>
 
                 <Card className={"mt-9 h-48 bg-[#FFBF00] rounded-xl"}>
-                    <div className={'absolute top-0 right-0'}>
-                        <Image src={'/assets/background/chip.svg'} preview={false}/>
+                    <div className={'absolute top-0 right-0 z-0'}>
+                        <Image src={'/assets/background/chip.svg'} alt={'background'} preview={false}/>
                     </div>
                     <div className={'flex justify-between'}>
                         <span className={'text-white font-semibold text-2xl leading-8'}>GMP</span>
                     </div>
-                    <div className={'font-medium text-sm leading-4 text-white mt-2.5'}>
-                        Balance
+                    <div className={'absolute'}>
+                        <div className={'font-medium text-sm leading-4 text-white mt-2.5'}>
+                            Balance
+                        </div>
+                        <h2 className={'font-semibold text-3xl text-white z-10'}>
+                            $10000000000
+                        </h2>
+                        <p className={'text-sm font-medium text-white mb-[1px]'}>Transaksi Terakhir</p>
+                        <p className={'text-white font-semibold text-base'}>{history[0].date}</p>
                     </div>
-                    <h2 className={'font-semibold text-3xl text-white'}>
-                        $1000
-                    </h2>
-                    <p className={'text-sm font-medium text-white mb-[1px]'}>Transaksi Terakhir</p>
-                    <p className={'text-white font-semibold text-base'}>09 September 2022</p>
                 </Card>
 
                 <div className={'mt-8'}>
                     <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
                     {history.map((value, index) => (
-                        <div className={'grid grid-rows-2 grid-flow-col mb-2'}>
+                        <div key={index} className={'grid grid-rows-2 grid-flow-col mb-2'}>
                             <div className={'font-semibold text-base mb-1'}>{value.name}</div>
                             <div className={'text-sm font-normal text-slate-600'}>{value.date}</div>
-                            <div className={'row-span-3 col-span-2 text-lg text-red-500 font-semibold'}>
-                                <p className={'text-right'}>-${value.amount}</p>
+                            <div className={'row-span-3 col-span-2 text-lg font-semibold'}>
+                                {value.name === "Withdraw" ? (
+                                    <p className={'text-right text-red-500'}>-${value.amount}</p>
+                                ) : (
+                                    <p className={'text-right text-green-500'}>+${value.amount}</p>
+                                )}
                             </div>
                         </div>
                     ))}

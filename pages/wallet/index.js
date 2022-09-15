@@ -9,16 +9,16 @@ const Wallet = observer(() => {
         <>
             <div className={"relative min-h-screen flex flex-col max-w-lg mx-auto px-8 bg-[#FAFAFA] overflow-hidden"}>
                 <div className={'absolute top-0 left-0'}>
-                    <Image src={'/assets/icons/Ellipse1.svg'} preview={false}/>
+                    <Image src={'/assets/icons/Ellipse1.svg'} alt={'icon'} preview={false}/>
                 </div>
                 <div className={'absolute top-11 right-0'}>
-                    <Image src={'/assets/icons/Ellipse3.svg'} preview={false}/>
+                    <Image src={'/assets/icons/Ellipse3.svg'} alt={'icon'} preview={false}/>
                 </div>
                 <div className={"flex w-full mt-10"}>
                     <div>
                         <button className={'flex items-center justify-center rounded-lg w-10 h-10 bg-[#FFBF00]'}>
                             <Link href={'/login'}>
-                                <a><Image src={'/assets/icons/arrow-left.svg'} preview={false}/></a>
+                                <a><Image src={'/assets/icons/arrow-left.svg'} alt={'icon'} preview={false}/></a>
                             </Link>
                         </button>
                     </div>
@@ -29,10 +29,10 @@ const Wallet = observer(() => {
 
                 <Card className={"mt-9 h-40 bg-[#4461F2] rounded-xl"}>
                     <div className={'absolute top-0 left-0'}>
-                        <Image src={'/assets/icons/Ellipse2.svg'} preview={false}/>
+                        <Image src={'/assets/icons/Ellipse2.svg'} alt={'icon'} preview={false}/>
                     </div>
                     <div className={'absolute top-[80px] right-0'}>
-                        <Image src={'/assets/icons/Ellipse4.svg'} preview={false}/>
+                        <Image src={'/assets/icons/Ellipse4.svg'} alt={'icon'} preview={false}/>
                     </div>
                     <div className={'flex justify-between'}>
                         <span className={'text-white font-semibold text-3xl leading-8'}>USDT</span>
@@ -55,10 +55,10 @@ const Wallet = observer(() => {
                 <Card
                     className={"mt-10 h-40 bg-[#FFBF00] rounded-xl bg-[url('/assets/icons/Ellipse5.svg')] bg-no-repeat"}>
                     <div className={'absolute top-0 left-0'}>
-                        <Image src={'/assets/icons/Ellipse2.svg'} preview={false}/>
+                        <Image src={'/assets/icons/Ellipse2.svg'} alt={'icon'} preview={false}/>
                     </div>
                     <div className={'absolute top-[80px] right-0'}>
-                        <Image src={'/assets/icons/Ellipse6.svg'} preview={false}/>
+                        <Image src={'/assets/icons/Ellipse6.svg'} alt={'icon'} preview={false}/>
                     </div>
                     <div className={'flex justify-between'}>
                         <span className={'text-white font-semibold text-3xl leading-8'}>GMP</span>
@@ -89,7 +89,7 @@ const Wallet = observer(() => {
                         </Col>
                         <Col span={12} className={'flex items-center ml-3'}>
                             <div className={'font-medium text-lg'}>
-                                <Link href={'/wallet_details'}>
+                                <Link href={'/wallet/1'}>
                                     <a className={'text-black hover:text-[#FFBF00]'}>Riwayat Transaksi</a>
                                 </Link>
                             </div>
