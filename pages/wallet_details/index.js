@@ -65,7 +65,7 @@ const WalletDetails = observer(() => {
                 <div className={'mt-8'}>
                     <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
                     {history.map((value, index) => (
-                        <div className={'grid grid-rows-2 grid-flow-col mb-2'}>
+                        <div key={index} className={'grid grid-rows-2 grid-flow-col mb-2'}>
                             <div className={'font-semibold text-base mb-1'}>{value.name}</div>
                             <div className={'text-sm font-normal text-slate-600'}>{value.date}</div>
                             <div className={'row-span-3 col-span-2 text-lg text-red-500 font-semibold'}>
