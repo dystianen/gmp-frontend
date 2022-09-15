@@ -8,7 +8,7 @@ const DesktopLayout = ({children, bottomNavigation = true}) => {
 
     return <Layout
             theme={"light"}
-            className={"h-screen max-w-md mx-auto"}
+            className={"bg-[#fafafa] h-screen max-w-md mx-auto"}
             hasSider={true}>
             <Content>
                 {children}

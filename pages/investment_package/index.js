@@ -101,7 +101,7 @@ const InvestmentPackage = observer(() => {
                                 <span className={'text-[#4461F2] text-2xl font-semibold'}>$ {it.price}</span>
                             </div>
                             <Button type={'primary'} size={'large'} className={'rounded-full'}
-                                    onClick={() => router.push('/paket_investasi/0909209/detail')}>Detail</Button>
+                                    onClick={() => router.push('/investment_package/0909209/detail')}>Detail</Button>
                         </div>
                     </Card>
                 ))}
