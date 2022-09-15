@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
-import {BiHomeAlt, BiUser} from "react-icons/bi";
-import {BsCreditCard2Back} from "react-icons/bs";
-import {HiOutlineUsers} from "react-icons/hi";
 import {useRouter} from "next/router";
 import {Menu} from "antd";
+import {MdDashboard, MdPeopleAlt, MdAccountBalanceWallet, MdPerson} from "react-icons/md";
 
 export const DesktopLayoutNavigation = () => {
     const router = useRouter();
@@ -14,25 +12,25 @@ export const DesktopLayoutNavigation = () => {
             id: 1,
             name: "Menu",
             url: "/investment_package",
-            icon: <BiHomeAlt style={styles.icon}/>
+            icon: <MdDashboard style={styles.icon}/>
         },
         {
             id: 2,
             name: "Downline",
             url: "/downline",
-            icon: <HiOutlineUsers style={styles.icon}/>
+            icon: <MdPeopleAlt style={styles.icon}/>
         },
         {
             id: 3,
             name: "Dompet",
             url: "/wallet",
-            icon: <BsCreditCard2Back style={styles.icon}/>
+            icon: <MdAccountBalanceWallet style={styles.icon}/>
         },
         {
             id: 4,
             name: "Profile",
             url: "/profile",
-            icon: <BiUser style={styles.icon}/>
+            icon: <MdPerson style={styles.icon}/>
         }
     ];
 
