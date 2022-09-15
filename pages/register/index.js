@@ -48,7 +48,7 @@ const Register = observer(() => {
                         <h1 className={'text-xl font-bold'}>REGISTRASI</h1>
                         <span className={'text-base text-center opacity-50'}>Silahkan isi email aktif anda sebagai <br/> kode verifikasi</span>
                     </div>
-                    <Form form={form} layout={'vertical'}>
+                    <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
                         <Form.Item name={'username'} label={label('Username')} rules={[{
                             required: true,
                             message: "Please input Username!",
@@ -62,8 +62,7 @@ const Register = observer(() => {
                             <Input.Password placeholder={'Masukan password'}/>
                         </Form.Item>
                         <Form.Item className={'text-center pt-5'}>
-                            <Button type={'primary'} className={'rounded-md mb-2'} size={'large'} block
-                                    onClick={handleSubmit}>Buat Akun</Button>
+                            <Button htmlType={'submit'} type={'primary'} className={'rounded-md mb-2'} size={'large'} block>Buat Akun</Button>
                             <span>Sudah punya akun? <Link href={'/login'}>Login</Link></span>
                         </Form.Item>
                     </Form>

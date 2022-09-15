@@ -51,7 +51,7 @@ const Login = observer(() => {
                         <h1 className={'text-xl font-bold'}>SELAMAT DATANG</h1>
                         <span className={'text-base text-center opacity-50'}>Masuk Untuk Mengelola Akun Anda</span>
                     </div>
-                    <Form form={form} layout={'vertical'}>
+                    <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
                         <Form.Item name={'username'} label={label('Username')} rules={[{
                             required: true,
                             message: "Please input Username!",
@@ -72,8 +72,7 @@ const Login = observer(() => {
                             </Link>
                         </Form.Item>
                         <Form.Item className={'text-center pt-1.5'}>
-                            <Button type={'primary'} className={'rounded-md mb-2'} size={'large'} block
-                                    onClick={handleSubmit}>Masuk</Button>
+                            <Button htmlType={'submit'} type={'primary'} className={'rounded-md mb-2'} size={'large'} block>Masuk</Button>
                             <span>Belum punya akun? <Link href={'/register'}>Registrasi</Link></span>
                         </Form.Item>
                     </Form>

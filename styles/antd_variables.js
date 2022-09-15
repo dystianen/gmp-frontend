@@ -1,10 +1,12 @@
 module.exports = {
     '@primary-color': '#4461F2',
-    '@body-background': '#e3e8ee',
+    '@body-background': '#F5F5F5',
     '@font-family': `'Rubik', sans-serif, 'Montserrat Alternates', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
   'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
   'Noto Color Emoji'`,
     '@font-size-base': '12px',
+    '@font-weight': 600,
+    '@line-height': '16px',
     '@layout-sider-background': 'transparent',
     '@layout-body-background': 'transparent',
     '@menu-item-height': '20px',
