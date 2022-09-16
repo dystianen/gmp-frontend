@@ -52,21 +52,41 @@ const ForgotPassword = observer(() => {
                             message: "Please input username!",
                             type: 'string',
                         }]}>
-                            <Input placeholder={'Masukan Username'}/>
+                            <Input size={'large'} placeholder={'Masukan Username'} className={'h-12 rounded-lg'}/>
                         </Form.Item>
-                        <Form.Item name={'password'} label={label('Password')} rules={[{
+
+                        <Form.Item name={'password'} label={label('Password')} hasFeedback rules={[{
                             required: true,
                             message: "Please input new password!",
                             type: 'string',
                         }]}>
-                            <Input placeholder={'Masukan Password Baru'}/>
+                            <Input.Password size={'large'} placeholder={'Masukan Password Baru'} className={'h-12 rounded-lg text-lg'}/>
                         </Form.Item>
-                        <Form.Item name={'repeat_password'} label={label('Ulangi Password')} rules={[{
-                            required: true,
-                            message: "Please input Repeat Password!",
-                        }]}>
-                            <Input.Password placeholder={'Ulangi Password'}/>
+
+                        <Form.Item
+                            name="confirm"
+                            label={label('Konfirmasi Password')}
+                            dependencies={['password']}
+                            hasFeedback
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please confirm your password!',
+                                },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue('password') === value) {
+                                            return Promise.resolve();
+                                        }
+
+                                        return Promise.reject(new Error('Kedua sandi yang Anda masukkan tidak cocok!'));
+                                    },
+                                }),
+                            ]}
+                        >
+                            <Input.Password size={'large'} placeholder={'Konfirmasi Password'} className={'h-12 rounded-lg text-lg'}/>
                         </Form.Item>
+
                         <Form.Item className={'text-center pt-1.5'}>
                             <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl mb-2'} size={'large'} block>Simpan</Button>
                         </Form.Item>
