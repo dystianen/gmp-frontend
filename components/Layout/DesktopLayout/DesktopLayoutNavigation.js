@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import {Menu} from "antd";
 import {MdDashboard, MdPeopleAlt, MdAccountBalanceWallet, MdPerson} from "react-icons/md";
@@ -6,6 +6,18 @@ import {MdDashboard, MdPeopleAlt, MdAccountBalanceWallet, MdPerson} from "react-
 export const DesktopLayoutNavigation = () => {
     const router = useRouter();
     const [setKeys, setSetKeys] = useState(['1']);
+
+    useEffect(() => {
+        if (router.pathname === '/investment_package') {
+            setSetKeys(['1'])
+        } else if (router.pathname === '/downline') {
+            setSetKeys(['2'])
+        } else if (router.pathname === '/wallet') {
+            setSetKeys(['3'])
+        } else {
+            setSetKeys(['4'])
+        }
+    } , [router])
 
     const menu = [
         {
