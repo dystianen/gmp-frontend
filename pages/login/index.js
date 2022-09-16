@@ -44,7 +44,7 @@ const Login = observer(() => {
             <div className={'flex flex-col items-center h-screen max-w-lg mx-auto'}>
                 <div
                     className={'flex justify-center items-center bg-cover bg-[url("/assets/background/BG2.svg")] bg-center h-3/5 rounded-b-3xl w-full z-10'}>
-                    <Image className={'w-32'} src={'/assets/logo/logo.png'} preview={false}/>
+                    <Image className={'w-32'} src={'/assets/logo/logo.png'} alt={'logo'} preview={false}/>
                 </div>
                 <Card className={'w-full h-4/5 -mt-10'}>
                     <div className={'flex flex-col items-center mb-10 mt-8'}>
@@ -67,7 +67,7 @@ const Login = observer(() => {
                         </Form.Item>
                         <Form.Item>
                             {/*<Checkbox onChange={onChange}>Ingatkan saya</Checkbox>*/}
-                            <Link href="#">
+                            <Link href="/forgot_password">
                                 <a className={'float-right text-black font-semibold'}>Lupa Password?</a>
                             </Link>
                         </Form.Item>

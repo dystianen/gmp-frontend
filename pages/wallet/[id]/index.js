@@ -26,10 +26,16 @@ const WalletDetails = observer(() => {
             date: '25 Oktober 2022, 16:00',
             amount: 50,
         },
+        {
+            name: 'Paket Medium',
+            date: '25 Oktober 2022, 16:00',
+            amount: 50,
+        },
     ]
+    console.log(history)
     return (
         <>
-            <div className="relative bg-[#FAFAFA] min-h-screen max-w-lg bg-center h-screen w-full mx-auto px-6 rounded-t">
+            <div className="relative bg-[#FAFAFA] min-h-screen max-w-lg bg-center w-full mx-auto px-6 rounded-t">
                 <div className="absolute top-0 left-0">
                     <Image src={'/assets/icons/Ellipse8.svg'} alt={'icons'} preview={false}/>
                 </div>
@@ -60,26 +66,39 @@ const WalletDetails = observer(() => {
                             $10000000000
                         </h2>
                         <p className={'text-sm font-medium text-white mb-[1px]'}>Transaksi Terakhir</p>
-                        <p className={'text-white font-semibold text-base'}>{history[0].date}</p>
+                        {history.length === 0 ? (
+                            ''
+                        ) : (
+                            <p className={'text-white font-semibold text-base'}>{history[0].date}</p>
+                        )}
                     </div>
                 </Card>
 
-                <div className={'mt-8'}>
-                    <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
-                    {history.map((value, index) => (
-                        <div key={index} className={'grid grid-rows-2 grid-flow-col mb-2'}>
-                            <div className={'font-semibold text-base mb-1'}>{value.name}</div>
-                            <div className={'text-sm font-normal text-slate-600'}>{value.date}</div>
-                            <div className={'row-span-3 col-span-2 text-lg font-semibold'}>
-                                {value.name === "Withdraw" ? (
-                                    <p className={'text-right text-red-500'}>-${value.amount}</p>
-                                ) : (
-                                    <p className={'text-right text-green-500'}>+${value.amount}</p>
-                                )}
-                            </div>
+                {history.length === 0 ? (
+                    <div className={'mt-8 pb-28'}>
+                        <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
+                        <div className={'flex justify-center'}>
+                            Anda Belum Memiliki Riwayat Transaksi
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ) : (
+                    <div className={'mt-8 pb-28'}>
+                        <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
+                        {history.map((value, index) => (
+                            <div key={index} className={'grid grid-rows-2 grid-flow-col mb-2'}>
+                                <div className={'font-semibold text-base mb-1'}>{value.name}</div>
+                                <div className={'text-sm font-normal text-slate-600'}>{value.date}</div>
+                                <div className={'row-span-3 col-span-2 text-lg font-semibold pb-8'}>
+                                    {value.name === "Withdraw" ? (
+                                        <p className={'text-right text-red-500 mb-1'}>-${value.amount}</p>
+                                    ) : (
+                                        <p className={'text-right text-green-500 mb-1'}>+${value.amount}</p>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </>
     )
