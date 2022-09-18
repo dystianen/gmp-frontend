@@ -1,9 +1,7 @@
 import React, {useState} from "react";
 import _ from "lodash";
-import Box from "@material-ui/core/Box";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
-import {ThemeProvider,} from "@material-ui/core/styles";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
 import dynamic from "next/dynamic";
 import {observer} from "mobx-react-lite";
@@ -85,13 +83,10 @@ const Downline = observer(() => {
                         <Image className={'-mb-[6px]'} src={'/assets/background/BGYellowBot.svg'} preview={false}/>
                     </div>
                 </div>
-                <ThemeProvider>
-                    <Box bgcolor="background" padding={4} height="80vh">
-                        <DndProvider backend={HTML5Backend}>
-                            <Node o={organization?.data}/>
-                        </DndProvider>
-                    </Box>
-                </ThemeProvider>
+
+                <DndProvider backend={HTML5Backend}>
+                    <Node o={organization?.data}/>
+                </DndProvider>
             </div>
         </>
     )
