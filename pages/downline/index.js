@@ -9,6 +9,9 @@ import {downlineRepository} from "../../repository/downline";
 import {Avatar, Button, Card, Image} from "antd";
 import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from "next/router";
+import {MdKeyboardArrowUp} from "react-icons/md";
+import clsx from "clsx";
+import {makeStyles} from "@material-ui/core/styles";
 
 const Tree = dynamic(() => import('react-organizational-chart').then((mod) => mod.Tree), {
     ssr: false,
@@ -17,19 +20,40 @@ const TreeNode = dynamic(() => import('react-organizational-chart').then((mod) =
     ssr: false,
 })
 
+const useStyles = makeStyles((theme) => ({
+    expand: {
+        transform: "rotate(0deg)",
+        transition: theme.transitions.create("transform", {
+            duration: theme.transitions.duration.short
+        })
+    },
+    expandOpen: {
+        transform: "rotate(180deg)"
+    },
+}));
+
 const Downline = observer(() => {
     const router = useRouter();
     const {data: organization} = downlineRepository.hooks.useGetAll();
 
-    function Organization({org, onCollapse}) {
+    function Organization({org, onCollapse, collapsed}) {
+        const classes = useStyles();
+
         return (
-            <Card className={'inline-block rounded-lg hover:cursor-pointer hover:bg-[#FFCF40]'} bodyStyle={{padding: '5px 15px',}} onClick={onCollapse}>
+            <Card className={'inline-block rounded-lg'} bodyStyle={{padding: '5px 15px'}}>
                 <div className={'flex flex-row gap-2'}>
                     <Avatar src="https://joeschmoe.io/api/v1/random"/>
                     <div className={'flex flex-col'}>
                         <span className={'font-bold'}>{org?.label}</span>
                         <span className={'text-[#7d7d82]'}>{org?.label}</span>
                     </div>
+                </div>
+
+                <div className={'flex justify-center'}>
+                    <MdKeyboardArrowUp
+                        className={clsx(classes.expand, {[classes.expandOpen]: !collapsed}, 'hover:cursor-pointer text-sm')}
+                        onClick={onCollapse}
+                    />
                 </div>
             </Card>
         );
