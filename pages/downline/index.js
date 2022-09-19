@@ -12,6 +12,7 @@ import {useRouter} from "next/router";
 import {MdKeyboardArrowUp} from "react-icons/md";
 import clsx from "clsx";
 import {makeStyles} from "@material-ui/core/styles";
+import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
 
 const Tree = dynamic(() => import('react-organizational-chart').then((mod) => mod.Tree), {
     ssr: false,
@@ -88,7 +89,7 @@ const Downline = observer(() => {
 
     return (
         <>
-            <div className={'overflow-x-auto h-screen bg-[url("/assets/background/BGDot.png")]'}>
+            <div className={'h-screen bg-[url("/assets/background/BGDot.png")]'}>
                 <div className={'relative flex justify-center items-center bg-primary bg-center h-1/6 w-full rounded-t mb-8'}>
                     <div className={'flex flex-row items-center w-5/6 z-10'}>
                         <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
@@ -108,9 +109,16 @@ const Downline = observer(() => {
                     </div>
                 </div>
 
-                <DndProvider backend={HTML5Backend}>
-                    <Node o={organization?.data}/>
-                </DndProvider>
+                <TransformWrapper
+                    initialScale={1}
+                    minScale={0.5}
+                >
+                    <TransformComponent contentStyle={{height: '80vh', width: '100%', padding: 20}}>
+                        <DndProvider backend={HTML5Backend}>
+                            <Node o={organization?.data}/>
+                        </DndProvider>
+                    </TransformComponent>
+                </TransformWrapper>
             </div>
         </>
     )
