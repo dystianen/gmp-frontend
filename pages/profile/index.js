@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
+import { userRepository } from "../../repository/users";
 
 const Profile = observer(() => {
     const router = useRouter();
@@ -19,7 +20,6 @@ const Profile = observer(() => {
         if (typeof window !== undefined) {
             token = localStorage.getItem("access_token")
         }
-        console.log(token);
     
         useEffect(() => {
             const decodeJwt = jwtDecode(token)
@@ -28,6 +28,9 @@ const Profile = observer(() => {
     } catch (e) {
         
     }
+
+    const {data: user } = userRepository.hooks.useGetUserDetail(dataUser.id);
+    const result = user?.data
 
     const { confirm } = Modal;
 
@@ -100,14 +103,18 @@ const Profile = observer(() => {
             </div>
             <p className={'text-center text-2xl font-bold text-white pt-[54px]'}>Profile</p>
             <div className={'absolute grid grid-flow-col-dense-dense grid-cols-3 h-4 pt-9 gap-3'}>
+                {result?.picProfile == null ? (
                     <Image src={'/assets/user.jpg'} alt={'avatar'} className={'rounded-full w-[90px] h-[90px]'} preview={false}/>
+                ) : (
+                    <Image src={`${result?.picProfile}`} alt={'avatar'} className={'rounded-full w-[90px] h-[90px]'} preview={false}/>
+                )}
                 <div className={'col-span-2 left-20'}>
                     <p className={'font-medium text-lg text-white mb-1 leading-5'}>Welcome</p>
-                    <p className={'font-medium text-3xl text-white leading-8 mb-1'}>{dataUser.username}</p>
-                    {dataUser.email == null ? (
+                    <p className={'font-medium text-3xl text-white leading-8 mb-1'}>{result?.username}</p>
+                    {result?.email == null ? (
                         ''
                     ) : (
-                        <p className={'font-normal text-xs text-white leading-4'}>{dataUser.email}</p>
+                        <p className={'font-normal text-xs text-white leading-4'}>{result?.email}</p>
                     )}
                 </div>
             </div>
