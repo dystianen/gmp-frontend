@@ -89,8 +89,9 @@ const Downline = observer(() => {
 
     return (
         <>
-            <div className={'h-screen bg-[url("/assets/background/BGDot.png")]'}>
-                <div className={'relative flex justify-center items-center bg-primary bg-center h-1/6 w-full rounded-t mb-8'}>
+            <div className={'relative h-screen bg-[url("/assets/background/BGDot.png")]'}>
+                <div
+                    className={'relative flex justify-center items-center bg-primary bg-center h-1/6 w-full rounded-t'}>
                     <div className={'flex flex-row items-center w-5/6 z-10'}>
                         <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
                                 onClick={() => router.push('/investment_package')}>
@@ -112,6 +113,8 @@ const Downline = observer(() => {
                 <TransformWrapper
                     initialScale={1}
                     minScale={0.5}
+                    centerOnInit={true}
+                    limitToBounds={false}
                 >
                     <TransformComponent contentStyle={{height: '80vh', width: '100%', padding: 20}}>
                         <DndProvider backend={HTML5Backend}>
