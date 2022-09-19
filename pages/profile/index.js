@@ -1,24 +1,71 @@
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import {Button, Col, Image, Row} from "antd";
+import {Button, Col, Image, Row, Modal, message} from "antd";
 import Link from "next/link";
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { useEffect, useState } from "react";
+import jwtDecode from "jwt-decode";
 
 const Profile = observer(() => {
     const router = useRouter();
+    const { id } = router.query;
+    
+    const [dataUser, setDataUser] = useState([]);
+
+    try {
+        let token;
+        
+        if (typeof window !== undefined) {
+            token = localStorage.getItem("access_token")
+        }
+        console.log(token);
+    
+        useEffect(() => {
+            const decodeJwt = jwtDecode(token)
+            setDataUser(decodeJwt)
+        }, [])
+    } catch (e) {
+        
+    }
+
+    const { confirm } = Modal;
+
+    const showConfirm = () => {
+        confirm({
+          title: 'Apakah Anda Yakin Untuk Keluar?',
+          icon: <ExclamationCircleOutlined />,
+          content: 'Klik Ok untuk keluar & klik Cancel untuk membatalkan',
+          onOk() {
+            logoutHandler();
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+    };
+
+    const logoutHandler = () => {
+        localStorage.removeItem("access_token");
+        router.push("/login")
+        message.success("Anda Berhasil Logout");
+    }
 
     const akunMenu = [
         {
             name: 'Ubah Profile',
             icon: '/assets/icons/change_profile_user.svg',
+            url: `/profile/${dataUser.id}/edit_profile`,
         },
         {
             name: 'Ubah Password',
             icon: '/assets/icons/lock.svg',
+            url: `/forgot_password`,
         },
         {
             name: 'Dompet',
             icon: '/assets/icons/wallet-add.svg',
+            url: `/wallet`,
         },
     ];
 
@@ -26,10 +73,12 @@ const Profile = observer(() => {
         {
             name: 'Syarat & Ketentuan',
             icon: '/assets/icons/task-square.svg',
+            url: '#',
         },
         {
             name: 'Privasi',
             icon: '/assets/icons/shield-tick.svg',
+            url: '#',
         },
     ];
 
@@ -54,8 +103,12 @@ const Profile = observer(() => {
                     <Image src={'/assets/user.jpg'} alt={'avatar'} className={'rounded-full w-[90px] h-[90px]'} preview={false}/>
                 <div className={'col-span-2 left-20'}>
                     <p className={'font-medium text-lg text-white mb-1 leading-5'}>Welcome</p>
-                    <p className={'font-medium text-3xl text-white leading-8 mb-1'}>Bocil Kematian</p>
-                    <p className={'font-normal text-xs text-white leading-4'}>bocil.kematian@gmail.com</p>
+                    <p className={'font-medium text-3xl text-white leading-8 mb-1'}>{dataUser.username}</p>
+                    {dataUser.email == null ? (
+                        ''
+                    ) : (
+                        <p className={'font-normal text-xs text-white leading-4'}>{dataUser.email}</p>
+                    )}
                 </div>
             </div>
         </div>
@@ -74,7 +127,7 @@ const Profile = observer(() => {
                             </Col>
                             <Col span={12} className={'flex items-center ml-3'}>
                                 <div className={'font-medium text-lg'}>
-                                    <Link href={'#'}>
+                                    <Link href={value.url}>
                                         <a className={'text-black hover:text-[#FFBF00]'}>{value.name}</a>
                                     </Link>
                                 </div>
@@ -96,7 +149,7 @@ const Profile = observer(() => {
                             </Col>
                             <Col span={12} className={'flex items-center ml-3'}>
                                 <div className={'font-medium text-lg'}>
-                                    <Link href={'#'}>
+                                    <Link href={value.url}>
                                         <a className={'text-black hover:text-[#FFBF00]'}>{value.name}</a>
                                     </Link>
                                 </div>
@@ -108,7 +161,9 @@ const Profile = observer(() => {
             <Button className={'h-14 rounded-3xl bg-yellow-50 text-yellow-500 text-lg font-medium'}>
                 Ganti ke akun lain
             </Button>
-            <Button className={'h-14 rounded-3xl bg-red-100 text-red-500 text-lg font-medium'}>
+            <Button 
+                className={'h-14 rounded-3xl bg-red-100 text-red-500 text-lg font-medium'}
+                onClick={showConfirm}>
                 Keluar
             </Button>
         </div>
