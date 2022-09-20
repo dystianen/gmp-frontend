@@ -38,14 +38,14 @@ const InvestmentPackage = observer(() => {
                                     <Image src={'/assets/icons/profit.svg'} preview={false}/>
                                     <div className={'flex flex-col'}>
                                         <span className={'text-xs'}>Profit</span>
-                                        <span className={'text-sm font-bold'}>{it.return_percentage}</span>
+                                        <span className={'text-sm font-bold'}>{it.return_percentage} %</span>
                                     </div>
                                 </div>
                                 <div className={'flex gap-4'}>
                                     <Image src={'/assets/icons/admin.svg'} preview={false}/>
                                     <div className={'flex flex-col'}>
                                         <span className={'text-xs'}>Admin</span>
-                                        <span className={'text-sm font-bold'}>{it.service_fee} BUSD</span>
+                                        <span className={'text-sm font-bold'}>{it.service_fee} USDT</span>
                                     </div>
                                 </div>
                             </div>
