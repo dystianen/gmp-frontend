@@ -1,43 +1,51 @@
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
 import {Button, Card, Form, Image, Input, message} from "antd";
+import {authenticationRepository} from "../../repository/authentication";
+import {useState} from "react";
 
 const ForgotPassword = observer(() => {
     const router = useRouter();
     const [form] = Form.useForm();
-
+    const [isLoading, setIsLoading] = useState(false);
     const label = (text) => (
         <span className="font-bold">
             {text}
         </span>
     )
 
+
     const handleSubmit = async () => {
-        try {
-            const values = await form.validateFields();
-            setIsLoading(true)
+        form
+            .validateFields()
+            .then(async (values) => {
+                try {
+                    setIsLoading(true);
+                    const res = await authenticationRepository.api.resetPassword({
+                        username: values.username,
+                        password: values.password,
+                    });
 
-            const body = {
-                username: values.username,
-                password: values.password,
-            };
-
-            await store.authentication.login(body);
-            form.resetFields();
-            message.success("Login Successfully");
-            await router.push("/investment_package");
-            setIsLoading(false)
-        } catch (err) {
-            console.log({err});
-            setIsLoading(false)
-            message.error(err.response.data.message);
-        }
+                    if (res.message !== "Password is Already Used") {
+                        setIsLoading(false);
+                        message.success("Success Forgot Password");
+                        await router.push("/login");
+                    }
+                } catch (e) {
+                    setIsLoading(false);
+                    message.error(e.response?.data?.message);
+                }
+            })
+            .catch((info) => {
+                console.log("Validate Failed:", info);
+            });
     };
 
 
     return (
         <>
-            <div className={'relative flex-col flex justify-center bg-primary bg-center h-screen max-w-lg mx-auto rounded-t'}>
+            <div
+                className={'relative flex-col flex justify-center bg-primary bg-center h-screen max-w-lg mx-auto rounded-t'}>
                 <div className="absolute top-0 left-0">
                     <Image src={'/assets/background/Ellipse1.svg'} alt={'icon'} preview={false}/>
                 </div>
@@ -60,7 +68,8 @@ const ForgotPassword = observer(() => {
                             message: "Please input new password!",
                             type: 'string',
                         }]}>
-                            <Input.Password size={'large'} placeholder={'Masukan Password Baru'} className={'h-12 rounded-lg text-lg'}/>
+                            <Input.Password size={'large'} placeholder={'Masukan Password Baru'}
+                                            className={'h-12 rounded-lg text-lg'}/>
                         </Form.Item>
 
                         <Form.Item
@@ -73,7 +82,7 @@ const ForgotPassword = observer(() => {
                                     required: true,
                                     message: 'Please confirm your password!',
                                 },
-                                ({ getFieldValue }) => ({
+                                ({getFieldValue}) => ({
                                     validator(_, value) {
                                         if (!value || getFieldValue('password') === value) {
                                             return Promise.resolve();
@@ -84,11 +93,13 @@ const ForgotPassword = observer(() => {
                                 }),
                             ]}
                         >
-                            <Input.Password size={'large'} placeholder={'Konfirmasi Password'} className={'h-12 rounded-lg text-lg'}/>
+                            <Input.Password size={'large'} placeholder={'Konfirmasi Password'}
+                                            className={'h-12 rounded-lg text-lg'}/>
                         </Form.Item>
 
                         <Form.Item className={'text-center pt-1.5'}>
-                            <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl mb-2'} size={'large'} block>Simpan</Button>
+                            <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl mb-2'} size={'large'}
+                                    block>Simpan</Button>
                         </Form.Item>
                     </Form>
                 </Card>
