@@ -142,7 +142,7 @@ const WalletDetails = observer(() => {
                             </Form>
                         </div>
                         {history.map((value, index) => (
-                            <div key={index} onClick={() => router.push(`/wallet/${dataUser.id}/transaction_detail/233`)} className={'grid grid-rows-2 grid-flow-col mb-2 mt-4'}>
+                            <div key={index} onClick={() => router.push(`/wallet/${dataUser.id}/transaction_detail`)} className={'grid grid-rows-2 grid-flow-col mb-2 mt-4'}>
                                 <div className={'font-semibold text-base mb-1'}>{value.name}</div>
                                 <div className={'text-sm font-normal text-slate-600'}>{value.date}</div>
                                 <div className={'row-span-3 col-span-2 text-lg font-semibold pb-8'}>
