@@ -1,50 +1,43 @@
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import {Button, Col, Image, Row, Modal, message} from "antd";
-import Link from "next/link";
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { useEffect, useState } from "react";
+import {Button, Image, Modal, message, Avatar, Typography, Tag, Card} from "antd";
+import {ExclamationCircleOutlined} from '@ant-design/icons';
+import React, {useEffect, useState} from "react";
 import jwtDecode from "jwt-decode";
-import { userRepository } from "../../repository/users";
+import {userRepository} from "../../repository/users";
+import {BiArrowBack} from "react-icons/bi";
+import {MdKeyboardArrowRight} from "react-icons/md";
+
+const {Title} = Typography;
 
 const Profile = observer(() => {
     const router = useRouter();
-    const { id } = router.query;
-    
     const [dataUser, setDataUser] = useState([]);
+    const {data: user} = userRepository.hooks.useGetProfile();
 
-    try {
-        let token;
-        
+    useEffect(() => {
         if (typeof window !== undefined) {
-            token = localStorage.getItem("access_token")
-        }
-    
-        useEffect(() => {
+            const token = localStorage.getItem("access_token")
+
             const decodeJwt = jwtDecode(token)
             setDataUser(decodeJwt)
-        }, [])
-    } catch (e) {
-        
-    }
+        }
+    }, [])
 
-    const {data: user } = userRepository.hooks.useGetUserDetail(dataUser.id);
-    const result = user?.data
-
-    const { confirm } = Modal;
+    const {confirm} = Modal;
 
     const showConfirm = () => {
         confirm({
-          title: 'Apakah Anda Yakin Untuk Keluar?',
-          icon: <ExclamationCircleOutlined />,
-          content: 'Klik Ok untuk keluar & klik Cancel untuk membatalkan',
-          onOk() {
-            logoutHandler();
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
+            title: 'Apakah Anda Yakin Untuk Keluar?',
+            icon: <ExclamationCircleOutlined/>,
+            content: 'Klik Ok untuk keluar & klik Cancel untuk membatalkan',
+            onOk() {
+                logoutHandler();
+            },
+            onCancel() {
+                console.log('Cancel');
+            },
         });
     };
 
@@ -54,126 +47,125 @@ const Profile = observer(() => {
         message.success("Anda Berhasil Logout");
     }
 
-    const akunMenu = [
+    const accountMenu = [
         {
-            name: 'Ubah Profile',
-            icon: '/assets/icons/change_profile_user.svg',
+            name: 'Edit Profile',
+            icon: '/assets/icons/userblue.svg',
             url: `/profile/${dataUser.id}/edit_profile`,
         },
         {
             name: 'Ubah Password',
-            icon: '/assets/icons/lock.svg',
+            icon: '/assets/icons/lockblue.svg',
             url: `/forgot_password`,
-        },
-        {
-            name: 'Dompet',
-            icon: '/assets/icons/wallet-add.svg',
-            url: `/wallet`,
         },
     ];
 
-    const tentangMenu = [
+    const aboutMenu = [
         {
             name: 'Syarat & Ketentuan',
-            icon: '/assets/icons/task-square.svg',
+            icon: '/assets/icons/syaratblue.svg',
             url: '#',
         },
         {
             name: 'Privasi',
-            icon: '/assets/icons/shield-tick.svg',
+            icon: '/assets/icons/privasiblue.svg',
             url: '#',
         },
     ];
 
     return (
         <>
-        <div className="relative bg-yellow-400 bg-center h-1/3 w-full mx-auto px-6 rounded-t">
-            <div className="absolute top-0 left-0">
-                <Image src={'/assets/icons/Ellipse8.svg'} alt={'icons'} preview={false}/>
-            </div>
-            <div className="absolute bottom-0 right-0">
-                <Image src={'/assets/icons/Ellipse7.svg'} alt={'icons'} preview={false}/>
-            </div>
-            <div className={'absolute z-10 top-12'}>
-                <button className={' rounded-lg w-10 h-10 bg-white'}>
-                    <Link href={'/investment_package'}>
-                        <a><Image src={'/assets/icons/arrow-left-black.svg'} preview={false} alt={'icons'}/></a>
-                    </Link>
-                </button>
-            </div>
-            <p className={'text-center text-2xl font-bold text-white pt-[54px]'}>Profile</p>
-            <div className={'absolute grid grid-flow-col-dense-dense grid-cols-3 h-4 pt-9 gap-3'}>
-                {result?.picProfile == null ? (
-                    <Image src={'/assets/user.jpg'} alt={'avatar'} className={'rounded-full w-[90px] h-[90px]'} preview={false}/>
-                ) : (
-                    <Image src={`${result?.picProfile}`} alt={'avatar'} className={'rounded-full w-[90px] h-[90px]'} preview={false}/>
-                )}
-                <div className={'col-span-2 left-20'}>
-                    <p className={'font-medium text-lg text-white mb-1 leading-5'}>Welcome</p>
-                    <p className={'font-medium text-3xl text-white leading-8 mb-1'}>{result?.username}</p>
-                    {result?.email == null ? (
-                        ''
-                    ) : (
-                        <p className={'font-normal text-xs text-white leading-4'}>{result?.email}</p>
-                    )}
+            <div
+                className={'relative flex justify-center items-center bg-primary bg-center h-1/6 w-full rounded-t'}>
+                <div className={'flex flex-row items-center w-5/6 z-10'}>
+                    <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
+                            onClick={() => router.push('/investment_package')}>
+                        <BiArrowBack className={'text-lg'}/>
+                    </Button>
+                    <span className={'w-full text-2xl font-bold text-white text-center pr-12'}>Profil</span>
+                </div>
+                <div className="absolute">
+                    <Image src={'/assets/background/Particle1.png'} preview={false}/>
+                </div>
+                <div className="absolute top-0 left-0">
+                    <Image src={'/assets/background/BGYellowTop.svg'} preview={false}/>
+                </div>
+                <div className="absolute bottom-0 right-0 mt-10">
+                    <Image className={'-mb-[6px]'} src={'/assets/background/BGYellowBot.svg'} preview={false}/>
                 </div>
             </div>
-        </div>
 
-        <div className={'flex flex-col gap-5 bg-[#f8f8ff] pb-20 mx-auto px-6'}>
-            <p className={"font-medium text-lg leading-5 text-slate-400 pt-7"}>Akun</p>
-                {akunMenu.map((value, index) => {
-                    return (
-                        <>
-                        <Row justify={"start"}>
-                            <Col key={index}>
-                                <Button className={'bg-[#FFBF00] w-12 h-12 rounded-full'}>
-                                    <Image src={value.icon} className={'absolute right-1'}
-                                           width={25} height={25} alt={'icon'} preview={false}/>
-                                </Button>
-                            </Col>
-                            <Col span={12} className={'flex items-center ml-3'}>
-                                <div className={'font-medium text-lg'}>
-                                    <Link href={value.url}>
-                                        <a className={'text-black hover:text-[#FFBF00]'}>{value.name}</a>
-                                    </Link>
-                                </div>
-                            </Col>
-                        </Row>
-                        </>
-                    )
-                })}
-            <p className={"font-medium text-lg leading-5 text-slate-400 pt-7"}>Tentang</p>
-            {tentangMenu.map((value, index) => {
-                return (
-                    <>
-                        <Row justify={"start"}>
-                            <Col key={index}>
-                                <Button className={'bg-[#FFBF00] w-12 h-12 rounded-full'}>
-                                    <Image src={value.icon} className={'absolute right-1'}
-                                           width={25} height={25} alt={'icon'} preview={false}/>
-                                </Button>
-                            </Col>
-                            <Col span={12} className={'flex items-center ml-3'}>
-                                <div className={'font-medium text-lg'}>
-                                    <Link href={value.url}>
-                                        <a className={'text-black hover:text-[#FFBF00]'}>{value.name}</a>
-                                    </Link>
-                                </div>
-                            </Col>
-                        </Row>
-                    </>
-                )
-            })}
-            <Button className={'h-14 rounded-3xl bg-yellow-50 text-yellow-500 text-lg font-medium'}>
-                Ganti ke akun lain
-            </Button>
-            <Button 
-                className={'h-14 rounded-3xl bg-red-100 text-red-500 text-lg font-medium'}
-                onClick={showConfirm}>
-                Keluar
-            </Button>
-        </div>
+            <div className={'px-8 bg-white'}>
+                <Avatar size={70} className={'border-8 border-gray-50 bg-white -mt-[30px]'}
+                        src="https://joeschmoe.io/api/v1/random"/>
+                <div className={'flex flex-col'}>
+                    <Title level={4}>Alexis Gibson</Title>
+                    <span className={'text-sm text-[#7d7d82]'}>+62 8136473763</span>
+                    <span className={'text-sm text-[#7d7d82]'}>alexisGib@gmail.com</span>
+                </div>
+
+                <div className={'flex flex-col pt-8 pb-28'}>
+                    <div>
+                        <Title level={5}>Kode Referral</Title>
+                        <Tag
+                            className={'flex justify-between items-center border-dashed p-3 border-[#4461F2] bg-[#4461F2]/[0.1] rounded-lg text-lg'}>
+                            <span className={'text-primary'}>E5B6DHASFG</span>
+                            <span className={'text-sm hover:cursor-pointer'}>Salin</span>
+                        </Tag>
+                    </div>
+
+                    <div className={'pt-5'}>
+                        <Title level={5}>Akun</Title>
+                        <div className={'flex flex-col gap-4'}>
+                            {accountMenu.map((it, index) => {
+                                return <Card key={index} className={'rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'} bodyStyle={{padding: 12}}>
+                                    <div className={'flex items-center justify-between'}>
+                                        <div className={'flex flex-row items-center gap-4'}>
+                                            <Image src={it.icon} width={36} height={36} alt={'icon'} preview={false}/>
+                                            <span className={'text-base font-bold'}>{it.name}</span>
+                                        </div>
+                                        <div className={'text-right'}>
+                                            <MdKeyboardArrowRight className={'text-3xl hover:cursor-pointer'}
+                                                                  onClick={() => router.push(it.url)}/>
+                                        </div>
+                                    </div>
+                                </Card>
+                            })}
+                        </div>
+                    </div>
+
+                    <div className={'pt-5'}>
+                        <Title level={5}>Tentang</Title>
+                        <div className={'flex flex-col gap-4'}>
+                            {aboutMenu.map((it, index) => {
+                                return <Card key={index} className={'rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'} bodyStyle={{padding: 12}}>
+                                    <div className={'flex items-center justify-between'}>
+                                        <div className={'flex flex-row items-center gap-4'}>
+                                            <Image src={it.icon} width={36} height={36} alt={'icon'} preview={false}/>
+                                            <span className={'text-base font-bold'}>{it.name}</span>
+                                        </div>
+                                        <div className={'text-right'}>
+                                            <MdKeyboardArrowRight className={'text-3xl hover:cursor-pointer'}
+                                                                  onClick={() => router.push(it.url)}/>
+                                        </div>
+                                    </div>
+                                </Card>
+                            })}
+                        </div>
+                    </div>
+
+                    <div className={'flex flex-col gap-4 pt-8'}>
+                        <Button className={'h-14 rounded-full bg-[#FFBF00]/[0.1] text-[#FFBF00] text-lg font-semibold border-none'}>
+                            Ganti ke akun lain
+                        </Button>
+                        <Button
+                            className={'h-14 rounded-full bg-[#F03636]/[0.1] text-[#F03636] text-lg font-semibold border-none'}
+                            onClick={showConfirm}>
+                            Keluar
+                        </Button>
+                    </div>
+                </div>
+            </div>
         </>
     )
 })
@@ -181,4 +173,4 @@ const Profile = observer(() => {
 Profile.getLayout = function Layout(page) {
     return <DesktopLayout>{page}</DesktopLayout>
 }
-export default  Profile;
+export default Profile;

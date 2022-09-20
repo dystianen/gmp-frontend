@@ -3,7 +3,8 @@ import useSWR from "swr";
 
 const url = {
     getAllUser: () => "/users/",
-    getUserId: (id) => `/users/detail/${id}`,
+    getProfile: () => `/users-profile/detail`,
+    getUserId: (id) => `/users-profile/detail/${id}`,
     editUser: (id) => `/users/${id}`,
     deleteUser: (id) => `/users/${id}`,
     uploadUserImage: () => `/file/upload`,
@@ -18,7 +19,10 @@ const hooks = {
     useGetAllUser() {
         return useSWR(url.getAllUser(), http.fetcher);
     },
-    useGetUserDetail(id) {
+    useGetProfile() {
+        return useSWR(url.getProfile(), http.fetcher);
+    },
+    useGetProfileById(id) {
         return useSWR(url.getUserId(id), http.fetcher);
     },
     userGetBalanceUSDT() {
