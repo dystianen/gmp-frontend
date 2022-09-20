@@ -62,40 +62,30 @@ const InvestmentPackageDetail = observer(() => {
         },
         {
             name: 'Token Perbulan',
-            value: '',
+            value: detail?.data?.gmp_permonth,
             icon: '/assets/icons/benefit/token.svg'
         },
         {
             name: 'Total Token',
-            value: '',
+            value: detail?.data?.gmp_total,
             icon: '/assets/icons/benefit/token.svg'
         }
     ];
 
     const otherInfo = [
         {
-            label: 'Pembeli',
-            value: '',
-            icon: '/assets/icons/users.svg',
-        },
-        {
             label: 'Level Staking',
             value: detail?.data?.reward_level_max + ' Level',
             icon: '/assets/icons/reward.svg',
         },
         {
-            label: 'Reward Matching',
-            value: '',
-            icon: '/assets/icons/reward.svg',
-        },
-        {
-            label: 'Biaya Mesin Staking',
+            label: 'Biaya Admin Staking',
             value: detail?.data?.reward_percentage_investor,
             icon: '/assets/icons/kontrak.svg',
         },
         {
-            label: 'Biaya Admin Staking',
-            value: detail?.data?.service_fee,
+            label: 'Biaya Mesin Staking',
+            value: detail?.data?.reward_percentage_investor,
             icon: '/assets/icons/kontrak.svg',
         },
         {
@@ -171,7 +161,7 @@ const InvestmentPackageDetail = observer(() => {
                 className="grid grid-cols-2 items-center max-w-md mx-auto rounded-b-lg fixed bg-white drop-shadow-2xl h-20 inset-x-0 bottom-0 z-10 px-5">
                 <div className={'flex flex-col justify-center'}>
                     <span className={'text-sm text-[#12131C]/55 font-semibold'}>Harga Paket</span>
-                    <span className={'text-2xl font-bold text-primary'}>$ {detail?.data?.price}</span>
+                    <span className={'text-2xl font-bold text-primary'}>$ {(detail?.data?.price + detail?.data?.service_fee)}</span>
                 </div>
                 <Button type={'primary'} size={'large'} className={'rounded-full'} onClick={showConfirm}>Beli
                     Paket</Button>
