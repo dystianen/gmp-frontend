@@ -72,9 +72,12 @@ const Wallet = observer(() => {
                 </Card>
 
                 <Card
-                    className={"mt-10 h-40 bg-[#FFBF00] rounded-xl bg-no-repeat"}>
-                    <div className={'absolute right-0'}>
-                        <Image src={'/assets/background/PatternBG2.svg'} alt={'icon'} preview={false}/>
+                    className={"mt-10 h-40 bg-[#FFBF00] rounded-xl bg-[url('/assets/icons/Ellipse5.svg')] bg-no-repeat"}>
+                    <div className={'absolute top-0 left-0'}>
+                        <Image src={'/assets/icons/Ellipse2.svg'} alt={'icon'} preview={false}/>
+                    </div>
+                    <div className={'absolute top-[80px] right-0'}>
+                        <Image src={'/assets/icons/Ellipse6.svg'} alt={'icon'} preview={false}/>
                     </div>
                     <div className={'flex justify-between'}>
                         <span className={'text-white font-semibold text-3xl leading-8'}>GMP</span>
