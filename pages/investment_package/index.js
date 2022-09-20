@@ -1,64 +1,44 @@
 import {observer} from "mobx-react-lite";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import {Button, Card, Image, Tag, Skeleton} from "antd";
+import {Button, Card, Image, Tag, Skeleton, Typography, Progress} from "antd";
 import {useRouter} from "next/router";
 import {packageRepository} from "../../repository/package";
+import React from "react";
+import {CardPackage} from "../../components/CardPackage";
+
+const {Title} = Typography;
 
 const InvestmentPackage = observer(() => {
-    const router = useRouter();
     const {data: packages, isValidating} = packageRepository.hooks.useGetAll();
+    const {data: progress} = packageRepository.hooks.useGetProgress();
 
     return (
         <>
-            <div className={'relative flex justify-center items-center bg-primary bg-center h-1/3 w-full rounded-t'}>
+            <div className={'relative flex flex-col justify-center items-center bg-primary bg-center h-1/3 w-full rounded-b-[30px]'}>
+                <span className={'w-full text-2xl font-bold text-white text-center z-10'}>Paket Investasi</span>
+                <Card className={'rounded-lg w-11/12 z-10 mt-5'} bodyStyle={{padding: 20}}>
+                    <Title className={'text-sm'}>Stok Investasi <span className={'text-primary'}>(70%)</span></Title>
+                    <div className={'flex justify-between items-center'}>
+                        <span className={'text-primary font-semibold'}>$ 3.500.000</span>
+                        <span className={'text-primary font-semibold'}>$ 5.000.000</span>
+                    </div>
+                    <Progress strokeColor={'#4461F2'} percent={70} size="large"/>
+                    <span className={'text-[#7d7d82] font-semibold'}>Tersisa $ 2.500.000</span>
+                </Card>
+                <div className="absolute h-full">
+                    <Image src={'/assets/background/Particle1.png'} preview={false}/>
+                </div>
                 <div className="absolute top-0 left-0">
-                    <Image src={'/assets/background/Ellipse1.svg'} preview={false}/>
+                    <Image src={'/assets/background/BGYellowTop.svg'} preview={false}/>
                 </div>
                 <div className="absolute bottom-0 right-0">
-                    <Image src={'/assets/background/Ellipse3.svg'} preview={false}/>
+                    <Image className={'-mb-[6px] w-36 h-36 rounded-b-[30px]'}
+                           src={'/assets/background/BGYellowBot2.png'} preview={false}/>
                 </div>
-                <p className={'text-2xl font-bold text-white text-center'}>Paket Investasi</p>
             </div>
             <div className={'flex flex-col items-center gap-5 pb-28 bg-[#f8f8ff]'}>
                 {packages?.data?.map((it, index) => (
-                    <Card
-                        key={index}
-                        className={`w-11/12 rounded-2xl ${index === 0 && '-mt-20'}`}
-                        title={<span className={'font-bold text-xl'}>{it.name}</span>}
-                        extra={
-                            <Tag className={'flex items-center py-3 px-4 rounded-full border-none bg-[#4461f2]/[.09]'}>
-                                <Image src={'/assets/icons/clock.svg'} preview={false}/>
-                                <span className={'text-primary font-semibold text-sm pl-1'}>{it.reward_percentage_monthly} Bulan</span>
-                            </Tag>
-                        }
-                    >
-                        <Skeleton loading={isValidating} active={true}>
-                            <div className={'grid grid-cols-2 gap-4'}>
-                                <div className={'flex gap-4'}>
-                                    <Image src={'/assets/icons/profit.svg'} preview={false}/>
-                                    <div className={'flex flex-col'}>
-                                        <span className={'text-xs'}>Profit</span>
-                                        <span className={'text-sm font-bold'}>{it.return_percentage} %</span>
-                                    </div>
-                                </div>
-                                <div className={'flex gap-4'}>
-                                    <Image src={'/assets/icons/admin.svg'} preview={false}/>
-                                    <div className={'flex flex-col'}>
-                                        <span className={'text-xs'}>Admin</span>
-                                        <span className={'text-sm font-bold'}>{it.service_fee} USDT</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={'grid grid-cols-2 items-center mt-4'}>
-                                <div className={'flex flex-col'}>
-                                    <span className={'text-sm font-medium'}>Harga</span>
-                                    <span className={'text-[#4461F2] text-2xl font-semibold'}>$ {it.price}</span>
-                                </div>
-                                <Button type={'primary'} size={'large'} className={'rounded-full'}
-                                        onClick={() => router.push(`/investment_package/${it.id}/detail`)}>Detail</Button>
-                            </div>
-                        </Skeleton>
-                    </Card>
+                    <CardPackage key={index} index={index} isValidating={isValidating} data={it}/>
                 ))}
             </div>
         </>

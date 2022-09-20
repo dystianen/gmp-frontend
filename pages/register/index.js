@@ -24,6 +24,9 @@ const Register = observer(() => {
             const body = {
                 username: values.username,
                 password: values.password,
+                email: values.email,
+                phoneNumber: values.phoneNumber,
+                referralCode: values.referralCode
             };
 
             await authenticationRepository.api.register(body);
@@ -40,7 +43,8 @@ const Register = observer(() => {
     return (
         <Spin spinning={isLoading}>
             <div className={'flex flex-col items-center h-screen max-w-lg mx-auto'}>
-                <div className={'flex justify-center items-center bg-[url("/assets/background/BG.png")] bg-center h-3/5 w-full'}>
+                <div
+                    className={'flex justify-center items-center bg-[url("/assets/background/BG.png")] bg-center h-3/5 w-full'}>
                     <Image className={'w-32'} src={'/assets/logo/logo.png'} preview={false}/>
                 </div>
                 <Card className={'w-full h-4/5 rounded-2xl -mt-10'}>
@@ -55,14 +59,36 @@ const Register = observer(() => {
                         }]}>
                             <Input placeholder={'Masukan username'}/>
                         </Form.Item>
+                        <Form.Item name={'email'} label={label('Email')} rules={[
+                            {
+                                required: true,
+                                message: "Please input Email!",
+                            },
+                            {
+                                type: 'email',
+                                message: 'Please input a valid email address!'
+                            }
+                        ]}>
+                            <Input placeholder={'Masukan username'}/>
+                        </Form.Item>
                         <Form.Item name={'password'} label={label('Password')} rules={[{
                             required: true,
                             message: "Please input Password!",
                         }]}>
                             <Input.Password placeholder={'Masukan password'}/>
                         </Form.Item>
+                        <Form.Item name={'phoneNumber'} label={label('Phone Number')} rules={[{
+                            required: true,
+                            message: "Please input Phone Number!",
+                        }]}>
+                            <Input placeholder={'Masukan Phone Number'}/>
+                        </Form.Item>
+                        <Form.Item name={'referralCode'} label={label('Referral Code')}>
+                            <Input placeholder={'Masukan Referral Code'}/>
+                        </Form.Item>
                         <Form.Item className={'text-center pt-5'}>
-                            <Button htmlType={'submit'} type={'primary'} className={'rounded-md mb-2'} size={'large'} block>Buat Akun</Button>
+                            <Button htmlType={'submit'} type={'primary'} className={'rounded-md mb-2'} size={'large'}
+                                    block>Buat Akun</Button>
                             <span>Sudah punya akun? <Link href={'/login'}>Login</Link></span>
                         </Form.Item>
                     </Form>

@@ -9,10 +9,10 @@ import {downlineRepository} from "../../repository/downline";
 import {Avatar, Button, Card, Image} from "antd";
 import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from "next/router";
-import {MdKeyboardArrowUp} from "react-icons/md";
 import clsx from "clsx";
 import {makeStyles} from "@material-ui/core/styles";
 import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
+import {CaretUpOutlined} from "@ant-design/icons";
 
 const Tree = dynamic(() => import('react-organizational-chart').then((mod) => mod.Tree), {
     ssr: false,
@@ -41,18 +41,18 @@ const Downline = observer(() => {
         const classes = useStyles();
 
         return (
-            <Card className={'inline-block rounded-lg'} bodyStyle={{padding: '5px 15px'}}>
-                <div className={'flex flex-row gap-2'}>
-                    <Avatar src="https://joeschmoe.io/api/v1/random"/>
-                    <div className={'flex flex-col'}>
-                        <span className={'font-bold'}>{org?.label}</span>
-                        <span className={'text-[#7d7d82]'}>{org?.label}</span>
+            <Card className={'inline-block rounded-lg hover:bg-amber-300'} bodyStyle={{padding: '5px 15px'}}>
+                <div className={'flex flex-row items-center gap-2 hover:cursor-pointer'}>
+                    <div className={'flex flex-row gap-2'} onClick={() => router.push(`/profile/${org.id}/detail`)}>
+                        <Avatar src="https://joeschmoe.io/api/v1/random"/>
+                        <div className={'flex flex-col'}>
+                            <span className={'font-bold'}>{org?.label}</span>
+                            <span className={'text-[#7d7d82]'}>{org?.label}</span>
+                        </div>
                     </div>
-                </div>
 
-                <div className={'flex justify-center'}>
-                    <MdKeyboardArrowUp
-                        className={clsx(classes.expand, {[classes.expandOpen]: !collapsed}, 'hover:cursor-pointer text-sm')}
+                    <CaretUpOutlined
+                        className={clsx(classes.expand, {[classes.expandOpen]: !collapsed}, 'text-lg')}
                         onClick={onCollapse}
                     />
                 </div>
@@ -90,8 +90,7 @@ const Downline = observer(() => {
     return (
         <>
             <div className={'relative h-screen bg-[url("/assets/background/BGDot.png")]'}>
-                <div
-                    className={'relative flex justify-center items-center bg-primary bg-center h-1/6 w-full rounded-t'}>
+                <div className={'relative flex justify-center items-center bg-primary bg-center  h-1/5 w-full rounded-t'}>
                     <div className={'flex flex-row items-center w-5/6 z-10'}>
                         <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
                                 onClick={() => router.push('/investment_package')}>
