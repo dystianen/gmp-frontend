@@ -17,13 +17,13 @@ const InvestmentPackage = observer(() => {
             <div className={'relative flex flex-col justify-center items-center bg-primary bg-center h-1/3 w-full rounded-b-[30px]'}>
                 <span className={'w-full text-2xl font-bold text-white text-center z-10'}>Paket Investasi</span>
                 <Card className={'rounded-lg w-11/12 z-10 mt-5'} bodyStyle={{padding: 20}}>
-                    <Title className={'text-sm'}>Stok Investasi <span className={'text-primary'}>(70%)</span></Title>
+                    <Title className={'text-sm'}>Stok Investasi <span className={'text-primary'}>({progress?.data?.percentage}%)</span></Title>
                     <div className={'flex justify-between items-center'}>
-                        <span className={'text-primary font-semibold'}>$ 3.500.000</span>
-                        <span className={'text-primary font-semibold'}>$ 5.000.000</span>
+                        <span className={'text-primary font-semibold'}>$ {progress?.data?.current}</span>
+                        <span className={'text-primary font-semibold'}>$ {progress?.data?.target}</span>
                     </div>
-                    <Progress strokeColor={'#4461F2'} percent={70} size="large"/>
-                    <span className={'text-[#7d7d82] font-semibold'}>Tersisa $ 2.500.000</span>
+                    <Progress strokeColor={'#4461F2'} percent={progress?.data?.percentage} size="large"/>
+                    <span className={'text-[#7d7d82] font-semibold'}>Tersisa $ {(progress?.data?.target - progress?.data?.current)}</span>
                 </Card>
                 <div className="absolute h-full">
                     <Image src={'/assets/background/Particle1.png'} preview={false}/>
