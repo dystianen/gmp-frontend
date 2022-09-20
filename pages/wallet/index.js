@@ -5,6 +5,8 @@ import jwtDecode from "jwt-decode";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
 import {DesktopLayoutNavigation} from "../../components/Layout/DesktopLayout/DesktopLayoutNavigation";
 import { useState, useEffect } from "react";
+import {transactionRepository} from "../../repository/transaction";
+import {userRepository} from "../../repository/users";
 
 const Wallet = observer(() => {
 
@@ -19,11 +21,17 @@ const Wallet = observer(() => {
         }
     }, [])
 
+    const {data: dataBalanceUSDT} = userRepository.hooks.userGetBalanceUSDT();
+    const {data: dataBalanceGMP} = userRepository.hooks.userGetBalanceGMP();
+
     return (
         <>
             <div className={"relative min-h-screen flex flex-col max-w-lg mx-auto px-8 bg-[#FAFAFA] overflow-hidden"}>
-                <div className={'absolute right-0'}>
-                    <Image src={'/assets/background/PatternBG2.svg'} alt={'icon'} preview={false}/>
+                <div className={'absolute top-0 left-0'}>
+                    <Image src={'/assets/icons/Ellipse1.svg'} alt={'icon'} preview={false}/>
+                </div>
+                <div className={'absolute top-11 right-0'}>
+                    <Image src={'/assets/icons/Ellipse3.svg'} alt={'icon'} preview={false}/>
                 </div>
                 <div className={"flex w-full mt-10"}>
                     <div>
@@ -59,7 +67,7 @@ const Wallet = observer(() => {
                         Balance
                     </div>
                     <h2 className={'font-semibold text-4xl text-white'}>
-                        $1000
+                        {dataBalanceUSDT}
                     </h2>
                 </Card>
 
@@ -85,7 +93,7 @@ const Wallet = observer(() => {
                         Balance
                     </div>
                     <h2 className={'font-semibold text-4xl text-white'}>
-                        $1000
+                        {dataBalanceGMP}
                     </h2>
                 </Card>
 
