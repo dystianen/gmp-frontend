@@ -1,9 +1,55 @@
 import {observer} from "mobx-react-lite";
 import DesktopLayout from "../../../components/Layout/DesktopLayout/DesktopLayout";
-import {Card, Image} from "antd";
+import {Card, Image, DatePicker, Form, Col} from "antd";
 import Link from "next/link";
+import { transactionRepository } from "../../../repository/transaction";
+import jwtDecode from "jwt-decode";
+import { useEffect, useState } from "react";
+const { RangePicker } = DatePicker;
+import React from 'react';
+import moment from "moment";
+import { useRouter } from "next/router";
 
 const WalletDetails = observer(() => {
+
+    const [dataUser, setDataUser] = useState([]);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+
+    const router = useRouter();
+
+    useEffect(() => {
+        if (typeof window !== undefined) {
+            let token = localStorage.getItem('access_token')
+
+            const decodeJwt = jwtDecode(token)
+            setDataUser(decodeJwt)
+        }
+    }, [])
+
+    const {data: dataTransaction} = transactionRepository.hooks.useGetAllTransaction(
+        {
+            startDate: startDate,
+            endDate: endDate,
+        },
+    );
+    console.log(dataTransaction, "uhuhfruh");
+
+    const filterDate = (date1, date2) => {
+        if (!date1 && !date2) {
+            setStartDate('')
+            setEndDate('')
+            return
+        }
+        const result = moment(date1).format("YYYY-MM")
+        const result2 = moment(date2).format("YYYY-MM")
+        setEndDate(result2);
+        setStartDate(result);
+    }
+
+    console.log(startDate, "start");
+    console.log(endDate, "end");
+    console.log(dataTransaction);
 
     const history = [
         {
@@ -32,7 +78,7 @@ const WalletDetails = observer(() => {
             amount: 50,
         },
     ]
-    console.log(history)
+    // console.log(history)
     return (
         <>
             <div className="relative bg-[#FAFAFA] min-h-screen max-w-lg bg-center w-full mx-auto px-6 rounded-t">
@@ -84,8 +130,19 @@ const WalletDetails = observer(() => {
                 ) : (
                     <div className={'mt-8 pb-28'}>
                         <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
+                        <div className="relative">
+                            <Form>
+                                <Form.Item>
+                                    <DatePicker.RangePicker 
+                                        className="mr-2 rounded-md" 
+                                        picker="month" 
+                                        onChange={(e) => filterDate(e?.[0], e?.[1])}
+                                    />
+                                </Form.Item>
+                            </Form>
+                        </div>
                         {history.map((value, index) => (
-                            <div key={index} className={'grid grid-rows-2 grid-flow-col mb-2'}>
+                            <div key={index} onClick={() => router.push(`/wallet/${dataUser.id}/transaction_detail/233`)} className={'grid grid-rows-2 grid-flow-col mb-2 mt-4'}>
                                 <div className={'font-semibold text-base mb-1'}>{value.name}</div>
                                 <div className={'text-sm font-normal text-slate-600'}>{value.date}</div>
                                 <div className={'row-span-3 col-span-2 text-lg font-semibold pb-8'}>

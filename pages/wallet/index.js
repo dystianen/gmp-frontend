@@ -1,10 +1,24 @@
 import {Image, Card, Button, Row, Col} from "antd";
 import {observer} from "mobx-react-lite";
 import Link from "next/link";
+import jwtDecode from "jwt-decode";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
 import {DesktopLayoutNavigation} from "../../components/Layout/DesktopLayout/DesktopLayoutNavigation";
+import { useState, useEffect } from "react";
 
 const Wallet = observer(() => {
+
+    const [dataUser, setDataUser] = useState([]);
+
+    useEffect(() => {
+        if (typeof window !== undefined) {
+            let token = localStorage.getItem('access_token')
+
+            const decodeJwt = jwtDecode(token)
+            setDataUser(decodeJwt)
+        }
+    }, [])   
+
     return (
         <>
             <div className={"relative min-h-screen flex flex-col max-w-lg mx-auto px-8 bg-[#FAFAFA] overflow-hidden"}>
@@ -89,7 +103,7 @@ const Wallet = observer(() => {
                         </Col>
                         <Col span={12} className={'flex items-center ml-3'}>
                             <div className={'font-medium text-lg'}>
-                                <Link href={'/wallet/1'}>
+                                <Link href={`wallet/${dataUser.id}`}>
                                     <a className={'text-black hover:text-[#FFBF00]'}>Riwayat Transaksi</a>
                                 </Link>
                             </div>
