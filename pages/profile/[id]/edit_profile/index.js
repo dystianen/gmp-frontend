@@ -16,7 +16,7 @@ const UpdateProfile = observer(() => {
     const router = useRouter();
     const { id } = router.query;
 
-    const {data: userData} = userRepository.hooks.useGetUserDetail(id)
+    const {data: userData} = userRepository.hooks.useGetProfileById(id)
 
     const label = (text) => (
         <span className="font-bold">

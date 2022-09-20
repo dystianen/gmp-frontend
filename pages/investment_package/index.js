@@ -36,6 +36,7 @@ const InvestmentPackage = observer(() => {
                            src={'/assets/background/BGYellowBot2.png'} preview={false}/>
                 </div>
             </div>
+
             <div className={'flex flex-col items-center gap-5 pb-28 bg-[#f8f8ff]'}>
                 {packages?.data?.map((it, index) => (
                     <CardPackage key={index} index={index} isValidating={isValidating} data={it}/>

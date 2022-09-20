@@ -99,9 +99,9 @@ const Profile = observer(() => {
                 <Avatar size={70} className={'border-8 border-gray-50 bg-white -mt-[30px]'}
                         src="https://joeschmoe.io/api/v1/random"/>
                 <div className={'flex flex-col'}>
-                    <Title level={4}>Alexis Gibson</Title>
-                    <span className={'text-sm text-[#7d7d82]'}>+62 8136473763</span>
-                    <span className={'text-sm text-[#7d7d82]'}>alexisGib@gmail.com</span>
+                    <Title level={4}>{user?.data?.username}</Title>
+                    <span className={'text-sm text-[#7d7d82]'}>{user?.data?.phoneNumber}</span>
+                    <span className={'text-sm text-[#7d7d82]'}>{user?.data?.email}</span>
                 </div>
 
                 <div className={'flex flex-col pt-8 pb-28'}>
@@ -109,7 +109,7 @@ const Profile = observer(() => {
                         <Title level={5}>Kode Referral</Title>
                         <Tag
                             className={'flex justify-between items-center border-dashed p-3 border-[#4461F2] bg-[#4461F2]/[0.1] rounded-lg text-lg'}>
-                            <span className={'text-primary'}>E5B6DHASFG</span>
+                            <span className={'text-primary'}>{user?.data?.referralCode}</span>
                             <span className={'text-sm hover:cursor-pointer'}>Salin</span>
                         </Tag>
                     </div>

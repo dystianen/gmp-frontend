@@ -3,8 +3,8 @@ import useSWR from "swr";
 
 const url = {
     getAllUser: () => "/users/",
-    getProfile: () => `/users-profile/detail`,
-    getUserId: (id) => `/users-profile/detail/${id}`,
+    getProfile: () => `/users/profile`,
+    getUserId: (id) => `/users/detail-binary/${id}`,
     editUser: (id) => `/users/${id}`,
     deleteUser: (id) => `/users/${id}`,
     uploadUserImage: () => `/file/upload`,
