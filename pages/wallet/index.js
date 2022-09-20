@@ -17,16 +17,13 @@ const Wallet = observer(() => {
             const decodeJwt = jwtDecode(token)
             setDataUser(decodeJwt)
         }
-    }, [])   
+    }, [])
 
     return (
         <>
             <div className={"relative min-h-screen flex flex-col max-w-lg mx-auto px-8 bg-[#FAFAFA] overflow-hidden"}>
-                <div className={'absolute top-0 left-0'}>
-                    <Image src={'/assets/icons/Ellipse1.svg'} alt={'icon'} preview={false}/>
-                </div>
-                <div className={'absolute top-11 right-0'}>
-                    <Image src={'/assets/icons/Ellipse3.svg'} alt={'icon'} preview={false}/>
+                <div className={'absolute right-0'}>
+                    <Image src={'/assets/background/PatternBG2.svg'} alt={'icon'} preview={false}/>
                 </div>
                 <div className={"flex w-full mt-10"}>
                     <div>
