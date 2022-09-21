@@ -1,10 +1,10 @@
 import {observer} from "mobx-react-lite";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import {Button, Card, Image, Tag, Skeleton, Typography, Progress} from "antd";
-import {useRouter} from "next/router";
+import {Card, Image, Typography, Progress} from "antd";
 import {packageRepository} from "../../repository/package";
 import React from "react";
 import {CardPackage} from "../../components/CardPackage";
+import {FormatNumber} from "../../helpers/NumberFormat";
 
 const {Title} = Typography;
 
@@ -19,11 +19,17 @@ const InvestmentPackage = observer(() => {
                 <Card className={'rounded-lg w-11/12 z-10 mt-5'} bodyStyle={{padding: 20}}>
                     <Title className={'text-sm'}>Stok Investasi <span className={'text-primary'}>({progress?.data?.percentage}%)</span></Title>
                     <div className={'flex justify-between items-center'}>
-                        <span className={'text-primary font-semibold'}>$ {progress?.data?.current}</span>
-                        <span className={'text-primary font-semibold'}>$ {progress?.data?.target}</span>
+                        <span className={'text-primary font-semibold'}>
+                            <FormatNumber value={progress?.data?.current} prefix={'$ '}/>
+                        </span>
+                        <span className={'text-primary font-semibold'}>
+                            <FormatNumber value={progress?.data?.target} prefix={'$ '}/>
+                        </span>
                     </div>
                     <Progress strokeColor={'#4461F2'} percent={progress?.data?.percentage} size="large"/>
-                    <span className={'text-[#7d7d82] font-semibold'}>Tersisa $ {(progress?.data?.target - progress?.data?.current)}</span>
+                    <span className={'text-[#7d7d82] font-semibold'}>
+                        Tersisa <FormatNumber value={progress?.data?.target - progress?.data?.current} prefix={'$ '}/>
+                    </span>
                 </Card>
                 <div className="absolute h-full">
                     <Image src={'/assets/background/Particle1.png'} preview={false}/>

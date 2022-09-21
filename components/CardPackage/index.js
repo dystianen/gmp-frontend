@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Button, Card, Image, Skeleton, Tag} from "antd";
 import {useRouter} from "next/router";
+import {FormatNumber} from "../../helpers/NumberFormat";
 
 export const CardPackage = (props) => {
     const {index, isValidating, data} = props;
@@ -24,21 +25,27 @@ export const CardPackage = (props) => {
                     <Image src={'/assets/icons/profit.svg'} preview={false}/>
                     <div className={'flex flex-col'}>
                         <span className={'text-xs'}>Profit</span>
-                        <span className={'text-sm font-bold'}>{data.return_percentage}</span>
+                        <span className={'text-sm font-bold'}>
+                            <FormatNumber value={data.return_percentage} suffix={' %'}/>
+                        </span>
                     </div>
                 </div>
                 <div className={'flex gap-4'}>
                     <Image src={'/assets/icons/admin.svg'} preview={false}/>
                     <div className={'flex flex-col'}>
                         <span className={'text-xs'}>Admin</span>
-                        <span className={'text-sm font-bold'}>{data.service_fee} BUSD</span>
+                        <span className={'text-sm font-bold'}>
+                            <FormatNumber value={data.service_fee} suffix={' BUSD'}/>
+                        </span>
                     </div>
                 </div>
             </div>
             <div className={'grid grid-cols-2 items-center mt-4'}>
                 <div className={'flex flex-col'}>
                     <span className={'text-sm font-medium'}>Harga</span>
-                    <span className={'text-[#4461F2] text-2xl font-semibold'}>$ {data.price}</span>
+                    <span className={'text-[#4461F2] text-2xl font-semibold'}>
+                        <FormatNumber value={data.price} prefix={'$ '}/>
+                    </span>
                 </div>
                 <Button size={'large'}
                         className={'rounded-full bg-[#FCC200] text-white border-none font-medium'}

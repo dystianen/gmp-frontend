@@ -3,12 +3,11 @@ import {Image, Card, Button} from "antd";
 import {observer} from "mobx-react-lite";
 import jwtDecode from "jwt-decode";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import {userRepository} from "../../repository/users";
 import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from "next/router";
-import NumberFormat from "react-number-format";
 import {walletRepository} from "../../repository/wallet";
 import moment from "moment";
+import {FormatNumber} from "../../helpers/NumberFormat";
 
 const Wallet = observer(() => {
     const router = useRouter();
@@ -68,13 +67,7 @@ const Wallet = observer(() => {
                                 Balance
                             </div>
                             <span className={'font-semibold text-4xl text-white'}>
-                                <NumberFormat
-                                    value={dataBalanceUSDT?.data ?? 0}
-                                    decimalSeparator={","}
-                                    displayType={"text"}
-                                    thousandSeparator={"."}
-                                    renderText={(value) => <div>{value}</div>}
-                                />
+                                <FormatNumber value={dataBalanceUSDT?.data}/>
                             </span>
                         </div>
 
@@ -110,13 +103,7 @@ const Wallet = observer(() => {
                                 Balance
                             </div>
                             <span className={'font-semibold text-4xl text-white'}>
-                                <NumberFormat
-                                    value={dataBalanceGMP?.data ?? 0}
-                                    decimalSeparator={","}
-                                    displayType={"text"}
-                                    thousandSeparator={"."}
-                                    renderText={(value) => <div>{value}</div>}
-                                />
+                                <FormatNumber value={dataBalanceGMP?.data}/>
                             </span>
                         </div>
 

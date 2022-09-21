@@ -7,6 +7,7 @@ import React, {useState} from "react";
 import {packageRepository} from "../../../../repository/package";
 import {useEffect} from "react";
 import jwtDecode from "jwt-decode";
+import {FormatNumber} from "../../../../helpers/NumberFormat";
 
 const InvestmentPackageDetail = observer(() => {
     const router = useRouter();
@@ -26,8 +27,7 @@ const InvestmentPackageDetail = observer(() => {
 
     const showConfirm = async () => {
         Modal.confirm({
-            title: <span
-                className={'font-bold'}>Are you sure want to buy {detail?.data?.name} with price {detail?.data?.price} USDT ?</span>,
+            title: <span className={'font-bold'}>Are you sure want to buy {detail?.data?.name} with price ${detail?.data?.price} USDT? </span>,
             okText: "Ok",
             cancelText: "Cancel",
             onOk() {
@@ -62,12 +62,12 @@ const InvestmentPackageDetail = observer(() => {
         },
         {
             name: 'Token Perbulan',
-            value: detail?.data?.gmp_permonth,
+            value: <FormatNumber value={detail?.data?.gmp_permonth}/>,
             icon: '/assets/icons/benefit/token.svg'
         },
         {
             name: 'Total Token',
-            value: detail?.data?.gmp_total,
+            value: <FormatNumber value={detail?.data?.gmp_total}/>,
             icon: '/assets/icons/benefit/token.svg'
         }
     ];
@@ -103,7 +103,8 @@ const InvestmentPackageDetail = observer(() => {
                             onClick={() => router.push('/investment_package')}>
                         <BiArrowBack className={'text-lg'}/>
                     </Button>
-                    <span className={'w-full text-2xl font-bold text-white text-center pr-12'}>{detail?.data?.name}</span>
+                    <span
+                        className={'w-full text-2xl font-bold text-white text-center pr-12'}>{detail?.data?.name}</span>
                 </div>
                 <div className="absolute">
                     <Image src={'/assets/background/Particle1.png'} preview={false}/>
@@ -117,7 +118,7 @@ const InvestmentPackageDetail = observer(() => {
             </div>
 
             <Spin spinning={isLoading}>
-                <div className={'flex flex-col gap-2 bg-white pb-20 overflow-auto'}>
+                <div className={'flex flex-col gap-2 bg-white overflow-auto'}>
                     <div className={'border-b-[5px] px-8 pt-3'}>
                         <h1 className={'text-lg font-bold'}>Deskripsi Paket</h1>
                         <p className={'text-justify text-sm'}>-</p>
@@ -131,7 +132,8 @@ const InvestmentPackageDetail = observer(() => {
 
                                 <div className={'flex flex-col'}>
                                     <span className={'font-bold text-[15px]'}>{it.name}</span>
-                                    <span className={'text-base font-bold text-[#65DC41] text-[21px]'}>{it.value? it.value : '-'}</span>
+                                    <span
+                                        className={'text-base font-bold text-[#65DC41] text-[21px]'}>{it.value ? it.value : '-'}</span>
                                 </div>
 
                                 <div className={'absolute bottom-0 right-0'}>
@@ -141,7 +143,7 @@ const InvestmentPackageDetail = observer(() => {
                         ))}
                     </div>
 
-                    <div className={'px-8 py-5'}>
+                    <div className={'px-8 py-3'}>
                         <h1 className={'text-lg font-bold'}>Info Lainnya</h1>
                         <div className={'grid grid-rows-3 grid-cols-2 gap-8 justify-between'}>
                             {otherInfo.map((it, index) => (
@@ -149,7 +151,7 @@ const InvestmentPackageDetail = observer(() => {
                                     <Image src={it.icon} preview={false}/>
                                     <div className={'flex flex-col'}>
                                         <span className={'text-xs text-[#12131C]/90 font-medium'}>{it.label}</span>
-                                        <span className={'text-base font-bold'}>{it.value? it.value : '-'}</span>
+                                        <span className={'text-base font-bold'}>{it.value ? it.value : '-'}</span>
                                     </div>
                                 </div>
                             ))}
@@ -161,7 +163,9 @@ const InvestmentPackageDetail = observer(() => {
                 className="grid grid-cols-2 items-center max-w-md mx-auto rounded-b-lg fixed bg-white drop-shadow-2xl h-20 inset-x-0 bottom-0 z-10 px-5">
                 <div className={'flex flex-col justify-center'}>
                     <span className={'text-sm text-[#12131C]/55 font-semibold'}>Harga Paket</span>
-                    <span className={'text-2xl font-bold text-primary'}>$ {(detail?.data?.price + detail?.data?.service_fee)}</span>
+                    <span className={'text-2xl font-bold text-primary'}>
+                        <FormatNumber value={detail?.data?.price + detail?.data?.service_fee} prefix={'$ '}/>
+                    </span>
                 </div>
                 <Button type={'primary'} size={'large'} className={'rounded-full'} onClick={showConfirm}>Beli
                     Paket</Button>
