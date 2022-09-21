@@ -11,8 +11,6 @@ const url = {
     changePassword: () => `/users/change-password`,
     binaryTree: () => `/users/binary-tree`,
     sunTree: () => `/users/sun-tree`,
-    getBalanceUSDT: () => `/users/balance`,
-    getBalanceGMP: () => `/users/balance-gmp`,
 };
 
 const hooks = {
@@ -24,12 +22,6 @@ const hooks = {
     },
     useGetProfileById(id) {
         return useSWR(url.getUserId(id), http.fetcher);
-    },
-    userGetBalanceUSDT() {
-        return useSWR(url.getBalanceUSDT(), http.fetcher);
-    },
-    userGetBalanceGMP() {
-        return useSWR(url.getBalanceGMP(), http.fetcher);
     },
 }
 
