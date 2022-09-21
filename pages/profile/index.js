@@ -51,7 +51,7 @@ const Profile = observer(() => {
         {
             name: 'Edit Profile',
             icon: '/assets/icons/userblue.svg',
-            url: `/profile/${dataUser.id}/edit_profile`,
+            url: `/profile/${dataUser.id}/edit`,
         },
         {
             name: 'Ubah Password',
