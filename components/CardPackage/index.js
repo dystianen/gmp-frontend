@@ -10,12 +10,12 @@ export const CardPackage = (props) => {
     return <Card
         key={index}
         className={`${(type !='binary') && 'w-11/12'} rounded-2xl ${(index === 0 && type !='binary') && '-mt-5'}`}
-        title={<span className={'font-bold text-xl'}>{data.name}</span>}
+        title={<span className={'font-bold text-xl'}>{data?.name}</span>}
         extra={
             <Tag className={'flex items-center py-3 px-4 rounded-full border-none bg-[#4461f2]/[.09]'}>
                 <Image src={'/assets/icons/clock.svg'} preview={false}/>
                 <span
-                    className={'text-primary font-semibold text-sm pl-1'}>{data.month_contract} Bulan</span>
+                    className={'text-primary font-semibold text-sm pl-1'}>{data?.month_contract} Bulan</span>
             </Tag>
         }
     >
@@ -26,7 +26,7 @@ export const CardPackage = (props) => {
                     <div className={'flex flex-col'}>
                         <span className={'text-xs'}>Profit</span>
                         <span className={'text-sm font-bold'}>
-                            <FormatNumber value={data.return_percentage} suffix={' %'}/>
+                            <FormatNumber value={data?.return_percentage} suffix={' %'}/>
                         </span>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ export const CardPackage = (props) => {
                     <div className={'flex flex-col'}>
                         <span className={'text-xs'}>Admin</span>
                         <span className={'text-sm font-bold'}>
-                            <FormatNumber value={data.service_fee} suffix={' BUSD'}/>
+                            <FormatNumber value={data?.service_fee} suffix={' BUSD'}/>
                         </span>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ export const CardPackage = (props) => {
                 <div className={'flex flex-col'}>
                     <span className={'text-sm font-medium'}>Harga</span>
                     <span className={'text-[#4461F2] text-2xl font-semibold'}>
-                        <FormatNumber value={data.price} prefix={'$ '}/>
+                        <FormatNumber value={data?.price} prefix={'$ '}/>
                     </span>
                 </div>
                 {
