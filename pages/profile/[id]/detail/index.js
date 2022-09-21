@@ -46,9 +46,7 @@ const ProfileDetail = observer(() => {
             <div className={'pt-8'}>
                 <Title level={4}>Paket Dimiliki</Title>
 
-                {profile?.data?.package?.map((it, index) => (
-                    <CardPackage key={index} index={index} isValidating={isValidating} data={it}/>
-                ))}
+                <CardPackage key={index} index={index} isValidating={isValidating} data={profile?.data?.package}/>
             </div>
         </div>
     </>
