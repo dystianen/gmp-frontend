@@ -20,6 +20,7 @@ const WalletDetails = observer(() => {
     const [endDate, setEndDate] = useState("");
 
     const router = useRouter();
+    const {type} = router.query
 
     useEffect(() => {
         if (typeof window !== undefined) {
@@ -27,6 +28,7 @@ const WalletDetails = observer(() => {
 
             const decodeJwt = jwtDecode(token)
             setDataUser(decodeJwt)
+            console.log(type, "ini type");
         }
     }, [])
 
@@ -35,6 +37,7 @@ const WalletDetails = observer(() => {
         {
             startDate: startDate,
             endDate: endDate,
+            type: type,
         },
     );
     console.log(dataTransaction, "uhuhfruh");
@@ -68,7 +71,7 @@ const WalletDetails = observer(() => {
                         </Button>
                         <div className="flex items-center col-span-2">
                         <Image src={'/assets/logo/mini-logo2.png'} className={'px-2'}  preview={false}/>
-                        <span className={'w-full text-2xl font-bold text-white'}>GMP</span>
+                        <span className={'w-full text-2xl font-bold text-white'}>{type}</span>
                         </div>
                     </div>
                     <div className="absolute h-full">
@@ -86,7 +89,7 @@ const WalletDetails = observer(() => {
                 <Card className={"-mt-24 h-48 bg-[#b88727] rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/bg-chip.png')]"}>
                     <div className={'flex items-center gap-2 -mt-3'}>
                         <Image src={'/assets/logo/mini-logo.png'} preview={false}/>
-                        <span className={'text-white font-semibold text-sm leading-8'}>GMP</span>
+                        <span className={'text-white font-semibold text-sm leading-8'}>{type}</span>
                     </div>
                     <div className={'absolute'}>
                         <div className={'font-semibold text-sm leading-4 text-white mt-2.5'}>

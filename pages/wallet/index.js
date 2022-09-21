@@ -53,7 +53,7 @@ const Wallet = observer(() => {
                             <span className={'text-white font-semibold text-3xl leading-8'}>USDT</span>
                             <Button
                                 className={'text-primary font-bold text-sm w-[99px] h-[34px] border-solid border-none rounded-2xl'}
-                                onClick={() => router.push(`/wallet_detail/`)}>
+                                onClick={() => router.push(`/wallet_detail/USDT`)}>
                                 Detail
                             </Button>
                         </div>
@@ -88,7 +88,7 @@ const Wallet = observer(() => {
                             <span className={'text-white font-semibold text-3xl leading-8'}>GMP</span>
                             <Button
                                 className={'text-secondary font-bold text-sm w-[99px] h-[34px] border-solid border-none rounded-2xl'}
-                                onClick={() => router.push(`/wallet_detail/`)}
+                                onClick={() => router.push(`/wallet_detail/GMP`)}
                             >
                                 Detail
                             </Button>
