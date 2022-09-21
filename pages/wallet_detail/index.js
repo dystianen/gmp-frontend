@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite";
-import {Card, Image, DatePicker, Form, Col} from "antd";
+import {Card, Image, DatePicker, Form, Col, Button} from "antd";
 import Link from "next/link";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
 import { transactionRepository } from "../../repository/transaction";
 import formatDate from "../../helper/formatDate";
+import {BiArrowBack} from "react-icons/bi";
 
 const WalletDetails = observer(() => {
 
