@@ -12,7 +12,7 @@ const url = {
             filter.endDate = endDate;
         }
         return `/transaction/findAll?${qs.stringify(filter)}`},
-    getOneTransaction: () => `/transaction/getOne/${id}`,
+    getOneTransaction: (id) => `/transaction/getOne/${id}`,
 };
 
 const hooks = {

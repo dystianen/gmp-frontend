@@ -1,14 +1,15 @@
 import {observer} from "mobx-react-lite";
-import DesktopLayout from "../../../components/Layout/DesktopLayout/DesktopLayout";
 import {Card, Image, DatePicker, Form, Col} from "antd";
 import Link from "next/link";
-import { transactionRepository } from "../../../repository/transaction";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
 const { RangePicker } = DatePicker;
 import React from 'react';
 import moment from "moment";
 import { useRouter } from "next/router";
+import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
+import { transactionRepository } from "../../repository/transaction";
+import formatDate from "../../helper/formatDate";
 
 const WalletDetails = observer(() => {
 
@@ -51,51 +52,29 @@ const WalletDetails = observer(() => {
     console.log(endDate, "end");
     console.log(dataTransaction);
 
-    const history = [
-        {
-            name: 'Withdraw',
-            date: '09 September 2022, 12:45',
-            amount: 50,
-        },
-        {
-            name: 'Paket Medium',
-            date: '02 Agustus 2022, 06:20',
-            amount: 100,
-        },
-        {
-            name: 'Withdraw',
-            date: '20 Oktober 2022, 10:45',
-            amount: 150,
-        },
-        {
-            name: 'Paket Medium',
-            date: '25 Oktober 2022, 16:00',
-            amount: 50,
-        },
-        {
-            name: 'Paket Medium',
-            date: '25 Oktober 2022, 16:00',
-            amount: 50,
-        },
-    ]
-    // console.log(history)
+    
     return (
         <>
             <div className="relative bg-[#FAFAFA] min-h-screen max-w-lg bg-center w-full mx-auto px-6 rounded-t">
-                <div className="absolute top-0 left-0">
-                    <Image src={'/assets/icons/Ellipse8.svg'} alt={'icons'} preview={false}/>
+                <div className={'relative flex flex-col justify-center items-center bg-primary bg-center h-1/3 w-full rounded-b-[30px]'}>
+                    <div className={'flex flex-row items-center w-5/6 z-10 -mt-14'}>
+                        <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
+                                onClick={() => router.back()}>
+                            <BiArrowBack  className={'text-lg'}/>
+                        </Button>
+                        <span className={'w-full text-2xl font-bold text-white text-center pr-12'}>Detail Transaksi</span>
+                    </div>
+                    <div className="absolute h-full">
+                        <Image src={'/assets/background/Particle1.png'} preview={false}/>
+                    </div>
+                    <div className="absolute top-0 left-0">
+                        <Image src={'/assets/background/BGYellowTop.svg'} preview={false}/>
+                    </div>
+                    <div className="absolute bottom-0 right-0">
+                        <Image className={'-mb-[6px] w-36 h-36 rounded-b-[30px]'}
+                            src={'/assets/background/BGYellowBot2.png'} preview={false}/>
+                    </div>
                 </div>
-                <div className="absolute top-11 right-0">
-                    <Image src={'/assets/icons/Ellipse7.svg'} alt={'icons'} preview={false}/>
-                </div>
-                <div className={'absolute z-10 top-12'}>
-                    <button className={'rounded-lg w-10 h-10 bg-[#FFBF00]'}>
-                        <Link href={'/investment_package'}>
-                            <a><Image src={'/assets/icons/arrow-left.svg'} preview={false} alt={'icons'}/></a>
-                        </Link>
-                    </button>
-                </div>
-                <p className={'text-center text-2xl font-bold text-[#FFBF00] pt-[54px]'}>GMP</p>
 
                 <Card className={"mt-9 h-48 bg-[#FFBF00] rounded-xl"}>
                     <div className={'absolute top-0 right-0 z-0'}>
@@ -112,17 +91,28 @@ const WalletDetails = observer(() => {
                             $10000000000
                         </h2>
                         <p className={'text-sm font-medium text-white mb-[1px]'}>Transaksi Terakhir</p>
-                        {history.length === 0 ? (
+                        {dataTransaction?.data.length === 0 ? (
                             ''
                         ) : (
-                            <p className={'text-white font-semibold text-base'}>{history[0].date}</p>
+                            <p className={'text-white font-semibold text-base'}>{formatDate(new Date(dataTransaction?.data[0].createdAt))}</p>
                         )}
                     </div>
                 </Card>
 
-                {history.length === 0 ? (
+                {dataTransaction?.data.length === 0 ? (
                     <div className={'mt-8 pb-28'}>
                         <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
+                        <div className="relative">
+                            <Form>
+                                <Form.Item>
+                                    <DatePicker.RangePicker 
+                                        className="mr-2 rounded-md" 
+                                        picker="month" 
+                                        onChange={(e) => filterDate(e?.[0], e?.[1])}
+                                    />
+                                </Form.Item>
+                            </Form>
+                        </div>
                         <div className={'flex justify-center'}>
                             Anda Belum Memiliki Riwayat Transaksi
                         </div>
@@ -141,16 +131,26 @@ const WalletDetails = observer(() => {
                                 </Form.Item>
                             </Form>
                         </div>
-                        {history.map((value, index) => (
-                            <div key={index} onClick={() => router.push(`/wallet/${dataUser.id}/transaction_detail`)} className={'grid grid-rows-2 grid-flow-col mb-2 mt-4'}>
-                                <div className={'font-semibold text-base mb-1'}>{value.name}</div>
-                                <div className={'text-sm font-normal text-slate-600'}>{value.date}</div>
+                        {dataTransaction?.data.map((value, index) => (
+                            <div key={index} onClick={() => router.push(`/wallet_detail/transaction_detail/${value.id}`)} className={'grid grid-rows-2 grid-flow-col mb-2 mt-4'}>
+                                {value?.type === 0 ? (
+                                    <div className={'font-semibold text-base mb-1'}>Buy Package</div>
+                                ) : value?.type === 1 ? (
+                                    <div className={'font-semibold text-base mb-1'}>Distribute Pair</div>
+                                ) : value?.type === 2 ? (       
+                                    <div className={'font-semibold text-base mb-1'}>Stake Result</div>
+                                ) : value?.type === 3 ? (        
+                                    <div className={'font-semibold text-base mb-1'}>Stake Level Result</div>
+                                ) : value?.type === 4 ? (
+                                    <div className={'font-semibold text-base mb-1'}>Move Internal GMP</div>
+                                ) : value?.type === 5 ? (
+                                    <div className={'font-semibold text-base mb-1'}>Stake External GMP</div>
+                                ) : (
+                                    <div className={'font-semibold text-base mb-1'}>Move External USDT</div>
+                                )}
+                                <div className={'text-sm font-normal text-slate-600'}>{formatDate(new Date(value.createdAt))}</div>
                                 <div className={'row-span-3 col-span-2 text-lg font-semibold pb-8'}>
-                                    {value.name === "Withdraw" ? (
-                                        <p className={'text-right text-red-500 mb-1'}>-${value.amount}</p>
-                                    ) : (
-                                        <p className={'text-right text-green-500 mb-1'}>+${value.amount}</p>
-                                    )}
+                                    <p className={'text-right text-green-500 mb-1'}>{value.amount} {value?.currency}</p>
                                 </div>
                             </div>
                         ))}
