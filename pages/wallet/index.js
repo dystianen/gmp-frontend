@@ -36,12 +36,7 @@ const Wallet = observer(() => {
                 <div className={'absolute top-11 right-0'}>
                     <Image src={'/assets/icons/Ellipse3.svg'} alt={'icon'} preview={false}/>
                 </div>
-                <div className={'flex flex-row justify-center items-center w-5/6 z-10 pt-20'}>
-                    <Button
-                        className={'flex justify-center items-center bg-secondary rounded-lg p-0 h-10 w-12 border-none'}
-                        onClick={() => router.push('/investment_package')}>
-                        <BiArrowBack className={'text-lg text-white'}/>
-                    </Button>
+                <div className={'z-10 pt-20 text-center'}>
                     <span className={'w-full text-2xl font-bold text-secondary text-center'}>Dompet</span>
                 </div>
 

@@ -77,12 +77,8 @@ const Profile = observer(() => {
         <>
             <div
                 className={'relative flex justify-center items-center bg-primary bg-center h-1/6 w-full rounded-t'}>
-                <div className={'flex flex-row items-center w-5/6 z-10'}>
-                    <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
-                            onClick={() => router.push('/investment_package')}>
-                        <BiArrowBack className={'text-lg'}/>
-                    </Button>
-                    <span className={'w-full text-2xl font-bold text-white text-center pr-12'}>Profil</span>
+                <div className={'text-center z-10'}>
+                    <span className={'w-full text-2xl font-bold text-white text-center'}>Profil</span>
                 </div>
                 <div className="absolute">
                     <Image src={'/assets/background/Particle1.png'} preview={false}/>

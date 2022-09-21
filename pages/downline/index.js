@@ -1,133 +1,82 @@
-import React, {useState} from "react";
-import _ from "lodash";
-import {DndProvider} from "react-dnd";
-import {HTML5Backend} from "react-dnd-html5-backend";
-import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import dynamic from "next/dynamic";
+import React, {useState, useEffect} from "react";
+import {Image, Card, Button} from "antd";
 import {observer} from "mobx-react-lite";
-import {downlineRepository} from "../../repository/downline";
-import {Avatar, Button, Card, Image} from "antd";
+import jwtDecode from "jwt-decode";
+import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
 import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from "next/router";
-import clsx from "clsx";
-import {makeStyles} from "@material-ui/core/styles";
-import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
-import {CaretUpOutlined} from "@ant-design/icons";
-
-const Tree = dynamic(() => import('react-organizational-chart').then((mod) => mod.Tree), {
-    ssr: false,
-})
-const TreeNode = dynamic(() => import('react-organizational-chart').then((mod) => mod.TreeNode), {
-    ssr: false,
-})
-
-const useStyles = makeStyles((theme) => ({
-    expand: {
-        transform: "rotate(0deg)",
-        transition: theme.transitions.create("transform", {
-            duration: theme.transitions.duration.short
-        })
-    },
-    expandOpen: {
-        transform: "rotate(180deg)"
-    },
-}));
+import {walletRepository} from "../../repository/wallet";
+import moment from "moment";
+import {FormatNumber} from "../../helpers/NumberFormat";
 
 const Downline = observer(() => {
     const router = useRouter();
-    const {data: organization} = downlineRepository.hooks.useGetAll();
+    const [dataUser, setDataUser] = useState([]);
 
-    function Organization({org, onCollapse, collapsed}) {
-        const classes = useStyles();
+    useEffect(() => {
+        if (typeof window !== undefined) {
+            let token = localStorage.getItem('access_token')
 
-        return (
-            <Card className={'inline-block rounded-lg hover:bg-amber-300'} bodyStyle={{padding: '5px 15px'}}>
-                <div className={'flex flex-row items-center gap-2 hover:cursor-pointer'}>
-                    <div className={'flex flex-row gap-2'} onClick={() => router.push(`/profile/${org.id}/detail`)}>
-                        <Avatar src="https://joeschmoe.io/api/v1/random"/>
-                        <div className={'flex flex-col'}>
-                            <span className={'font-bold'}>{org?.label}</span>
-                            <span className={'text-[#7d7d82]'}>{org?.label}</span>
-                        </div>
-                    </div>
+            const decodeJwt = jwtDecode(token)
+            setDataUser(decodeJwt)
+        }
+    }, [])
 
-                    <CaretUpOutlined
-                        className={clsx(classes.expand, {[classes.expandOpen]: !collapsed}, 'text-lg')}
-                        onClick={onCollapse}
-                    />
-                </div>
-            </Card>
-        );
-    }
-
-    function Node({o, parent}) {
-        const [collapsed, setCollapsed] = useState(false);
-
-        const handleCollapse = () => {
-            setCollapsed(!collapsed);
-        };
-
-        const T = parent ? TreeNode : (props) => (
-            <Tree
-                {...props}
-                lineWidth={"2px"}
-                lineColor={"#bbc"}
-                lineBorderRadius={"12px"}
-            >
-                {props.children}
-            </Tree>
-        );
-
-        return collapsed ? (<T label={<Organization org={o} onCollapse={handleCollapse} collapsed={collapsed}/>}/>)
-            : (<T label={<Organization org={o} onCollapse={handleCollapse} collapsed={collapsed}/>}>
-                    {_.map(o?.children, (c) => (
-                        <Node o={c} parent={o}/>
-                    ))}
-                </T>
-            );
-    }
+    const {data: dataBalanceUSDT} = walletRepository.hooks.useGetBalanceUSDT();
+    const {data: dataBalanceGMP} = walletRepository.hooks.useGetBalanceGMP();
+    const {data: lastTransactionsUSDT} = walletRepository.hooks.useGetLastTransactions('USDT')
+    const {data: lastTransactionsGMP} = walletRepository.hooks.useGetLastTransactions('GMP')
 
     return (
         <>
-            <div className={'relative h-screen bg-[url("/assets/background/BGDot.png")]'}>
-                <div className={'relative flex justify-center items-center bg-primary bg-center  h-1/5 w-full rounded-t'}>
-                    <div className={'flex flex-row items-center w-5/6 z-10'}>
-                        <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
-                                onClick={() => router.push('/investment_package')}>
-                            <BiArrowBack className={'text-lg'}/>
-                        </Button>
-                        <span className={'w-full text-2xl font-bold text-white text-center pr-12'}>Downline</span>
-                    </div>
-                    <div className="absolute">
-                        <Image src={'/assets/background/Particle1.png'} preview={false}/>
-                    </div>
-                    <div className="absolute top-0 left-0">
-                        <Image src={'/assets/background/BGYellowTop.svg'} preview={false}/>
-                    </div>
-                    <div className="absolute bottom-0 right-0 mt-10">
-                        <Image className={'-mb-[6px]'} src={'/assets/background/BGYellowBot.svg'} preview={false}/>
-                    </div>
+            <div
+                className={"relative min-h-screen flex flex-col max-w-lg mx-auto px-8 pb-24 bg-[#FAFAFA] overflow-hidden"}>
+                <div className={'absolute top-0 left-0'}>
+                    <Image src={'/assets/icons/Ellipse1.svg'} alt={'icon'} preview={false}/>
+                </div>
+                <div className={'absolute top-11 right-0'}>
+                    <Image src={'/assets/icons/Ellipse3.svg'} alt={'icon'} preview={false}/>
+                </div>
+                <div className={'z-10 pt-20 text-center'}>
+                    <span className={'w-full text-2xl font-bold text-secondary text-center'}>Downline</span>
                 </div>
 
-                <TransformWrapper
-                    initialScale={1}
-                    minScale={0.5}
-                    centerOnInit={true}
-                    limitToBounds={false}
+                <Card
+                    className={"relative h-36 mt-9 bg-[#4461F2] rounded-xl hover:cursor-pointer hover:shadow-lg"}
+                    bodyStyle={{padding: 20}}
+                    onClick={() => router.push('/downline/binary-tree')}
                 >
-                    <TransformComponent contentStyle={{height: '80vh', width: '100%', padding: 20}}>
-                        <DndProvider backend={HTML5Backend}>
-                            <Node o={organization?.data}/>
-                        </DndProvider>
-                    </TransformComponent>
-                </TransformWrapper>
+                    <div className={'absolute top-0 right-0'}>
+                        <Image src={'/assets/background/Ellipse 403.svg'} alt={'icon'} preview={false}/>
+                    </div>
+                    <div className={'absolute -bottom-[10px] -right-[12px]'}>
+                        <Image src={'/assets/background/Ellipse 402.svg'} alt={'icon'} preview={false}/>
+                    </div>
+
+                    <h2 className={'text-2xl text-white'}>Binary Tree</h2>
+                </Card>
+
+                <Card
+                    className={"relative mt-9 h-36 bg-[#FFBF00] rounded-xl hover:cursor-pointer hover:shadow-lg"}
+                    bodyStyle={{padding: 20}}
+                    onClick={() => router.push('/downline/sun-tree')}
+                >
+                    <div className={'absolute top-0 right-0 z-0'}>
+                        <Image src={'/assets/background/chip.svg'} alt={'background'} height={140} preview={false}/>
+                    </div>
+
+                    <div>
+                        <div className={'z-10'}>
+                            <h2 className={'text-2xl text-white'}>Sun Tree</h2>
+                        </div>
+                    </div>
+                </Card>
             </div>
         </>
     )
-});
+})
 
 Downline.getLayout = function Layout(page) {
     return <DesktopLayout>{page}</DesktopLayout>;
 };
-
 export default Downline;

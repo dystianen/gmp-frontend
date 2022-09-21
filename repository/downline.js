@@ -2,12 +2,12 @@ import {http} from "../utils/http";
 import useSWR from "swr";
 
 const url = {
-    getDownline: () => "/users/binary-tree",
+    getDownline: (type) => `/users/${type}`,
 };
 
 const hooks = {
-    useGetAll() {
-        return useSWR(url.getDownline(), http.fetcher)
+    useGetAll(type) {
+        return useSWR(url.getDownline(type), http.fetcher)
     },
 };
 

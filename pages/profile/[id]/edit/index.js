@@ -105,7 +105,7 @@ const UpdateProfile = observer(() => {
                     className={'relative flex justify-center items-center bg-primary bg-center h-1/5 w-full rounded-t'}>
                     <div className={'flex flex-row items-center w-5/6 z-10'}>
                         <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
-                                onClick={() => router.push('/investment_package')}>
+                                onClick={() => router.push('/profile')}>
                             <CloseOutlined className={'text-lg'}/>
                         </Button>
                         <span className={'w-full text-2xl font-bold text-white text-center pr-12'}>Profil</span>
@@ -132,7 +132,7 @@ const UpdateProfile = observer(() => {
                             Ubah Foto
                         </Button>
                     </div>
-                    <Form form={form}>
+                    <Form form={form} layout={'vertical'}>
                         <Form.Item label={label('Username')} name={'username'}>
                             <Input className={'h-[50px] rounded-lg'}/>
                         </Form.Item>
