@@ -46,7 +46,7 @@ const ProfileDetail = observer(() => {
             <div className={'pt-8'}>
                 <Title level={4}>Paket Dimiliki</Title>
 
-                <CardPackage key={index} index={index} isValidating={isValidating} data={profile?.data?.package}/>
+                <CardPackage isValidating={isValidating} data={profile?.data?.package}/>
             </div>
         </div>
     </>
