@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite";
-import {Card, Image, DatePicker, Form, Col} from "antd";
+import {Card, Image, DatePicker, Form, Col, Button} from "antd";
 import Link from "next/link";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
@@ -10,6 +10,8 @@ import { useRouter } from "next/router";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
 import { transactionRepository } from "../../repository/transaction";
 import formatDate from "../../helper/formatDate";
+import { BiArrowBack } from "react-icons/bi";
+import { walletRepository } from "../../repository/wallet";
 
 const WalletDetails = observer(() => {
 
@@ -28,6 +30,7 @@ const WalletDetails = observer(() => {
         }
     }, [])
 
+    const {data: dataBalanceGMP} = walletRepository.hooks.useGetBalanceGMP();
     const {data: dataTransaction} = transactionRepository.hooks.useGetAllTransaction(
         {
             startDate: startDate,
@@ -35,6 +38,7 @@ const WalletDetails = observer(() => {
         },
     );
     console.log(dataTransaction, "uhuhfruh");
+    console.log(dataBalanceGMP, "ckckck");
 
     const filterDate = (date1, date2) => {
         if (!date1 && !date2) {
@@ -55,14 +59,17 @@ const WalletDetails = observer(() => {
     
     return (
         <>
-            <div className="relative bg-[#FAFAFA] min-h-screen max-w-lg bg-center w-full mx-auto px-6 rounded-t">
+            {/* <div className="relative bg-[#FAFAFA] min-h-screen max-w-lg bg-center w-full mx-auto px-6 rounded-t"> */}
                 <div className={'relative flex flex-col justify-center items-center bg-primary bg-center h-1/3 w-full rounded-b-[30px]'}>
-                    <div className={'flex flex-row items-center w-5/6 z-10 -mt-14'}>
+                    <div className={'grid grid-cols-3 w-5/6 z-10 -mt-14'}>
                         <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
                                 onClick={() => router.back()}>
                             <BiArrowBack  className={'text-lg'}/>
                         </Button>
-                        <span className={'w-full text-2xl font-bold text-white text-center pr-12'}>Detail Transaksi</span>
+                        <div className="flex items-center col-span-2">
+                        <Image src={'/assets/logo/mini-logo2.png'} className={'px-2'}  preview={false}/>
+                        <span className={'w-full text-2xl font-bold text-white'}>GMP</span>
+                        </div>
                     </div>
                     <div className="absolute h-full">
                         <Image src={'/assets/background/Particle1.png'} preview={false}/>
@@ -76,21 +83,21 @@ const WalletDetails = observer(() => {
                     </div>
                 </div>
 
-                <Card className={"mt-9 h-48 bg-[#FFBF00] rounded-xl"}>
-                    <div className={'absolute top-0 right-0 z-0'}>
-                        <Image src={'/assets/background/chip.svg'} alt={'background'} preview={false}/>
-                    </div>
-                    <div className={'flex justify-between'}>
-                        <span className={'text-white font-semibold text-2xl leading-8'}>GMP</span>
+                <Card className={"-mt-24 h-48 bg-[#b88727] rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/bg-chip.png')]"}>
+                    <div className={'flex items-center gap-2 -mt-3'}>
+                        <Image src={'/assets/logo/mini-logo.png'} preview={false}/>
+                        <span className={'text-white font-semibold text-sm leading-8'}>GMP</span>
                     </div>
                     <div className={'absolute'}>
-                        <div className={'font-medium text-sm leading-4 text-white mt-2.5'}>
+                        <div className={'font-semibold text-sm leading-4 text-white mt-2.5'}>
                             Balance
                         </div>
                         <h2 className={'font-semibold text-3xl text-white z-10'}>
-                            $10000000000
+                           ${dataBalanceGMP?.data}
                         </h2>
-                        <p className={'text-sm font-medium text-white mb-[1px]'}>Transaksi Terakhir</p>
+                    </div>
+                    <div className="absolute px-6 py-2 w-full right-0 left-0 rounded-b-xl bottom-0" style={{ backgroundColor: 'rgba(254, 155, 11, 0.4)', backdropFilter: 'blur(2px)' }}>
+                        <p className={'text-sm font-semibold text-white mb-[1px] pt-2'}>Transaksi Terakhir</p>
                         {dataTransaction?.data.length === 0 ? (
                             ''
                         ) : (
@@ -100,7 +107,7 @@ const WalletDetails = observer(() => {
                 </Card>
 
                 {dataTransaction?.data.length === 0 ? (
-                    <div className={'mt-8 pb-28'}>
+                    <div className={'mt-8 pb-28 px-10'}>
                         <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
                         <div className="relative">
                             <Form>
@@ -118,7 +125,7 @@ const WalletDetails = observer(() => {
                         </div>
                     </div>
                 ) : (
-                    <div className={'mt-8 pb-28'}>
+                    <div className={'mt-8 pb-28 px-10'}>
                         <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
                         <div className="relative">
                             <Form>
@@ -156,7 +163,7 @@ const WalletDetails = observer(() => {
                         ))}
                     </div>
                 )}
-            </div>
+            {/* </div> */}
         </>
     )
 })

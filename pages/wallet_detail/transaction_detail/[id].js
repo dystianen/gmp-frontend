@@ -34,7 +34,7 @@ const TransactionDetail = observer(() => {
                 </div>
             </div>
             <div className="bg-[#FAFAFA] h-screen">
-                <Card className={'h-screen rounded-2xl mx-10 -mt-[80px] pb-20'}>
+                <Card className={'h-screen rounded-2xl mx-10 -mt-[80px] mb-20'}>
                     <div className="my-2 flex flex-col items-center justify-center">
                         <Image src={"/assets/logo/logo-token.svg"} alt={'logo'} preview={false}/>
                         <p className=" text-center font-semibold text-2xl text-[#4461F2] mt-1">${oneTransaction?.data?.amount}</p>
