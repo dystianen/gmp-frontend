@@ -57,7 +57,8 @@ const Wallet = observer(() => {
                         <div className={'flex justify-between'}>
                             <span className={'text-white font-semibold text-3xl leading-8'}>USDT</span>
                             <Button
-                                className={'text-primary font-bold text-sm w-[99px] h-[34px] border-solid border-none rounded-2xl'}>
+                                className={'text-primary font-bold text-sm w-[99px] h-[34px] border-solid border-none rounded-2xl'}
+                                onClick={() => router.push(`/wallet_detail/`)}>
                                 Detail
                             </Button>
                         </div>
@@ -92,7 +93,7 @@ const Wallet = observer(() => {
                             <span className={'text-white font-semibold text-3xl leading-8'}>GMP</span>
                             <Button
                                 className={'text-secondary font-bold text-sm w-[99px] h-[34px] border-solid border-none rounded-2xl'}
-                                onClick={() => router.push(`/wallet/${dataUser.id}`)}
+                                onClick={() => router.push(`/wallet_detail/`)}
                             >
                                 Detail
                             </Button>
