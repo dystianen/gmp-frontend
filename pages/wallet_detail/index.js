@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite";
-import {Card, Image, DatePicker, Form, Col, Button, Button} from "antd";
+import {Card, Image, DatePicker, Form, Col, Button} from "antd";
 import Link from "next/link";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
