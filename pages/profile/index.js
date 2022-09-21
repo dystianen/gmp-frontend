@@ -114,15 +114,15 @@ const Profile = observer(() => {
                         <Title level={5}>Akun</Title>
                         <div className={'flex flex-col gap-4'}>
                             {accountMenu.map((it, index) => {
-                                return <Card key={index} className={'rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'} bodyStyle={{padding: 12}}>
+                                return <Card key={index} className={'hover:cursor-pointer rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'} bodyStyle={{padding: 12}} onClick={() => router.push(it.url)}>
                                     <div className={'flex items-center justify-between'}>
                                         <div className={'flex flex-row items-center gap-4'}>
                                             <Image src={it.icon} width={36} height={36} alt={'icon'} preview={false}/>
                                             <span className={'text-base font-bold'}>{it.name}</span>
                                         </div>
                                         <div className={'text-right'}>
-                                            <MdKeyboardArrowRight className={'text-3xl hover:cursor-pointer'}
-                                                                  onClick={() => router.push(it.url)}/>
+                                            <MdKeyboardArrowRight className={'text-3xl'}
+                                                                  />
                                         </div>
                                     </div>
                                 </Card>
@@ -134,15 +134,15 @@ const Profile = observer(() => {
                         <Title level={5}>Tentang</Title>
                         <div className={'flex flex-col gap-4'}>
                             {aboutMenu.map((it, index) => {
-                                return <Card key={index} className={'rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'} bodyStyle={{padding: 12}}>
+                                return <Card key={index} className={'hover:cursor-pointer rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'} bodyStyle={{padding: 12}} onClick={() => router.push(it.url)}>
                                     <div className={'flex items-center justify-between'}>
                                         <div className={'flex flex-row items-center gap-4'}>
                                             <Image src={it.icon} width={36} height={36} alt={'icon'} preview={false}/>
                                             <span className={'text-base font-bold'}>{it.name}</span>
                                         </div>
                                         <div className={'text-right'}>
-                                            <MdKeyboardArrowRight className={'text-3xl hover:cursor-pointer'}
-                                                                  onClick={() => router.push(it.url)}/>
+                                            <MdKeyboardArrowRight className={'text-3xl'}
+                                                                  />
                                         </div>
                                     </div>
                                 </Card>
@@ -151,9 +151,6 @@ const Profile = observer(() => {
                     </div>
 
                     <div className={'flex flex-col gap-4 pt-8'}>
-                        <Button className={'h-14 rounded-full bg-[#FFBF00]/[0.1] text-[#FFBF00] text-lg font-semibold border-none'}>
-                            Ganti ke akun lain
-                        </Button>
                         <Button
                             className={'h-14 rounded-full bg-[#F03636]/[0.1] text-[#F03636] text-lg font-semibold border-none'}
                             onClick={showConfirm}>
