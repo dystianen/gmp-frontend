@@ -67,6 +67,12 @@ const TransactionDetail = observer(() => {
                         <div className="text-right">{formatDate(new Date(oneTransaction?.data?.createdAt))}</div>
                         <div>ID Transaksi</div>
                         <div className="text-right">{oneTransaction?.data?.id}</div>
+                        {oneTransaction?.data?.user_destination ? (
+                            <>
+                                <div>Asal Dana</div>
+                                <div>{oneTransaction?.data?.user_destination}</div>
+                            </>
+                        ):(<div></div>)}
                         {/*<div>Order ID</div>*/}
                         {/*<div className="text-right">31473478485985985</div>*/}
                     </div>
