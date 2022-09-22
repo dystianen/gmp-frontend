@@ -60,7 +60,7 @@ const InvestmentPackageDetail = observer(() => {
 
     const benefit = [
         {
-            name: 'Laba',
+            name: 'Keuntungan',
             value: detail?.data?.return_percentage + '%',
             icon: '/assets/icons/benefit/profit.svg'
         },
