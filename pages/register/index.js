@@ -53,43 +53,42 @@ const Register = observer(() => {
                         <span className={'text-base text-center opacity-50'}>Silahkan isi email aktif anda sebagai <br/> kode verifikasi</span>
                     </div>
                     <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
-                        <Form.Item name={'username'} label={label('Username')} rules={[{
+                        <Form.Item name={'username'} label={label('Nama Pengguna')} rules={[{
                             required: true,
-                            message: "Please input Username!",
+                            message: "Tolong masukan nama pengguna!",
                         }]}>
-                            <Input placeholder={'Masukan username'}/>
+                            <Input placeholder={'Masukan Nama Pengguna'}/>
                         </Form.Item>
                         <Form.Item name={'email'} label={label('Email')} rules={[
                             {
                                 required: true,
-                                message: "Please input Email!",
+                                message: "Tolong masukan email!",
                             },
                             {
                                 type: 'email',
-                                message: 'Please input a valid email address!'
+                                message: 'Tolong masukan email yang sah!'
                             }
                         ]}>
-                            <Input placeholder={'Masukan username'}/>
+                            <Input placeholder={'Masukan Email'}/>
                         </Form.Item>
-                        <Form.Item name={'password'} label={label('Password')} rules={[{
-                            required: true,
-                            message: "Please input Password!",
-                        }]}>
-                            <Input.Password placeholder={'Masukan password'}/>
+                        <Form.Item name={'password'} label={label('Kata Sandi')} rules={[
+                            {required: true, message: "Tolong masukan kata sandi!"}
+                        ]}>
+                            <Input.Password placeholder={'Masukan Kata Sandi'}/>
                         </Form.Item>
-                        <Form.Item name={'phoneNumber'} label={label('Phone Number')} rules={[{
-                            required: true,
-                            message: "Please input Phone Number!",
-                        }]}>
-                            <Input placeholder={'Masukan Phone Number'}/>
+                        <Form.Item name={'phoneNumber'} label={label('Nomor Telepon')} rules={[
+                            {required: true, message: "Tolong Masukan nomor telepon!"},
+                            {min: 10, max: 14, message: "Tolong Masukan nomor telepon yang sah!"},
+                        ]}>
+                            <Input type={"number"} placeholder={'Masukan Nomor Telepon'}/>
                         </Form.Item>
-                        <Form.Item name={'referralCode'} label={label('Referral Code')}>
-                            <Input placeholder={'Masukan Referral Code'}/>
+                        <Form.Item name={'referralCode'} label={label('Kode Rujukan')}>
+                            <Input placeholder={'Masukan Kode Rujukan'}/>
                         </Form.Item>
                         <Form.Item className={'text-center pt-5'}>
                             <Button htmlType={'submit'} type={'primary'} className={'rounded-md mb-2'} size={'large'}
                                     block>Buat Akun</Button>
-                            <span>Sudah punya akun? <Link href={'/login'}>Login</Link></span>
+                            <span>Sudah punya akun? <Link href={'/login'}>Masuk</Link></span>
                         </Form.Item>
                     </Form>
                 </Card>

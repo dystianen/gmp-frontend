@@ -1,23 +1,28 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Avatar, Button, Form, Image, Input, message, Modal, Upload} from "antd";
 import {observer} from "mobx-react-lite"
 import {useRouter} from "next/router";
 import {appConfig} from "../../../../config/app";
 import {imageRepository} from "../../../../repository/image";
 import {userRepository} from "../../../../repository/users";
-import {BiArrowBack} from "react-icons/bi";
 import DesktopLayout from "../../../../components/Layout/DesktopLayout/DesktopLayout";
-import {CloseOutlined} from "@ant-design/icons";
+import {CloseOutlined, UserOutlined} from "@ant-design/icons";
 
 const UpdateProfile = observer(() => {
     const [form] = Form.useForm();
     const router = useRouter();
     const {id} = router.query;
     const [isLoading, setIsLoading] = useState(false)
-    const [fileList, setFileList] = useState();
+    const [fileList, setFileList] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const {data: userData} = userRepository.hooks.useGetProfile();
+
+    useEffect(() => {
+        setFileList([{
+            url: userData?.data?.picProfile
+        }])
+    }, [])
 
     form.setFieldsValue({
         username: userData?.data?.username,
@@ -37,7 +42,7 @@ const UpdateProfile = observer(() => {
             const processUpload = await imageRepository.api.upload(file);
             setFileList([
                 {
-                    url: appConfig.apiUrl + "/users/detail/" + processUpload.data.filename,
+                    url: appConfig.apiUrl + "/file/" + processUpload.data.filename,
                     name: 'file'
                 }
             ])
@@ -54,7 +59,7 @@ const UpdateProfile = observer(() => {
                 username: values.username,
                 email: values.email,
                 phoneNumber: values.phoneNumber,
-                // picProfile: fileList[0].url,
+                picProfile: fileList[0].url,
             }
 
             await userRepository.api.updateProfile(id, data);
@@ -123,24 +128,37 @@ const UpdateProfile = observer(() => {
 
                 <div className={'px-8 h-4/5'}>
                     <div className={'flex flex-col justify-center items-center pb-5'}>
-                        <Avatar size={100} className={'border-8 border-gray-50 bg-white -mt-[40px] mb-2'}
-                                src="https://joeschmoe.io/api/v1/random"/>
-                        <Button
-                            className={'h-[37px] rounded-full bg-[#FFBF00]/[0.1] text-[#FFBF00] text-sm font-semibold border-none'}
-                            onClick={() => setIsModalOpen(true)}
+                        <Avatar size={100} className={'flex justify-center items-center border-8 border-gray-50 -mt-[40px] mb-2'}
+                                src={fileList[0]?.url} icon={<UserOutlined />}/>
+                        <Upload
+                            name="picPicture"
+                            onChange={(args) => imageHandler(args)}
+                            fileList={fileList}
+                            beforeUpload={() => false}
+                            onRemove={() => setFileList([])}
+                            maxCount={1}
+                            onPreview={() => false}
+                            showUploadList={false}
                         >
-                            Ubah Foto
-                        </Button>
+                            <Button
+                                className={'h-[37px] rounded-full bg-[#FFBF00]/[0.1] text-[#FFBF00] text-sm font-semibold border-none'}>
+                                Ubah Foto
+                            </Button>
+                        </Upload>
                     </div>
                     <Form form={form} layout={'vertical'}>
-                        <Form.Item label={label('Username')} name={'username'}>
+                        <Form.Item label={label('Nama Pengguna')} name={'username'}>
                             <Input className={'h-[50px] rounded-lg'}/>
                         </Form.Item>
-                        <Form.Item label={label('Email')} name={'email'}>
-                            <Input className={'h-[50px] rounded-lg'}/>
+                        <Form.Item label={label('Email')} name={'email'} rules={[
+                            {type: 'email', message: "Please input a valid email address!"},
+                        ]}>
+                            <Input type="email" className={'h-[50px] rounded-lg'}/>
                         </Form.Item>
-                        <Form.Item label={label('Nomor Telepon')} name={'phoneNumber'}>
-                            <Input className={'h-[50px] rounded-lg'}/>
+                        <Form.Item label={label('Nomor Telepon')} name={'phoneNumber'} rules={[
+                            {min: 10, max: 14, message: "Please input a valid phone number!"},
+                        ]}>
+                            <Input type={'number'} className={'h-[50px] rounded-lg'}/>
                         </Form.Item>
                     </Form>
 

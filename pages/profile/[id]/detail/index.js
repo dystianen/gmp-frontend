@@ -2,7 +2,7 @@ import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
 import DesktopLayout from "../../../../components/Layout/DesktopLayout/DesktopLayout";
 import {userRepository} from "../../../../repository/users";
-import {Avatar, Button, Card, Image, Skeleton, Tag, Typography} from "antd";
+import {Avatar, Button, Card, Empty, Image, Skeleton, Tag, Typography} from "antd";
 import {BiArrowBack} from "react-icons/bi";
 import React from "react";
 import {CardPackage} from "../../../../components/CardPackage";
@@ -46,7 +46,8 @@ const ProfileDetail = observer(() => {
             <div className={'pt-8'}>
                 <Title level={4}>Paket Dimiliki</Title>
 
-                <CardPackage className={'-mt-[30px]'} key={0} index={0} isValidating={isValidating} data={profile?.data?.package} type={'binary'}/>
+                {!profile?.data?.package?.name ? <Empty className={'pt-10'}/> :
+                <CardPackage className={'-mt-[30px]'} key={0} index={0} isValidating={isValidating} data={profile?.data?.package} type={'binary'}/>}
             </div>
         </div>
     </>

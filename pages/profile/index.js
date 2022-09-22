@@ -2,14 +2,15 @@ import {observer} from "mobx-react-lite";
 import {useRouter} from "next/router";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
 import {Button, Image, Modal, message, Avatar, Typography, Tag, Card} from "antd";
-import {ExclamationCircleOutlined} from '@ant-design/icons';
+import {ExclamationCircleOutlined, UserOutlined} from '@ant-design/icons';
 import React, {useEffect, useState} from "react";
 import jwtDecode from "jwt-decode";
 import {userRepository} from "../../repository/users";
-import {BiArrowBack} from "react-icons/bi";
 import {MdKeyboardArrowRight} from "react-icons/md";
 
 const {Title} = Typography;
+
+const {confirm} = Modal;
 
 const Profile = observer(() => {
     const router = useRouter();
@@ -24,8 +25,6 @@ const Profile = observer(() => {
             setDataUser(decodeJwt)
         }
     }, [])
-
-    const {confirm} = Modal;
 
     const showConfirm = () => {
         confirm({
@@ -47,14 +46,19 @@ const Profile = observer(() => {
         message.success("Anda Berhasil Logout");
     }
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(user.data.referralCode)
+        message.info('Menyalin ke clipboard!')
+    }
+
     const accountMenu = [
         {
-            name: 'Edit Profile',
+            name: 'Ubah Profil',
             icon: '/assets/icons/userblue.svg',
             url: `/profile/${dataUser.id}/edit`,
         },
         {
-            name: 'Ubah Password',
+            name: 'Ubah Kata Sandi',
             icon: '/assets/icons/lockblue.svg',
             url: `/forgot_password`,
         },
@@ -92,8 +96,8 @@ const Profile = observer(() => {
             </div>
 
             <div className={'px-8 bg-white'}>
-                <Avatar size={70} className={'border-8 border-gray-50 bg-white -mt-[30px]'}
-                        src="https://joeschmoe.io/api/v1/random"/>
+                <Avatar size={80} className={'border-8 border-gray-50 bg-white -mt-[35px] -ml-2 mb-2'}
+                        src={user?.data?.picProfile} icon={<UserOutlined />}/>
                 <div className={'flex flex-col'}>
                     <Title level={4}>{user?.data?.username}</Title>
                     <span className={'text-sm text-[#7d7d82]'}>{user?.data?.phoneNumber}</span>
@@ -102,11 +106,11 @@ const Profile = observer(() => {
 
                 <div className={'flex flex-col pt-8 pb-28'}>
                     <div>
-                        <Title level={5}>Kode Referral</Title>
+                        <Title level={5}>Kode Rujukan</Title>
                         <Tag
                             className={'flex justify-between items-center border-dashed p-3 border-[#4461F2] bg-[#4461F2]/[0.1] rounded-lg text-lg'}>
                             <span className={'text-primary'}>{user?.data?.referralCode}</span>
-                            <span className={'text-sm hover:cursor-pointer'}>Salin</span>
+                            <span className={'text-sm hover:cursor-pointer'} onClick={copyToClipboard}>Salin</span>
                         </Tag>
                     </div>
 

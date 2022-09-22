@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import {Button, Card, Form, Image, Input, message} from "antd";
 import {authenticationRepository} from "../../repository/authentication";
 import {useState} from "react";
-import { BiArrowBack } from "react-icons/bi";
+import {BiArrowBack} from "react-icons/bi";
 
 const ForgotPassword = observer(() => {
     const router = useRouter();
@@ -61,37 +61,35 @@ const ForgotPassword = observer(() => {
                         <BiArrowBack  className={'text-lg'}/>
                     </Button>
                     <div className="col-span-3 text-center">
-                        <p className={'text-2xl font-bold text-white'}>Ganti Password</p>
+                        <p className={'text-2xl font-bold text-white'}>Ubah Kata Sandi</p>
                     </div>
                 </div>
                 <Card className={'mx-6 rounded-xl'}>
                     <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
-                        <Form.Item name={'password'} label={label('Password')} rules={[{
+                        <Form.Item name={'password'} label={label('Kata Sandi')} rules={[{
                             required: true,
-                            message: "Please input password!",
-                            type: 'string',
+                            message: "Tolong masukan kata sandi!",
                         }]}>
-                            <Input.Password size={'large'} placeholder={'Masukan password sekarang'} className={'h-12 rounded-lg'}/>
+                            <Input.Password size={'large'} placeholder={'Masukan Kata sandi sekarang'} className={'h-12 rounded-lg'}/>
                         </Form.Item>
 
-                        <Form.Item name={'newPassword'} label={label('Password Baru')} hasFeedback rules={[{
+                        <Form.Item name={'newPassword'} label={label('Kata Sandi Baru')} hasFeedback rules={[{
                             required: true,
-                            message: "Please input new password!",
-                            type: 'string',
+                            message: "Tolong masukan kata sandi baru!",
                         }]}>
-                            <Input.Password size={'large'} placeholder={'MasukaMasukann Password Baru'}
+                            <Input.Password size={'large'} placeholder={'Masukan Kata Sandi Baru'}
                                             className={'h-12 rounded-lg text-lg'}/>
                         </Form.Item>
 
                         <Form.Item
                             name="confirm"
-                            label={label('Konfirmasi Password')}
+                            label={label('Konfirmasi Kata Sandi')}
                             dependencies={['newPassword']}
                             hasFeedback
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please confirm your password!',
+                                    message: 'Tolong masukan konfirmasi kata sandi!',
                                 },
                                 ({getFieldValue}) => ({
                                     validator(_, value) {
@@ -99,17 +97,17 @@ const ForgotPassword = observer(() => {
                                             return Promise.resolve();
                                         }
 
-                                        return Promise.reject(new Error('Kedua sandi yang Anda masukkan tidak cocok!'));
+                                        return Promise.reject(new Error('Kedua sandi yang Anda masukan tidak cocok!'));
                                     },
                                 }),
                             ]}
                         >
-                            <Input.Password size={'large'} placeholder={'Konfirmasi Password'}
+                            <Input.Password size={'large'} placeholder={'Konfirmasi Kata Sandi'}
                                             className={'h-12 rounded-lg text-lg'}/>
                         </Form.Item>
 
                         <Form.Item className={'text-center pt-1.5'}>
-                            <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl mb-2'} size={'large'}
+                            <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl h-[48px]'} size={'large'}
                                     block>Simpan</Button>
                         </Form.Item>
                     </Form>

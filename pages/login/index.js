@@ -29,7 +29,7 @@ const Login = observer(() => {
 
             await store.authentication.login(body);
             form.resetFields();
-            message.success("Login Successfully");
+            message.success("Berhasil Masuk");
             await router.push("/investment_package");
             setIsLoading(false)
         } catch (err) {
@@ -52,23 +52,22 @@ const Login = observer(() => {
                         <span className={'text-base text-center opacity-50'}>Masuk Untuk Mengelola Akun Anda</span>
                     </div>
                     <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
-                        <Form.Item name={'username'} label={label('Username')} rules={[{
+                        <Form.Item name={'username'} label={label('Nama Pengguna')} rules={[{
                             required: true,
-                            message: "Please input Username!",
+                            message: "Tolong masukan nama pengguna!",
                             type: 'string',
                         }]}>
                             <Input placeholder={'Masukan username'}/>
                         </Form.Item>
-                        <Form.Item name={'password'} label={label('Password')} rules={[{
-                            required: true,
-                            message: "Please input Password!",
-                        }]}>
+                        <Form.Item name={'password'} label={label('Kata Sandi')} rules={[
+                            {required: true, message: "Tolong masukan kata sandi!"}
+                        ]}>
                             <Input.Password placeholder={'Masukan password'}/>
                         </Form.Item>
                         <Form.Item>
                             {/*<Checkbox onChange={onChange}>Ingatkan saya</Checkbox>*/}
                             <Link href="/forgot_password">
-                                <a className={'float-right text-black font-semibold'}>Lupa Password?</a>
+                                <a className={'float-right text-black font-semibold'}>Lupa Kata Sandi?</a>
                             </Link>
                         </Form.Item>
                         <Form.Item className={'text-center pt-1.5'}>

@@ -24,7 +24,7 @@ export const CardPackage = (props) => {
                 <div className={'flex gap-4'}>
                     <Image src={'/assets/icons/profit.svg'} preview={false}/>
                     <div className={'flex flex-col'}>
-                        <span className={'text-xs'}>Profit</span>
+                        <span className={'text-xs'}>Laba</span>
                         <span className={'text-sm font-bold'}>
                             <FormatNumber value={data?.return_percentage} suffix={' %'}/>
                         </span>

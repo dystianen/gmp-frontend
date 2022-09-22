@@ -1,6 +1,6 @@
 import {observer} from "mobx-react-lite";
 import DesktopLayout from "../../../../components/Layout/DesktopLayout/DesktopLayout";
-import {Button, Image, message, Modal, Spin} from "antd";
+import {Button, Image, message, Modal, notification, Spin} from "antd";
 import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from "next/router";
 import React, {useState} from "react";
@@ -8,6 +8,7 @@ import {packageRepository} from "../../../../repository/package";
 import {useEffect} from "react";
 import jwtDecode from "jwt-decode";
 import {FormatNumber} from "../../../../helpers/NumberFormat";
+import {userRepository} from "../../../../repository/users";
 
 const InvestmentPackageDetail = observer(() => {
     const router = useRouter();
@@ -15,6 +16,8 @@ const InvestmentPackageDetail = observer(() => {
     const {data: detail} = packageRepository.hooks.useGetDetail(id);
     const [userId, setUserId] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    const {data: profile} = userRepository.hooks.useGetProfile();
 
     useEffect(() => {
         if (typeof window !== undefined) {
@@ -46,17 +49,17 @@ const InvestmentPackageDetail = observer(() => {
             setIsLoading(true);
             await packageRepository.api.buyPackage(body);
             setIsLoading(false);
-            message.success('Success Buy Package');
+            message.success('Berhasil Membeli Paket');
             await router.push('/investment_package')
         } catch (err) {
             setIsLoading(false);
-            message.error('Failed Buy Package!')
+            message.error('Gagal Membeli Paket!')
         }
     }
 
     const benefit = [
         {
-            name: 'Profit',
+            name: 'Laba',
             value: detail?.data?.return_percentage + '%',
             icon: '/assets/icons/benefit/profit.svg'
         },
@@ -125,7 +128,7 @@ const InvestmentPackageDetail = observer(() => {
                     </div>
 
                     <div className={'relative flex gap-2 flex-col border-b-[5px] px-8 py-3'}>
-                        <h1 className={'text-lg font-bold'}>Benefit Paket</h1>
+                        <h1 className={'text-lg font-bold'}>Keuntungan Paket</h1>
                         {benefit.map((it, index) => (
                             <div key={index} className={'relative flex gap-4 bg-[#FAFAFA] p-5 rounded-xl'}>
                                 <Image src={it.icon} width={40} height={40} alt={'icon'} preview={false}/>
@@ -167,8 +170,14 @@ const InvestmentPackageDetail = observer(() => {
                         <FormatNumber value={detail?.data?.price + detail?.data?.service_fee} prefix={'$ '}/>
                     </span>
                 </div>
-                <Button type={'primary'} size={'large'} className={'rounded-full'} onClick={showConfirm}>Beli
-                    Paket</Button>
+                <Button
+                    disabled={profile?.data?.isBought}
+                    type={'primary'} size={'large'}
+                    className={'rounded-full border-none'}
+                    onClick={showConfirm}
+                >
+                    Beli Paket
+                </Button>
             </div>
         </>
     )

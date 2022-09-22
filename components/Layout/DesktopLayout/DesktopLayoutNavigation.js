@@ -40,7 +40,7 @@ export const DesktopLayoutNavigation = () => {
         },
         {
             id: 4,
-            name: "Profile",
+            name: "Profil",
             url: "/profile",
             icon: <MdPerson style={styles.icon}/>
         }
