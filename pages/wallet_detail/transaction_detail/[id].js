@@ -42,16 +42,14 @@ const TransactionDetail = observer(() => {
                     <hr className="w-full"/>
                     <p className="my-4 font-semibold text-base">Rincian Transaksi</p>
                     <div className="grid grid-cols-2 gap-4 font-medium text-sm">
-                        <div>Status</div>
-                        <div className="text-right">Selesai</div>
                         <div>Waktu</div>
                         <div className="text-right">12:45</div>
                         <div>Tanggal</div>
                         <div className="text-right">{formatDate(new Date(oneTransaction?.data?.createdAt))}</div>
                         <div>ID Transaksi</div>
                         <div className="text-right">{oneTransaction?.data?.id}</div>
-                        <div>Order ID</div>
-                        <div className="text-right">31473478485985985</div>
+                        {/*<div>Order ID</div>*/}
+                        {/*<div className="text-right">31473478485985985</div>*/}
                     </div>
                     <hr className="w-full my-4"/>
                     <div className="flex justify-between items-center font-medium text-sm">
@@ -62,11 +60,6 @@ const TransactionDetail = observer(() => {
                     <div className="flex justify-between font-semibold text-sm">
                         <p>Total</p>
                         <p>${oneTransaction?.data?.amount}</p>
-                    </div>
-                    <div className="pb-14">
-                        <Button className={'h-14 rounded-full bg-[#FFBF00]/[0.1] w-full text-[#FFBF00] text-lg font-semibold border-none'}>
-                            Bagikan Transaksi
-                        </Button>
                     </div>
                 </Card>
             </div>

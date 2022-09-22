@@ -23,14 +23,16 @@ const ForgotPassword = observer(() => {
                 try {
                     setIsLoading(true);
                     const res = await authenticationRepository.api.resetPassword({
-                        username: values.username,
+                        newPassword: values.newPassword,
                         password: values.password,
                     });
 
-                    if (res.message !== "Password is Already Used") {
+                    console.log(res, "ini dia")
+
+                    if (res.message == "success") {
                         setIsLoading(false);
                         message.success("Success Forgot Password");
-                        await router.push("/login");
+                        await router.push("/investment_package");
                     }
                 } catch (e) {
                     setIsLoading(false);
@@ -64,27 +66,27 @@ const ForgotPassword = observer(() => {
                 </div>
                 <Card className={'mx-6 rounded-xl'}>
                     <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
-                        <Form.Item name={'username'} label={label('Username')} rules={[{
+                        <Form.Item name={'password'} label={label('Password')} rules={[{
                             required: true,
-                            message: "Please input username!",
+                            message: "Please input password!",
                             type: 'string',
                         }]}>
-                            <Input size={'large'} placeholder={'Masukan Username'} className={'h-12 rounded-lg'}/>
+                            <Input.Password size={'large'} placeholder={'Masukan password sekarang'} className={'h-12 rounded-lg'}/>
                         </Form.Item>
 
-                        <Form.Item name={'password'} label={label('Password')} hasFeedback rules={[{
+                        <Form.Item name={'newPassword'} label={label('Password Baru')} hasFeedback rules={[{
                             required: true,
                             message: "Please input new password!",
                             type: 'string',
                         }]}>
-                            <Input.Password size={'large'} placeholder={'Masukan Password Baru'}
+                            <Input.Password size={'large'} placeholder={'MasukaMasukann Password Baru'}
                                             className={'h-12 rounded-lg text-lg'}/>
                         </Form.Item>
 
                         <Form.Item
                             name="confirm"
                             label={label('Konfirmasi Password')}
-                            dependencies={['password']}
+                            dependencies={['newPassword']}
                             hasFeedback
                             rules={[
                                 {
@@ -93,7 +95,7 @@ const ForgotPassword = observer(() => {
                                 },
                                 ({getFieldValue}) => ({
                                     validator(_, value) {
-                                        if (!value || getFieldValue('password') === value) {
+                                        if (!value || getFieldValue('newPassword') === value) {
                                             return Promise.resolve();
                                         }
 
