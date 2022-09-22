@@ -7,6 +7,7 @@ import {imageRepository} from "../../../../repository/image";
 import {userRepository} from "../../../../repository/users";
 import DesktopLayout from "../../../../components/Layout/DesktopLayout/DesktopLayout";
 import {CloseOutlined, UserOutlined} from "@ant-design/icons";
+import {Header} from "../../../../components/Reusable/Header";
 
 const UpdateProfile = observer(() => {
     const [form] = Form.useForm();
@@ -106,25 +107,7 @@ const UpdateProfile = observer(() => {
             </Modal>
 
             <div className={'relative h-screen'}>
-                <div
-                    className={'relative flex justify-center items-center bg-primary bg-center h-1/5 w-full rounded-t'}>
-                    <div className={'flex flex-row items-center w-5/6 z-10'}>
-                        <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
-                                onClick={() => router.push('/profile')}>
-                            <CloseOutlined className={'text-lg'}/>
-                        </Button>
-                        <span className={'w-full text-2xl font-bold text-white text-center pr-12'}>Profil</span>
-                    </div>
-                    <div className="absolute">
-                        <Image src={'/assets/background/Particle1.png'} preview={false}/>
-                    </div>
-                    <div className="absolute top-0 left-0">
-                        <Image src={'/assets/background/BGYellowTop.svg'} preview={false}/>
-                    </div>
-                    <div className="absolute bottom-0 right-0 mt-10">
-                        <Image className={'-mb-[6px]'} src={'/assets/background/BGYellowBot.svg'} preview={false}/>
-                    </div>
-                </div>
+                <Header title={'Profil'} isBack/>
 
                 <div className={'px-8 h-4/5'}>
                     <div className={'flex flex-col justify-center items-center pb-5'}>

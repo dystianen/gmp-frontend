@@ -7,6 +7,7 @@ import React, {useEffect, useState} from "react";
 import jwtDecode from "jwt-decode";
 import {userRepository} from "../../repository/users";
 import {MdKeyboardArrowRight} from "react-icons/md";
+import {Header} from "../../components/Reusable/Header";
 
 const {Title} = Typography;
 
@@ -79,21 +80,7 @@ const Profile = observer(() => {
 
     return (
         <>
-            <div
-                className={'relative flex justify-center items-center bg-primary bg-center h-1/6 w-full rounded-t'}>
-                <div className={'text-center z-10'}>
-                    <span className={'w-full text-2xl font-bold text-white text-center'}>Profil</span>
-                </div>
-                <div className="absolute">
-                    <Image src={'/assets/background/Particle1.png'} preview={false}/>
-                </div>
-                <div className="absolute top-0 left-0">
-                    <Image src={'/assets/background/BGYellowTop.svg'} preview={false}/>
-                </div>
-                <div className="absolute bottom-0 right-0 mt-10">
-                    <Image className={'-mb-[6px]'} src={'/assets/background/BGYellowBot.svg'} preview={false}/>
-                </div>
-            </div>
+            <Header title={'Profil'} />
 
             <div className={'px-8 bg-white'}>
                 <Avatar size={80} className={'border-8 border-gray-50 bg-white -mt-[35px] -ml-2 mb-2'}

@@ -8,6 +8,10 @@ import {useRouter} from "next/router";
 import {walletRepository} from "../../repository/wallet";
 import moment from "moment";
 import {FormatNumber} from "../../helpers/NumberFormat";
+import {Header} from "../../components/Reusable/Header";
+import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
 const Downline = observer(() => {
     const router = useRouter();
@@ -29,48 +33,51 @@ const Downline = observer(() => {
 
     return (
         <>
-            <div
-                className={"relative min-h-screen flex flex-col max-w-lg mx-auto px-8 pb-24 bg-[#FAFAFA] overflow-hidden"}>
-                <div className={'absolute top-0 left-0'}>
-                    <Image src={'/assets/icons/Ellipse1.svg'} alt={'icon'} preview={false}/>
-                </div>
-                <div className={'absolute top-11 right-0'}>
-                    <Image src={'/assets/icons/Ellipse3.svg'} alt={'icon'} preview={false}/>
-                </div>
-                <div className={'z-10 pt-20 text-center'}>
-                    <span className={'w-full text-2xl font-bold text-secondary text-center'}>Downline</span>
-                </div>
+            <div className={'relative h-screen'}>
+                <Header title={'Downline'}/>
 
-                <Card
-                    className={"relative h-36 mt-9 bg-[#4461F2] rounded-xl hover:cursor-pointer hover:shadow-lg"}
-                    bodyStyle={{padding: 20}}
-                    onClick={() => router.push('/downline/binary-tree')}
-                >
-                    <div className={'absolute top-0 right-0'}>
-                        <Image src={'/assets/background/Ellipse 403.svg'} alt={'icon'} preview={false}/>
-                    </div>
-                    <div className={'absolute -bottom-[10px] -right-[12px]'}>
-                        <Image src={'/assets/background/Ellipse 402.svg'} alt={'icon'} preview={false}/>
-                    </div>
-
-                    <h2 className={'text-2xl text-white'}>Binary Tree</h2>
-                </Card>
-
-                <Card
-                    className={"relative mt-9 h-36 bg-[#FFBF00] rounded-xl hover:cursor-pointer hover:shadow-lg"}
-                    bodyStyle={{padding: 20}}
-                    onClick={() => router.push('/downline/sun-tree')}
-                >
-                    <div className={'absolute top-0 right-0 z-0'}>
-                        <Image src={'/assets/background/chip.svg'} alt={'background'} height={140} preview={false}/>
-                    </div>
-
-                    <div>
-                        <div className={'z-10'}>
-                            <h2 className={'text-2xl text-white'}>Sun Tree</h2>
+                <div className={'px-8'}>
+                    <Card
+                        className={"relative h-36 mt-9 bg-[#4461F2] rounded-xl bg-gradient-to-tr from-primary to-blue-300"}
+                        bodyStyle={{padding: 20}}
+                    >
+                        <div className={'absolute bottom-0 right-0 -mb-2'}>
+                            <Image src={'/assets/background/hierarchy.svg'} alt={'icon'} preview={false}/>
                         </div>
-                    </div>
-                </Card>
+
+                        <div className={'flex flex-col gap-4'}>
+                            <h2 className={'text-2xl text-white'}>Binary Downline</h2>
+                            <Button
+                                size={'large'}
+                                className={'rounded-full bg-[#FCC200] text-white border-none font-semibold w-28'}
+                                onClick={() => router.push(`/downline/binary-tree`)}
+                            >
+                                Lihat Detail
+                            </Button>
+                        </div>
+                    </Card>
+
+                    <Card
+                        className={"relative mt-9 h-36 bg-[#FFBF00] rounded-xl bg-gradient-to-tr from-secondary to-yellow-200"}
+                        bodyStyle={{padding: 20}}
+                    >
+                        <div className={'absolute bottom-0 right-0 -mb-2'}>
+                            <Image src={'/assets/background/hierarchy.svg'} alt={'icon'} preview={false}/>
+                        </div>
+
+                        <div className={'flex flex-col gap-4'}>
+                            <h2 className={'text-2xl text-white'}>Sun Downline</h2>
+                            <Button
+                                size={'large'}
+                                type={'primary'}
+                                className={'rounded-full text-white border-none font-semibold w-28'}
+                                onClick={() => router.push(`/downline/sun-tree`)}
+                            >
+                                Lihat Detail
+                            </Button>
+                        </div>
+                    </Card>
+                </div>
             </div>
         </>
     )
