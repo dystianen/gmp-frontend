@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import {Button, Card, Form, Image, Input, message} from "antd";
 import {authenticationRepository} from "../../repository/authentication";
 import {useState} from "react";
+import { BiArrowBack } from "react-icons/bi";
 
 const ForgotPassword = observer(() => {
     const router = useRouter();
@@ -52,7 +53,15 @@ const ForgotPassword = observer(() => {
                 <div className="absolute top-28 right-0">
                     <Image src={'/assets/background/Ellipse4.svg'} alt={'icon'} preview={false}/>
                 </div>
-                <p className={'text-2xl font-bold text-white text-center'}>Ganti Password</p>
+                <div className={'grid grid-cols-4 w-5/6 z-10 -mt-14'}>
+                    <Button className={'flex justify-center mx-6 items-center rounded-lg p-0 h-10 w-12'}
+                            onClick={() => router.back()}>
+                        <BiArrowBack  className={'text-lg'}/>
+                    </Button>
+                    <div className="col-span-3 text-center">
+                        <p className={'text-2xl font-bold text-white'}>Ganti Password</p>
+                    </div>
+                </div>
                 <Card className={'mx-6 rounded-xl'}>
                     <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
                         <Form.Item name={'username'} label={label('Username')} rules={[{
