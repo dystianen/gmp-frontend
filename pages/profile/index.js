@@ -83,7 +83,7 @@ const Profile = observer(() => {
             <Header title={'Profil'} />
 
             <div className={'px-8 bg-white'}>
-                <Avatar size={80} className={'border-8 border-gray-50 bg-white -mt-[35px] -ml-2 mb-2'}
+                <Avatar size={80} className={'flex justify-center items-center border-8 border-gray-50 -mt-[35px] -ml-2 mb-2'}
                         src={user?.data?.picProfile} icon={<UserOutlined />}/>
                 <div className={'flex flex-col'}>
                     <Title level={4}>{user?.data?.username}</Title>
