@@ -5,10 +5,13 @@ import { BiArrowBack } from "react-icons/bi"
 import DesktopLayout from "../../../components/Layout/DesktopLayout/DesktopLayout"
 import { transactionRepository } from "../../../repository/transaction"
 import formatDate from "../../../helper/formatDate"
+import moment from "moment";
+import React from "react";
 
 const TransactionDetail = observer(() => {
     const router = useRouter()
     const {id} = router.query;
+
 
     const {data: oneTransaction} = transactionRepository.hooks.useGetTransactionDetail(id)
     console.log(oneTransaction);
@@ -42,8 +45,24 @@ const TransactionDetail = observer(() => {
                     <hr className="w-full"/>
                     <p className="my-4 font-semibold text-base">Rincian Transaksi</p>
                     <div className="grid grid-cols-2 gap-4 font-medium text-sm">
+                        <div>Type</div>
+                        {oneTransaction?.data?.type === 0 ? (
+                                    <div className={'text-right'}>Buy Package</div>
+                                ) : oneTransaction?.data?.type === 1 ? (
+                                    <div className={'text-right'}>Distribute Pair</div>
+                                ) : oneTransaction?.data?.type === 2 ? (
+                                    <div className={'text-right'}>Stake Result</div>
+                                ) : oneTransaction?.data?.type === 3 ? (
+                                    <div className={'text-right'}>Stake Level Result</div>
+                                ) : oneTransaction?.data?.type === 4 ? (
+                                    <div className={'text-right'}>Move Internal GMP</div>
+                                ) : oneTransaction?.data?.type === 5 ? (
+                                    <div className={'text-right'}>Stake External GMP</div>
+                                ) : (
+                                    <div className={'text-right'}>Move External USDT</div>
+                        )}
                         <div>Waktu</div>
-                        <div className="text-right">12:45</div>
+                        <div className="text-right">{moment(oneTransaction?.data?.createdAt).format('hh:mm')}</div>
                         <div>Tanggal</div>
                         <div className="text-right">{formatDate(new Date(oneTransaction?.data?.createdAt))}</div>
                         <div>ID Transaksi</div>
