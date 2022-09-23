@@ -1,21 +1,19 @@
 import {observer} from "mobx-react-lite";
-import {Card, Image, DatePicker, Form, Col, Button} from "antd";
-import Link from "next/link";
+import {Card, Image, DatePicker, Button, Empty} from "antd";
 import jwtDecode from "jwt-decode";
-import { useEffect, useState } from "react";
-const { RangePicker } = DatePicker;
+import {useEffect, useState} from "react";
 import React from 'react';
 import moment from "moment";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import { transactionRepository } from "../../repository/transaction";
-import formatDate from "../../helper/formatDate";
-import { FormatNumber } from "../../helpers/NumberFormat";
-import { BiArrowBack } from "react-icons/bi";
-import { walletRepository } from "../../repository/wallet";
+import {transactionRepository} from "../../repository/transaction";
+import {FormatNumber} from "../../helpers/NumberFormat";
+import {BiArrowBack} from "react-icons/bi";
+import {walletRepository} from "../../repository/wallet";
+
+const {RangePicker} = DatePicker;
 
 const WalletDetails = observer(() => {
-
     const [dataUser, setDataUser] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
@@ -44,7 +42,6 @@ const WalletDetails = observer(() => {
             type: type,
         },
     );
-    console.log(lastTransactionsGMP, "ini adalah transaksi");
 
     const filterDate = (date1, date2) => {
         if (!date1 && !date2) {
@@ -60,19 +57,20 @@ const WalletDetails = observer(() => {
 
     return (
         <>
-            <div className={'relative flex flex-col justify-center items-center bg-primary bg-center h-2/6 lg:h-[40%] w-full rounded-b-[30px]'}>
-                <div className={'grid grid-cols-3 w-5/6 z-10 -mt-28'}>
+            <div
+                className={'relative flex flex-col justify-center items-center bg-primary bg-center h-1/4 w-full rounded-b-[30px]'}>
+                <div className={'grid grid-cols-3 w-5/6 z-10 -mt-12'}>
                     <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
                             onClick={() => router.back()}>
-                        <BiArrowBack  className={'text-lg'}/>
+                        <BiArrowBack className={'text-lg'}/>
                     </Button>
                     <div className="flex items-center col-span-2">
                         {type === "GMP" ? (
-                            <Image src={'/assets/logo/mini-logo2.png'} className={'px-2'}  preview={false}/>
-                        ) : (        
-                            <Image src={'/assets/logo/theter2.png'} className={'px-2'}  preview={false}/>
+                            <Image src={'/assets/logo/mini-logo2.png'} className={'px-2'} preview={false}/>
+                        ) : (
+                            <Image src={'/assets/logo/theter2.png'} className={'px-2'} preview={false}/>
                         )}
-                    <span className={'w-full text-2xl font-bold text-white'}>{type}</span>
+                        <span className={'w-full text-2xl font-bold text-white'}>{type}</span>
                     </div>
                 </div>
                 <div className="absolute h-full">
@@ -83,12 +81,13 @@ const WalletDetails = observer(() => {
                 </div>
                 <div className="absolute bottom-0 right-0">
                     <Image className={'-mb-[6px] w-36 h-36 rounded-b-[30px]'}
-                        src={'/assets/background/BGYellowBot2.png'} preview={false}/>
+                           src={'/assets/background/BGYellowBot2.png'} preview={false}/>
                 </div>
             </div>
-            
+
             {type === "GMP" ? (
-                <Card className={"-mt-[110px] lg:-mt-[132px] h-[170px] lg:h-48 rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/GMT.png')] bg-transparent bg-top bg-cover"}>
+                <Card
+                    className={"-mt-[60px] h-[170px] lg:h-48 rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/GMT.png')] bg-transparent bg-top bg-cover"}>
                     <div className={'flex items-center gap-2 -mt-3'}>
                         <Image src={'/assets/logo/mini-logo.png'} preview={false}/>
                         <span className={'text-white font-semibold text-sm leading-8'}>{type}</span>
@@ -101,7 +100,8 @@ const WalletDetails = observer(() => {
                             <FormatNumber value={dataBalanceGMP?.data}/>
                         </h2>
                     </div>
-                    <div className="absolute px-6 w-full right-0 left-0 rounded-b-xl bottom-0" style={{ backgroundColor: 'rgba(254, 155, 11, 0.4)' }}>
+                    <div className="absolute px-6 w-full right-0 left-0 rounded-b-xl bottom-0"
+                         style={{backgroundColor: 'rgba(254, 155, 11, 0.4)'}}>
                         <p className={'text-sm font-semibold text-white mb-[1px] pt-2'}>Transaksi Terakhir</p>
                         {lastTransactionsGMP?.data === null ? (
                             <p className="pl-14 text-white">-</p>
@@ -111,7 +111,8 @@ const WalletDetails = observer(() => {
                     </div>
                 </Card>
             ) : (
-                <Card className={"-mt-[101px] lg:-mt-[123px] h-[170px] lg:h-48 bg-transparent rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/USDT.png')] bg-cover bg-top opacity-90"}>
+                <Card
+                    className={"-mt-[60px] h-[170px] lg:h-48 bg-transparent rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/USDT.png')] bg-cover bg-top opacity-90"}>
                     <div className={'flex items-center gap-2 -mt-3'}>
                         <Image src={'/assets/logo/theter.png'} preview={false}/>
                         <span className={'text-white font-semibold text-sm leading-8'}>{type}</span>
@@ -124,7 +125,8 @@ const WalletDetails = observer(() => {
                             <FormatNumber value={dataBalanceUSDT?.data}/>
                         </h2>
                     </div>
-                    <div className="absolute px-6 w-full right-0 left-0 rounded-b-xl bottom-0" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)'}}>
+                    <div className="absolute px-6 w-full right-0 left-0 rounded-b-xl bottom-0"
+                         style={{backgroundColor: 'rgba(0, 0, 0, 0.4)'}}>
                         <p className={'text-sm font-semibold text-white mb-[1px] pt-2'}>Transaksi Terakhir</p>
                         {lastTransactionsUSDT?.data === null ? (
                             <p className="pl-14 text-white">-</p>
@@ -135,67 +137,51 @@ const WalletDetails = observer(() => {
                 </Card>
             )}
 
-            {dataTransaction?.data.length === 0 ? (
-                <div className={'mt-8 pb-28 px-10'}>
-                    <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
-                    <div className="relative">
-                        <Form>
-                            <Form.Item>
-                                <DatePicker.RangePicker 
-                                    className="mr-2 rounded-md" 
-                                    picker="month" 
-                                    onChange={(e) => filterDate(e?.[0], e?.[1])}
-                                />
-                            </Form.Item>
-                        </Form>
-                    </div>
-                    <div className={'flex justify-center'}>
-                        Anda Belum Memiliki Riwayat Transaksi
-                    </div>
+            <div className={'mt-8 pb-28 px-10'}>
+                <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
+                <div className="relative">
+                    <RangePicker
+                        className="mr-2 rounded-md"
+                        picker="month"
+                        onChange={(e) => filterDate(e?.[0], e?.[1])}
+                    />
                 </div>
-            ) : (
-                <div className={'mt-8 pb-28 px-10'}>
-                    <p className={'font-semibold text-lg'}>Riwayat Transaksi</p>
-                    <div className="relative">
-                        <Form>
-                            <Form.Item>
-                                <DatePicker.RangePicker 
-                                    className="mr-2 rounded-md" 
-                                    picker="month" 
-                                    onChange={(e) => filterDate(e?.[0], e?.[1])}
-                                />
-                            </Form.Item>
-                        </Form>
-                    </div>
-                    {dataTransaction?.data.map((value, index) => (
-                        <div key={index} onClick={() => router.push(`/wallet_detail/transaction_detail/${value.id}`)} className={'grid grid-rows-2 grid-flow-col mb-2 mt-4 cursor-pointer'}>
-                            {value?.type === 0 ? (
-                                <div className={'font-semibold text-base mb-1'}>Buy Package</div>
-                            ) : value?.type === 1 ? (
-                                <div className={'font-semibold text-base mb-1'}>Distribute Pair</div>
-                            ) : value?.type === 2 ? (       
-                                <div className={'font-semibold text-base mb-1'}>Stake Result</div>
-                            ) : value?.type === 3 ? (        
-                                <div className={'font-semibold text-base mb-1'}>Stake Level Result</div>
-                            ) : value?.type === 4 ? (
-                                <div className={'font-semibold text-base mb-1'}>Move Internal GMP</div>
-                            ) : value?.type === 5 ? (
-                                <div className={'font-semibold text-base mb-1'}>Stake External GMP</div>
-                            ) : (
-                                <div className={'font-semibold text-base mb-1'}>Move External USDT</div>
-                            )}
-                            <div className={'text-sm font-normal text-slate-600'}>{moment(value?.createdAt).format('DD MMMM YYYY')}</div>
-                            <div className={'row-span-3 col-span-2 text-lg font-semibold pb-8'}>
-                                <p className={'text-right text-green-500 mb-1'}>{value.amount} {value?.currency}</p>
-                            </div>
+
+                {dataTransaction?.data.length === 0 ?
+                    (<Empty className={'mt-8'}/>) :
+                    (<div>
+                        {dataTransaction?.data.map((value, index) => (
+                    <div key={index} onClick={() => router.push(`/wallet_detail/transaction_detail/${value.id}`)}
+                         className={'grid grid-rows-2 grid-flow-col mb-2 mt-4 cursor-pointer'}>
+                        {value?.type === 0 ? (
+                            <div className={'font-semibold text-base mb-1'}>Buy Package</div>
+                        ) : value?.type === 1 ? (
+                            <div className={'font-semibold text-base mb-1'}>Distribute Pair</div>
+                        ) : value?.type === 2 ? (
+                            <div className={'font-semibold text-base mb-1'}>Stake Result</div>
+                        ) : value?.type === 3 ? (
+                            <div className={'font-semibold text-base mb-1'}>Stake Level Result</div>
+                        ) : value?.type === 4 ? (
+                            <div className={'font-semibold text-base mb-1'}>Move Internal GMP</div>
+                        ) : value?.type === 5 ? (
+                            <div className={'font-semibold text-base mb-1'}>Stake External GMP</div>
+                        ) : (
+                            <div className={'font-semibold text-base mb-1'}>Move External USDT</div>
+                        )}
+                        <div
+                            className={'text-sm font-normal text-slate-600'}>{moment(value?.createdAt).format('DD MMMM YYYY')}</div>
+                        <div className={'row-span-3 col-span-2 text-lg font-semibold pb-8'}>
+                            <p className={'text-right text-green-500 mb-1'}>{value.amount} {value?.currency}</p>
                         </div>
-                    ))}
-                </div>
-            )}
+                    </div>
+                ))}
+                    </div>)
+                }
+            </div>
         </>
     )
 })
 WalletDetails.getLayout = function Layout(page) {
     return <DesktopLayout>{page}</DesktopLayout>
 }
-export default  WalletDetails;
+export default WalletDetails;
