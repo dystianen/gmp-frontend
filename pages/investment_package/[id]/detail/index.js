@@ -122,8 +122,8 @@ const InvestmentPackageDetail = observer(() => {
                                         className={'text-base font-bold text-[#65DC41] text-[21px]'}>{it.value ? it.value : '-'}</span>
                                 </div>
 
-                                <div className={'absolute bottom-0 right-0'}>
-                                    <Image src={'/assets/logo/logo-transparent.svg'} alt={'icon'} preview={false}/>
+                                <div className={'absolute bottom-0 right-0 -mb-[5px]'}>
+                                    <Image className={'rounded-br-xl'} src={'/assets/logo/logo-transparent.svg'} alt={'icon'} preview={false}/>
                                 </div>
                             </div>
                         ))}
