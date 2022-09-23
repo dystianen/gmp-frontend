@@ -1,13 +1,12 @@
-import {Button, Card, Divider, Image} from "antd"
-import { observer } from "mobx-react-lite"
-import { useRouter } from "next/router"
-import { BiArrowBack } from "react-icons/bi"
+import {Card, Divider, Image} from "antd"
+import {observer} from "mobx-react-lite"
+import {useRouter} from "next/router"
 import DesktopLayout from "../../../components/Layout/DesktopLayout/DesktopLayout"
-import { transactionRepository } from "../../../repository/transaction"
-import formatDate from "../../../helper/formatDate"
+import {transactionRepository} from "../../../repository/transaction"
 import moment from "moment";
 import React from "react";
 import {Header2} from "../../../components/Reusable/Header2";
+import {FormatNumber} from "../../../helpers/NumberFormat";
 
 const TransactionDetail = observer(() => {
     const router = useRouter()
@@ -27,31 +26,34 @@ const TransactionDetail = observer(() => {
                 <Card className={'rounded-2xl mx-10 -mt-[130px] mb-20'}>
                     <div className="my-2 flex flex-col items-center justify-center">
                         <Image src={"/assets/logo/logo-token.svg"} alt={'logo'} preview={false}/>
-                        <p className=" text-center font-semibold text-2xl text-[#4461F2] mt-1">${oneTransaction?.data?.amount}</p>
+                        <p className=" text-center font-semibold text-2xl text-[#4461F2] pt-2">
+                            <FormatNumber value={oneTransaction?.data?.amount} prefix={'$ '} />
+                        </p>
                     </div>
                     <Divider dashed style={{borderWidth: '3px 0 0'}}/>
                     <p className="my-4 font-semibold text-base">Rincian Transaksi</p>
                     <div className="grid grid-cols-2 gap-4 font-medium text-sm">
                         <div>Type</div>
                         {oneTransaction?.data?.type === 0 ? (
-                                    <div className={'text-right'}>Buy Package</div>
-                                ) : oneTransaction?.data?.type === 1 ? (
-                                    <div className={'text-right'}>Distribute Pair</div>
-                                ) : oneTransaction?.data?.type === 2 ? (
-                                    <div className={'text-right'}>Stake Result</div>
-                                ) : oneTransaction?.data?.type === 3 ? (
-                                    <div className={'text-right'}>Stake Level Result</div>
-                                ) : oneTransaction?.data?.type === 4 ? (
-                                    <div className={'text-right'}>Move Internal GMP</div>
-                                ) : oneTransaction?.data?.type === 5 ? (
-                                    <div className={'text-right'}>Stake External GMP</div>
-                                ) : (
-                                    <div className={'text-right'}>Move External USDT</div>
+                            <div className={'text-right'}>Buy Package</div>
+                        ) : oneTransaction?.data?.type === 1 ? (
+                            <div className={'text-right'}>Distribute Pair</div>
+                        ) : oneTransaction?.data?.type === 2 ? (
+                            <div className={'text-right'}>Stake Result</div>
+                        ) : oneTransaction?.data?.type === 3 ? (
+                            <div className={'text-right'}>Stake Level Result</div>
+                        ) : oneTransaction?.data?.type === 4 ? (
+                            <div className={'text-right'}>Move Internal GMP</div>
+                        ) : oneTransaction?.data?.type === 5 ? (
+                            <div className={'text-right'}>Stake External GMP</div>
+                        ) : (
+                            <div className={'text-right'}>Move External USDT</div>
                         )}
                         <div>Waktu</div>
                         <div className="text-right">{moment(oneTransaction?.data?.createdAt).format('hh:mm')}</div>
                         <div>Tanggal</div>
-                        <div className="text-right">{formatDate(new Date(oneTransaction?.data?.createdAt))}</div>
+                        <div
+                            className="text-right">{moment(oneTransaction?.data?.createdAt).format('DD MMMM YYYY')}</div>
                         <div>ID Transaksi</div>
                         <div className="text-right">{oneTransaction?.data?.id}</div>
                         {oneTransaction?.data?.user_destination ? (
@@ -59,19 +61,17 @@ const TransactionDetail = observer(() => {
                                 <div>Asal Dana</div>
                                 <div>{oneTransaction?.data?.user_destination}</div>
                             </>
-                        ):(<div></div>)}
-                        {/*<div>Order ID</div>*/}
-                        {/*<div className="text-right">31473478485985985</div>*/}
+                        ) : (<div></div>)}
                     </div>
                     <Divider dashed style={{borderWidth: '3px 0 0'}}/>
                     <div className="flex justify-between items-center font-medium text-sm">
                         <span>Jumlah</span>
-                        <span>${oneTransaction?.data?.amount}</span>
+                        <FormatNumber value={oneTransaction?.data?.amount} prefix={'$ '} />
                     </div>
                     <Divider dashed style={{borderWidth: '3px 0 0'}}/>
                     <div className="flex justify-between font-semibold text-sm">
                         <p>Total</p>
-                        <p>${oneTransaction?.data?.amount}</p>
+                        <FormatNumber value={oneTransaction?.data?.amount} prefix={'$ '} />
                     </div>
                 </Card>
             </div>
