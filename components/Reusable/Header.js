@@ -11,7 +11,7 @@ export const Header = observer(({title, isBack = false}) => {
         <div className={'relative flex justify-center items-center bg-primary bg-center h-1/5 w-full rounded-t'}>
             <div className={'flex flex-row items-center w-5/6 z-10'}>
                 {isBack && (
-                    <Button className={'flex justify-center items-center rounded-lg border-none p-0 h-10 w-12'}
+                    <Button className={'flex justify-center items-center rounded-lg border-none p-0 h-10 w-14'}
                             onClick={() => router.back()}>
                         <BiArrowBack className={'text-lg'}/>
                     </Button>

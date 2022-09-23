@@ -3,11 +3,11 @@ import {Image, Card, Button} from "antd";
 import {observer} from "mobx-react-lite";
 import jwtDecode from "jwt-decode";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from "next/router";
 import {walletRepository} from "../../repository/wallet";
 import moment from "moment";
 import {FormatNumber} from "../../helpers/NumberFormat";
+import {Header2} from "../../components/Reusable/Header2";
 
 const Wallet = observer(() => {
     const router = useRouter();
@@ -29,29 +29,16 @@ const Wallet = observer(() => {
 
     return (
         <>
-            <div className={'relative flex flex-col justify-center items-center bg-primary bg-center h-1/4 w-full rounded-b-[30px]'}>
-                <div className={'grid grid-cols-3 w-5/6 z-10 -mt-12'}>
-                    <Button className={'flex justify-center items-center rounded-lg p-0 h-10 w-12'}
-                            onClick={() => router.back()}>
-                        <BiArrowBack  className={'text-lg'}/>
-                    </Button>
-                    <div className="flex items-center col-span-2">
-                        <span className={'w-full text-2xl font-bold text-white'}>Dompet</span>
+            <Header2 isEwallet>
+                {
+                    <div className="w-full text-center">
+                        <span className={`w-full text-2xl font-bold text-white text-center`}>Dompet</span>
                     </div>
-                </div>
-                <div className="absolute h-full">
-                    <Image src={'/assets/background/Particle1.png'} preview={false}/>
-                </div>
-                <div className="absolute top-0 left-0">
-                    <Image src={'/assets/background/BGYellowTop.svg'} preview={false}/>
-                </div>
-                <div className="absolute bottom-0 right-0">
-                    <Image className={'-mb-[6px] w-36 h-36 rounded-b-[30px]'}
-                        src={'/assets/background/BGYellowBot2.png'} preview={false}/>
-                </div>
-            </div>
-            
-            <Card className={"-mt-[60px] h-[170px] lg:h-48 rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/USDT.png')] bg-transparent bg-top bg-cover opacity-90"}>
+                }
+            </Header2>
+
+            <Card
+                className={"-mt-[125px] h-[170px] lg:h-48 rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/USDT.png')] bg-transparent bg-top bg-cover opacity-90"}>
                 <div className={'flex items-center gap-2 -mt-3'}>
                     <Image src={'/assets/logo/theter.png'} preview={false}/>
                     <span className={'text-white font-semibold text-sm leading-8'}>USDT</span>
@@ -64,7 +51,9 @@ const Wallet = observer(() => {
                         <FormatNumber value={dataBalanceUSDT?.data}/>
                     </h2>
                 </div>
-                <div className="absolute flex justify-between items-center px-6 w-full right-0 left-0 rounded-b-xl bottom-0" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)'}}>
+                <div
+                    className="absolute flex justify-between items-center px-6 w-full right-0 left-0 rounded-b-xl bottom-0"
+                    style={{backgroundColor: 'rgba(0, 0, 0, 0.4)'}}>
                     <div>
                         <p className={'text-sm font-semibold text-white mb-[1px] pt-2'}>Transaksi Terakhir</p>
                         {lastTransactionsUSDT?.data === null ? (
@@ -84,7 +73,8 @@ const Wallet = observer(() => {
                 </div>
             </Card>
 
-            <Card className={"h-[170px] lg:h-48 mt-5 rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/GMT.png')] bg-cover bg-top"}>
+            <Card
+                className={"h-[170px] lg:h-48 mt-5 rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/GMT.png')] bg-cover bg-top"}>
                 <div className={'flex items-center gap-2 -mt-3'}>
                     <Image src={'/assets/logo/mini-logo.png'} preview={false}/>
                     <span className={'text-white font-semibold text-sm leading-8'}>GMP</span>
@@ -97,7 +87,9 @@ const Wallet = observer(() => {
                         <FormatNumber value={dataBalanceGMP?.data}/>
                     </h2>
                 </div>
-                <div className="absolute flex justify-between items-center px-6 w-full right-0 left-0 rounded-b-xl bottom-0" style={{ backgroundColor: 'rgba(254, 155, 11, 0.4)' }}>
+                <div
+                    className="absolute flex justify-between items-center px-6 w-full right-0 left-0 rounded-b-xl bottom-0"
+                    style={{backgroundColor: 'rgba(254, 155, 11, 0.4)'}}>
                     <div>
                         <p className={'text-sm font-semibold text-white mb-[1px] pt-2'}>Transaksi Terakhir</p>
                         {lastTransactionsGMP?.data === null ? (
