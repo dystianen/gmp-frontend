@@ -68,14 +68,14 @@ const ForgotPassword = observer(() => {
                     <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
                         <Form.Item name={'password'} label={label('Kata Sandi')} rules={[{
                             required: true,
-                            message: "Tolong masukan kata sandi!",
+                            message: "Silahkan masukan kata sandi!",
                         }]}>
                             <Input.Password size={'large'} placeholder={'Masukan Kata sandi sekarang'} className={'h-12 rounded-lg'}/>
                         </Form.Item>
 
                         <Form.Item name={'newPassword'} label={label('Kata Sandi Baru')} hasFeedback rules={[{
                             required: true,
-                            message: "Tolong masukan kata sandi baru!",
+                            message: "Silahkan masukan kata sandi baru!",
                         }]}>
                             <Input.Password size={'large'} placeholder={'Masukan Kata Sandi Baru'}
                                             className={'h-12 rounded-lg text-lg'}/>
@@ -89,7 +89,7 @@ const ForgotPassword = observer(() => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Tolong masukan konfirmasi kata sandi!',
+                                    message: 'Silahkan masukan konfirmasi kata sandi!',
                                 },
                                 ({getFieldValue}) => ({
                                     validator(_, value) {

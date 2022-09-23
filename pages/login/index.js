@@ -54,13 +54,13 @@ const Login = observer(() => {
                     <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
                         <Form.Item name={'username'} label={label('Nama Pengguna')} rules={[{
                             required: true,
-                            message: "Tolong masukan nama pengguna!",
+                            message: "Silahkan masukan nama pengguna!",
                             type: 'string',
                         }]}>
                             <Input placeholder={'Masukan username'}/>
                         </Form.Item>
                         <Form.Item name={'password'} label={label('Kata Sandi')} rules={[
-                            {required: true, message: "Tolong masukan kata sandi!"}
+                            {required: true, message: "Silahkan masukan kata sandi!"}
                         ]}>
                             <Input.Password placeholder={'Masukan password'}/>
                         </Form.Item>

@@ -55,30 +55,30 @@ const Register = observer(() => {
                     <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
                         <Form.Item name={'username'} label={label('Nama Pengguna')} rules={[{
                             required: true,
-                            message: "Tolong masukan nama pengguna!",
+                            message: "Silahkan masukan nama pengguna!",
                         }]}>
                             <Input placeholder={'Masukan Nama Pengguna'}/>
                         </Form.Item>
                         <Form.Item name={'email'} label={label('Email')} rules={[
                             {
                                 required: true,
-                                message: "Tolong masukan email!",
+                                message: "Silahkan masukan email!",
                             },
                             {
                                 type: 'email',
-                                message: 'Tolong masukan email yang sah!'
+                                message: 'Silahkan masukan email yang sah!'
                             }
                         ]}>
                             <Input placeholder={'Masukan Email'}/>
                         </Form.Item>
                         <Form.Item name={'password'} label={label('Kata Sandi')} rules={[
-                            {required: true, message: "Tolong masukan kata sandi!"}
+                            {required: true, message: "Silahkan masukan kata sandi!"}
                         ]}>
                             <Input.Password placeholder={'Masukan Kata Sandi'}/>
                         </Form.Item>
                         <Form.Item name={'phoneNumber'} label={label('Nomor Telepon')} rules={[
-                            {required: true, message: "Tolong Masukan nomor telepon!"},
-                            {min: 10, max: 14, message: "Tolong Masukan nomor telepon yang sah!"},
+                            {required: true, message: "Silahkan masukan nomor telepon!"},
+                            {min: 10, max: 14, message: "Silahkan masukan nomor telepon yang sah!"},
                         ]}>
                             <Input type={"number"} placeholder={'Masukan Nomor Telepon'}/>
                         </Form.Item>
