@@ -38,7 +38,7 @@ const Wallet = observer(() => {
             </Header2>
 
             <Card
-                className={"-mt-[125px] h-[170px] lg:h-48 rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/USDT.png')] bg-transparent bg-top bg-cover opacity-90"}>
+                className={"-mt-[125px] h-[170px] lg:h-48 rounded-xl border-none mx-10 w-4/5 bg-[url('/assets/background/USDT.png')] bg-transparent bg-top bg-cover opacity-95"}>
                 <div className={'flex items-center gap-2 -mt-3'}>
                     <Image src={'/assets/logo/theter.png'} preview={false}/>
                     <span className={'text-white font-semibold text-sm leading-8'}>USDT</span>
@@ -47,7 +47,7 @@ const Wallet = observer(() => {
                     <div className={'font-semibold text-sm leading-4 text-white mt-2.5'}>
                         Balance
                     </div>
-                    <h2 className={'font-semibold text-3x text-white z-10'}>
+                    <h2 className={'font-semibold text-3xl text-white z-10'}>
                         <FormatNumber value={dataBalanceUSDT?.data}/>
                     </h2>
                 </div>
