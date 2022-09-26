@@ -157,7 +157,7 @@ const InvestmentPackageDetail = observer(() => {
                     disabled={profile?.data?.isBought}
                     type={'primary'}
                     size={'large'}
-                    className={'bg-secondary rounded-full border-none mx-2'}
+                    className={`${profile?.data?.isBought ? '' : 'bg-secondary'} rounded-full border-none mx-2`}
                     onClick={showConfirm}
                 >
                     Beli Paket

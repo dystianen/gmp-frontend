@@ -36,7 +36,7 @@ const Register = observer(() => {
         } catch (err) {
             console.log({err})
             setIsLoading(false)
-            message.error(err.response.data.message[0]);
+            message.error(err.response.data.message);
         }
     };
 
