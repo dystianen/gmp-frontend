@@ -75,7 +75,8 @@ const ForgotPassword = observer(() => {
 
                         <Form.Item name={'newPassword'} label={label('Kata Sandi Baru')} hasFeedback rules={[{
                             required: true,
-                            message: "Silahkan masukan kata sandi baru!",
+                            message: "Kata sandi minimal 8 karakter",
+                            min: 8,
                         }]}>
                             <Input.Password size={'large'} placeholder={'Masukan Kata Sandi Baru'}
                                             className={'h-12 rounded-lg text-lg'}/>
@@ -89,7 +90,8 @@ const ForgotPassword = observer(() => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Silahkan masukan konfirmasi kata sandi!',
+                                    message: 'Kata sandi minimal 8 karakter',
+                                    min: 8,
                                 },
                                 ({getFieldValue}) => ({
                                     validator(_, value) {
