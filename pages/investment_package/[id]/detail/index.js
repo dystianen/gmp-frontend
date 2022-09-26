@@ -19,6 +19,7 @@ const InvestmentPackageDetail = observer(() => {
     const [isLoading, setIsLoading] = useState(false);
 
     const {data: profile} = userRepository.hooks.useGetProfile();
+    const totalPrice = detail?.data?.price + detail?.data?.service_fee;
 
     useEffect(() => {
         if (typeof window !== undefined) {
@@ -27,11 +28,11 @@ const InvestmentPackageDetail = observer(() => {
             const decodeJwt = jwtDecode(token);
             setUserId(decodeJwt.id);
         }
-    }, [])
+    }, []);
 
     const showConfirm = async () => {
         Modal.confirm({
-            title: <span className={'font-bold'}>Are you sure want to buy {detail?.data?.name} with price ${detail?.data?.price} USDT? </span>,
+            title: <span className={'font-bold'}>Are you sure want to buy {detail?.data?.name} with price ${totalPrice} USDT? </span>,
             okText: "Ok",
             cancelText: "Cancel",
             onOk() {
@@ -97,7 +98,7 @@ const InvestmentPackageDetail = observer(() => {
             value: detail?.data?.month_contract + ' Bulan',
             icon: '/assets/icons/kontrak.svg',
         },
-    ]
+    ];
 
     return (
         <>
@@ -150,7 +151,7 @@ const InvestmentPackageDetail = observer(() => {
                 <div className={'flex flex-col justify-center'}>
                     <span className={'text-sm text-[#12131C]/55 font-semibold'}>Harga Paket</span>
                     <span className={'text-2xl font-bold text-primary'}>
-                        <FormatNumber value={detail?.data?.price + detail?.data?.service_fee} prefix={'$ '}/>
+                        <FormatNumber value={totalPrice} prefix={'$ '}/>
                     </span>
                 </div>
                 <Button
