@@ -63,6 +63,11 @@ const Profile = observer(() => {
             icon: '/assets/icons/lockblue.svg',
             url: `/forgot_password`,
         },
+        {
+            name: 'Paket Saya',
+            icon: '/assets/icons/box-tick.svg',
+            url: `/my_package/`,
+        }
     ];
 
     const aboutMenu = [

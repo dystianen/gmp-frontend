@@ -4,7 +4,7 @@ import {Button, Image} from "antd";
 import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from "next/router";
 
-export const Header = observer(({title, isBack = false}) => {
+export const Header = observer(({title, isBack = true}) => {
     const router = useRouter();
 
     return (
