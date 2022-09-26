@@ -29,7 +29,7 @@ const Login = observer(() => {
 
             await store.authentication.login(body);
             form.resetFields();
-            message.success("Berhasil Masuk");
+            await message.success("Berhasil Masuk");
             await router.push("/investment_package");
             setIsLoading(false)
         } catch (err) {
