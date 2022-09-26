@@ -55,3 +55,12 @@ body {
 .anticon svg {
   margin-bottom: 5px !important;
 }
+
+.ant-progress-text {
+  display: none !important;
+}
+
+.ant-progress-show-info .ant-progress-outer {
+  margin: 0 !important;
+  padding: 0 !important;
+}
