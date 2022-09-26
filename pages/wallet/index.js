@@ -47,7 +47,7 @@ const Wallet = observer(() => {
                     <div className={'font-semibold text-sm leading-4 text-white mt-2.5'}>
                         Balance
                     </div>
-                    <h2 className={'font-semibold text-3xl text-white z-10'}>
+                    <h2 className={'font-semibold text-3x text-white z-10'}>
                         <FormatNumber value={dataBalanceUSDT?.data}/>
                     </h2>
                 </div>

@@ -138,24 +138,29 @@ const WalletDetails = observer(() => {
                                  onClick={() => router.push(`/wallet_detail/transaction_detail/${value.id}`)}
                                  className={'grid grid-rows-2 grid-flow-col mb-2 mt-4 cursor-pointer'}>
                                 {value?.type === 0 ? (
-                                    <div className={'font-semibold text-base mb-1'}>Buy Package</div>
+                                    <div className={'font-semibold text-base mb-1'}>BUY PACKAGE</div>
                                 ) : value?.type === 1 ? (
-                                    <div className={'font-semibold text-base mb-1'}>Distribute Pair</div>
+                                    <div className={'font-semibold text-base mb-1'}>DISTRIBUTE PAIR</div>
                                 ) : value?.type === 2 ? (
-                                    <div className={'font-semibold text-base mb-1'}>Stake Result</div>
+                                    <div className={'font-semibold text-base mb-1'}>STAKE RESULT</div>
                                 ) : value?.type === 3 ? (
-                                    <div className={'font-semibold text-base mb-1'}>Stake Level Result</div>
+                                    <div className={'font-semibold text-base mb-1'}>STAKE LEVEL RESULT</div>
                                 ) : value?.type === 4 ? (
-                                    <div className={'font-semibold text-base mb-1'}>Move Internal GMP</div>
+                                    <div className={'font-semibold text-base mb-1'}>MOVE INTERNAL GMP</div>
                                 ) : value?.type === 5 ? (
-                                    <div className={'font-semibold text-base mb-1'}>Stake External GMP</div>
+                                    <div className={'font-semibold text-base mb-1'}>MOVE EXTERNAL GMP</div>
+                                ) : value?.type === 6 ? (
+                                    <div className={'font-semibold text-base mb-1'}>MOVE EXTERNAL USDT</div>
                                 ) : (
-                                    <div className={'font-semibold text-base mb-1'}>Move External USDT</div>
-                                )}
+                                    <div className={'font-semibold text-base mb-1'}>SPONSORSIP</div>
+                                    )}
                                 <div
                                     className={'text-sm font-normal text-slate-600'}>{moment(value?.createdAt).format('DD MMMM YYYY')}</div>
                                 <div className={'row-span-3 col-span-2 text-lg font-semibold pb-8'}>
-                                    <p className={'text-right text-green-500 mb-1'}>{value.amount} {value?.currency}</p>
+                                    {
+                                        value?.type === 0 || 5  || 6? (<p className={'text-right text-red-400 mb-1'}>{value.amount} <span>{value?.currency}</span> </p>) : (<p className={'text-right text-green-500 mb-1'}>{value.amount} {value?.currency}</p>)
+                                    }
+
                                 </div>
                             </div>
                         ))}
