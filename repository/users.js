@@ -11,6 +11,7 @@ const url = {
     changePassword: () => `/users/change-password`,
     binaryTree: () => `/users/binary-tree`,
     sunTree: () => `/users/sun-tree`,
+    getMyPackage: () => `/users/my-package`,
 };
 
 const hooks = {
@@ -23,6 +24,9 @@ const hooks = {
     useGetProfileById(id) {
         return useSWR(url.getUserId(id), http.fetcher);
     },
+    useGetMyPackage() {
+        return useSWR(url.getMyPackage(), http.fetcher);
+    }
 }
 
 const api = {

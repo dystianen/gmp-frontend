@@ -4,11 +4,13 @@ import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
 import { Button, Card, Image } from "antd";
 import { FormatNumber } from "../../helpers/NumberFormat";
 import { useState } from "react";
+import { userRepository } from "../../repository/users";
 
 const MyPackage = observer(() => {
 
     const [status, setStatus] = useState(false)   
-    
+    const {data: myPackage} = userRepository.hooks.useGetMyPackage();
+    console.log(myPackage, "ini pakett");
     return (
         <>
             <Header title={"Paket Saya"}/>
