@@ -155,10 +155,10 @@ const InvestmentPackageDetail = observer(() => {
                     </span>
                 </div>
                 <Button
-                    // disabled={profile?.data?.isBought}
+                    disabled={profile?.data?.isBought || isLoading}
                     type={'primary'}
                     size={'large'}
-                    className={`${profile?.data?.isBought ? '' : 'bg-secondary'} rounded-full border-none mx-2`}
+                    className={`${profile?.data?.isBought || isLoading ? '' : 'bg-secondary'} rounded-full border-none mx-2`}
                     onClick={showConfirm}
                 >
                     Beli Paket
