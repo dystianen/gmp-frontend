@@ -12,7 +12,7 @@ const Login = observer(() => {
     const [isLoading, setIsLoading] = useState(false);
 
     const label = (text) => (
-        <span className="font-semibold text-base">
+        <span className="font-semibold text-sm">
             {text}
         </span>
     )
@@ -60,13 +60,13 @@ const Login = observer(() => {
                             message: "Silahkan masukan nama pengguna!",
                             type: 'string',
                         }]}>
-                            <Input placeholder={'Masukan username'} size={'large'} className={'h-12 rounded-lg text-lg'}/>
+                            <Input placeholder={'Masukan username'} size={'large'} className={'h-12 rounded-lg text-sm'}/>
                         </Form.Item>
                         <Form.Item name={'password'} className={'my-2'} label={label('Kata Sandi')} rules={[
                             {required: true, message: "Silahkan masukan kata sandi!"},
                             {min: 8, message: "Kata sandi minimal 8 karakter"}
                         ]}>
-                            <Input.Password placeholder={'Masukan password'} size={'large'} className={'h-12 rounded-lg text-lg'}/>
+                            <Input.Password placeholder={'Masukan password'} size={'large'} className={'h-12 rounded-lg text-sm'}/>
                         </Form.Item>
                         <Form.Item className="my-2">
                             <Link href="/forgot_password">

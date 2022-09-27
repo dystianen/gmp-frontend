@@ -11,7 +11,7 @@ const Register = observer(() => {
     const [isLoading, setIsLoading] = useState(false);
 
     const label = (text) => (
-        <span className="font-bold">
+        <span className="font-semibold text-sm">
             {text}
         </span>
     );
@@ -42,59 +42,117 @@ const Register = observer(() => {
 
     return (
         <Spin spinning={isLoading}>
-            <div className={'flex flex-col items-center h-screen max-w-lg mx-auto'}>
-                <div
-                    className={'flex justify-center items-center bg-[url("/assets/background/BG.png")] bg-center h-3/5 w-full'}>
-                    <Image className={'w-32'} src={'/assets/logo/logo.png'} preview={false}/>
+            <div
+                className={'relative flex-col flex justify-center bg-primary bg-center min-h-full max-w-lg mx-auto rounded-t'}>
+                <div className="absolute top-0 left-0">
+                    <Image src={'/assets/background/Ellipse1.svg'} alt={'icon'} preview={false}/>
                 </div>
-                <Card className={'w-full h-4/5 rounded-2xl -mt-10'}>
-                    <div className={'flex flex-col items-center mb-10'}>
-                        <h1 className={'text-xl font-bold'}>REGISTRASI</h1>
-                        <span className={'text-base text-center opacity-50'}>Silahkan isi email aktif anda sebagai <br/> kode verifikasi</span>
-                    </div>
+                <div className="absolute top-28 right-0">
+                    <Image src={'/assets/background/Ellipse4.svg'} alt={'icon'} preview={false}/>
+                </div>
+                <div className={'absolute top-6 left-6'}>
+                    <Image src={'/assets/logo/logogmp.svg'} alt={'icon'} preview={false}/>
+                </div>
+                <p className={'text-2xl font-bold text-white text-center mt-20'}>Daftar</p>
+                <Card className={'mx-6 rounded-xl mb-20'}>
                     <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
                         <Form.Item name={'username'} label={label('Nama Pengguna')} rules={[{
+                        required: true,
+                        message: "Silahkan masukan nama pengguna!",
+                    }]}>
+                        <Input placeholder={'Masukan Nama Pengguna'} size={'middle'} className={'h-12 rounded-lg text-sm'}/>
+                    </Form.Item>
+                    <Form.Item name={'email'} label={label('Email')} rules={[
+                        {
                             required: true,
-                            message: "Silahkan masukan nama pengguna!",
-                        }]}>
-                            <Input placeholder={'Masukan Nama Pengguna'}/>
-                        </Form.Item>
-                        <Form.Item name={'email'} label={label('Email')} rules={[
-                            {
-                                required: true,
-                                message: "Silahkan masukan email!",
-                            },
-                            {
-                                type: 'email',
-                                message: 'Silahkan masukan email yang sah!'
-                            }
-                        ]}>
-                            <Input placeholder={'Masukan Email'}/>
-                        </Form.Item>
-                        <Form.Item name={'password'} label={label('Kata Sandi')} rules={[
-                            {required: true, message: "Silahkan masukan kata sandi!"},
-                            {min: 8, message: "Kata sandi minimal 8 karakter"}
-                        ]}>
-                            <Input.Password placeholder={'Masukan Kata Sandi'}/>
-                        </Form.Item>
-                        <Form.Item name={'phoneNumber'} label={label('Nomor Telepon')} rules={[
-                            {required: true, message: "Silahkan masukan nomor telepon!"},
-                            {min: 10, max: 14, message: "Silahkan masukan nomor telepon yang sah!"},
-                        ]}>
-                            <Input type={"number"} placeholder={'Masukan Nomor Telepon'}/>
-                        </Form.Item>
-                        <Form.Item name={'referralCode'} label={label('Kode Rujukan')}>
-                            <Input placeholder={'Masukan Kode Rujukan'}/>
-                        </Form.Item>
-                        <Form.Item className={'text-center pt-5'}>
-                            <Button htmlType={'submit'} type={'primary'} className={'rounded-md mb-2'} size={'large'}
-                                    block>Buat Akun</Button>
-                            <span>Sudah punya akun? <Link href={'/login'}>Masuk</Link></span>
-                        </Form.Item>
+                            message: "Silahkan masukan email!",
+                        },
+                        {
+                            type: 'email',
+                            message: 'Silahkan masukan email yang sah!'
+                        }
+                    ]}>
+                        <Input placeholder={'Masukan Email'} size={'middle'} className={'h-12 rounded-lg text-sm'}/>
+                    </Form.Item>
+                    <Form.Item name={'password'} label={label('Kata Sandi')} rules={[
+                        {required: true, message: "Silahkan masukan kata sandi!"},
+                        {min: 8, message: "Kata sandi minimal 8 karakter"}
+                    ]}>
+                        <Input.Password placeholder={'Masukan Kata Sandi'} size={'middle'} className={'h-12 rounded-lg text-sm'}/>
+                    </Form.Item>
+                    <Form.Item name={'phoneNumber'} label={label('Nomor Telepon')} rules={[
+                        {required: true, message: "Silahkan masukan nomor telepon!"},
+                        {min: 10, max: 14, message: "Silahkan masukan nomor telepon yang sah!"},
+                    ]}>
+                        <Input type={"number"} placeholder={'Masukan Nomor Telepon'} size={'middle'} className={'h-12 rounded-lg text-sm'}/>
+                    </Form.Item>
+                    <Form.Item name={'referralCode'} label={label('Kode Rujukan')}>
+                        <Input placeholder={'Masukan Kode Rujukan'} size={'middle'} className={'h-12 rounded-lg text-sm'}/>
+                    </Form.Item>
+                    <p className="text-sm font-normal">Dengan mendaftar anda menyetujui semua<br/><Link href={'#'}><a className="font-medium text-black">Syarat & Ketentuan</a></Link></p>
+                    <Form.Item className={'text-center pt-2'}>
+                        <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl h-[48px] bg-[#FFBF00] border-none mb-2 text-base'} size={'large'} block>Daftar</Button>
+                        <span className={'text-sm font-semibold'}>Sudah punya akun? <Link href={'/login'}><a className={'text-[#FFBF00]'}>Masuk</a></Link></span>
+                     </Form.Item>
                     </Form>
                 </Card>
             </div>
         </Spin>
+
+        // <Spin spinning={isLoading}>
+        //     <div className={'flex flex-col items-center h-screen max-w-lg mx-auto'}>
+        //         <div
+        //             className={'flex justify-center items-center bg-[url("/assets/background/BG.png")] bg-center h-3/5 w-full'}>
+        //             <Image className={'w-32'} src={'/assets/logo/logo.png'} preview={false}/>
+        //         </div>
+        //         <Card className={'w-full h-4/5 rounded-2xl -mt-10'}>
+        //             <div className={'flex flex-col items-center mb-10'}>
+        //                 <h1 className={'text-xl font-bold'}>REGISTRASI</h1>
+        //                 <span className={'text-base text-center opacity-50'}>Silahkan isi email aktif anda sebagai <br/> kode verifikasi</span>
+        //             </div>
+        //             <Form form={form} onFinish={handleSubmit} layout={'vertical'}>
+        //                 <Form.Item name={'username'} label={label('Nama Pengguna')} rules={[{
+        //                     required: true,
+        //                     message: "Silahkan masukan nama pengguna!",
+        //                 }]}>
+        //                     <Input placeholder={'Masukan Nama Pengguna'}/>
+        //                 </Form.Item>
+        //                 <Form.Item name={'email'} label={label('Email')} rules={[
+        //                     {
+        //                         required: true,
+        //                         message: "Silahkan masukan email!",
+        //                     },
+        //                     {
+        //                         type: 'email',
+        //                         message: 'Silahkan masukan email yang sah!'
+        //                     }
+        //                 ]}>
+        //                     <Input placeholder={'Masukan Email'}/>
+        //                 </Form.Item>
+        //                 <Form.Item name={'password'} label={label('Kata Sandi')} rules={[
+        //                     {required: true, message: "Silahkan masukan kata sandi!"},
+        //                     {min: 8, message: "Kata sandi minimal 8 karakter"}
+        //                 ]}>
+        //                     <Input.Password placeholder={'Masukan Kata Sandi'}/>
+        //                 </Form.Item>
+        //                 <Form.Item name={'phoneNumber'} label={label('Nomor Telepon')} rules={[
+        //                     {required: true, message: "Silahkan masukan nomor telepon!"},
+        //                     {min: 10, max: 14, message: "Silahkan masukan nomor telepon yang sah!"},
+        //                 ]}>
+        //                     <Input type={"number"} placeholder={'Masukan Nomor Telepon'}/>
+        //                 </Form.Item>
+        //                 <Form.Item name={'referralCode'} label={label('Kode Rujukan')}>
+        //                     <Input placeholder={'Masukan Kode Rujukan'}/>
+        //                 </Form.Item>
+        //                 <Form.Item className={'text-center pt-5'}>
+        //                     <Button htmlType={'submit'} type={'primary'} className={'rounded-md mb-2'} size={'large'}
+        //                             block>Buat Akun</Button>
+        //                     <span>Sudah punya akun? <Link href={'/login'}>Masuk</Link></span>
+        //                 </Form.Item>
+        //             </Form>
+        //         </Card>
+        //     </div>
+        // </Spin>
     )
 });
 
