@@ -3,7 +3,7 @@ import NumberFormat from "react-number-format";
 
 export const FormatNumber = ({value, prefix, suffix}) => {
     return <NumberFormat
-        value={value ?? 0}
+        value={value?.toString() ?? 0}
         prefix={prefix}
         suffix={suffix}
         decimalSeparator={"."}

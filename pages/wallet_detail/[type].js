@@ -130,7 +130,7 @@ const WalletDetails = observer(() => {
                     />
                 </div>
 
-                {dataTransaction?.data.length === 0 ?
+                {dataTransaction?.data?.length === 0 ?
                     (<Empty className={'mt-8'}/>) :
                     (<div>
                         {dataTransaction?.data.map((value, index) => (
