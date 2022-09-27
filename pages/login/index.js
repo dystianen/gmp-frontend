@@ -63,7 +63,8 @@ const Login = observer(() => {
                             <Input placeholder={'Masukan username'} size={'large'} className={'h-12 rounded-lg text-lg'}/>
                         </Form.Item>
                         <Form.Item name={'password'} className={'my-2'} label={label('Kata Sandi')} rules={[
-                            {required: true, message: "Silahkan masukan kata sandi!"}
+                            {required: true, message: "Silahkan masukan kata sandi!"},
+                            {min: 8, message: "Kata sandi minimal 8 karakter"}
                         ]}>
                             <Input.Password placeholder={'Masukan password'} size={'large'} className={'h-12 rounded-lg text-lg'}/>
                         </Form.Item>
