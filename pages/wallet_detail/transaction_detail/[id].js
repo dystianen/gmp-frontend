@@ -13,6 +13,44 @@ const TransactionDetail = observer(() => {
     const {id} = router.query;
     const {data: oneTransaction} = transactionRepository.hooks.useGetTransactionDetail(id)
 
+    const getType = (type) => {
+        switch (type) {
+            case 0:
+                return "Buy Package";
+            case 1:
+                return "Distribute Pair";
+            case 2:
+                return "Stake Result";
+            case 3:
+                return "Stake Level Result";
+            case 4:
+                return "Move Internal GMP";
+            case 5:
+                return "Stake External GMP";
+            default:
+                return "Move External USDT";
+        }
+    }
+
+    const data = [
+        {
+            label: 'Type',
+            value: getType(oneTransaction?.data?.type),
+        },
+        {
+            label: 'Waktu',
+            value: moment(oneTransaction?.data?.createdAt).format('hh:mm'),
+        },
+        {
+            label: 'Tanggal',
+            value: moment(oneTransaction?.data?.createdAt).format('DD MMMM YYYY'),
+        },
+        {
+            label: 'ID Transaksi',
+            value: oneTransaction?.data?.id
+        },
+    ]
+
     return (
         <>
             <Header2 isCancel>
@@ -27,51 +65,30 @@ const TransactionDetail = observer(() => {
                     <div className="my-2 flex flex-col items-center justify-center">
                         <Image src={"/assets/logo/logo-token.svg"} alt={'logo'} preview={false}/>
                         <p className=" text-center font-semibold text-2xl text-[#4461F2] pt-2">
-                            <FormatNumber value={oneTransaction?.data?.amount} prefix={'$ '} />
+                            <FormatNumber value={oneTransaction?.data?.amount} prefix={'$ '}/>
                         </p>
                     </div>
+
                     <Divider dashed style={{borderWidth: '3px 0 0'}}/>
+
                     <p className="my-4 font-semibold text-base">Rincian Transaksi</p>
-                    <div className="grid grid-cols-2 gap-4 font-medium text-sm">
-                        <div>Type</div>
-                        {oneTransaction?.data?.type === 0 ? (
-                            <div className={'text-right'}>Buy Package</div>
-                        ) : oneTransaction?.data?.type === 1 ? (
-                            <div className={'text-right'}>Distribute Pair</div>
-                        ) : oneTransaction?.data?.type === 2 ? (
-                            <div className={'text-right'}>Stake Result</div>
-                        ) : oneTransaction?.data?.type === 3 ? (
-                            <div className={'text-right'}>Stake Level Result</div>
-                        ) : oneTransaction?.data?.type === 4 ? (
-                            <div className={'text-right'}>Move Internal GMP</div>
-                        ) : oneTransaction?.data?.type === 5 ? (
-                            <div className={'text-right'}>Stake External GMP</div>
-                        ) : (
-                            <div className={'text-right'}>Move External USDT</div>
-                        )}
-                        <div>Waktu</div>
-                        <div className="text-right">{moment(oneTransaction?.data?.createdAt).format('hh:mm')}</div>
-                        <div>Tanggal</div>
-                        <div
-                            className="text-right">{moment(oneTransaction?.data?.createdAt).format('DD MMMM YYYY')}</div>
-                        <div>ID Transaksi</div>
-                        <div className="text-right">{oneTransaction?.data?.id}</div>
-                        {oneTransaction?.data?.user_destination ? (
-                            <>
-                                <div>Asal Dana</div>
-                                <div>{oneTransaction?.data?.user_destination}</div>
-                            </>
-                        ) : (<div></div>)}
-                    </div>
+                    {data.map((it, index) => {
+                        return <div key={index} className="flex flex-row justify-between font-medium text-sm">
+                            <p>{it.label}</p>
+                            <p className={'w-36 text-right'}>{it.value}</p>
+                        </div>
+                    })}
+
                     <Divider dashed style={{borderWidth: '3px 0 0'}}/>
+
                     <div className="flex justify-between items-center font-medium text-sm">
                         <span>Jumlah</span>
-                        <FormatNumber value={oneTransaction?.data?.amount} prefix={'$ '} />
+                        <FormatNumber value={oneTransaction?.data?.amount} prefix={'$ '}/>
                     </div>
                     <Divider dashed style={{borderWidth: '3px 0 0'}}/>
                     <div className="flex justify-between font-semibold text-sm">
                         <p>Total</p>
-                        <FormatNumber value={oneTransaction?.data?.amount} prefix={'$ '} />
+                        <FormatNumber value={oneTransaction?.data?.amount} prefix={'$ '}/>
                     </div>
                 </Card>
             </div>
