@@ -158,7 +158,7 @@ const WalletDetails = observer(() => {
                                     className={'text-sm font-normal text-slate-600'}>{moment(value?.createdAt).format('DD MMMM YYYY')}</div>
                                 <div className={'row-span-3 col-span-2 text-lg font-semibold pb-8'}>
                                     {
-                                        value?.type === 0 || 5  || 6? (<p className={'text-right text-red-400 mb-1'}>{value.amount} <span>{value?.currency}</span> </p>) : (<p className={'text-right text-green-500 mb-1'}>{value.amount} {value?.currency}</p>)
+                                        (value?.type === 0 ||  value?.type === 5  || value?.type === 6 ) ? (<p className={'text-right text-red-400 mb-1'}>{value.amount} <span>{value?.currency}</span> </p>) : (<p className={'text-right text-green-500 mb-1'}>{value.amount} {value?.currency}</p>)
                                     }
 
                                 </div>
