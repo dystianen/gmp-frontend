@@ -1,12 +1,12 @@
 import {Card, Divider, Image} from "antd"
 import {observer} from "mobx-react-lite"
 import {useRouter} from "next/router"
-import DesktopLayout from "../../../components/Layout/DesktopLayout/DesktopLayout"
-import {transactionRepository} from "../../../repository/transaction"
+import DesktopLayout from "../../../../components/Layout/DesktopLayout/DesktopLayout"
+import {transactionRepository} from "../../../../repository/transaction"
 import moment from "moment";
 import React from "react";
-import {Header2} from "../../../components/Reusable/Header2";
-import {FormatNumber} from "../../../helpers/NumberFormat";
+import {Header2} from "../../../../components/Reusable/Header2";
+import {FormatNumber} from "../../../../helpers/NumberFormat";
 
 const TransactionDetail = observer(() => {
     const router = useRouter()
@@ -49,6 +49,10 @@ const TransactionDetail = observer(() => {
             label: 'ID Transaksi',
             value: oneTransaction?.data?.id
         },
+        {
+            label: 'Asal Dana',
+            value: oneTransaction?.data?.user_destination?.username
+        }
     ]
 
     return (
