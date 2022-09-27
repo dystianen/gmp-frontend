@@ -50,9 +50,9 @@ const InvestmentPackageDetail = observer(() => {
 
             setIsLoading(true);
             await packageRepository.api.buyPackage(body);
-            setIsLoading(false);
-            message.success('Berhasil Membeli Paket');
+            await message.success('Berhasil Membeli Paket');
             await router.push('/investment_package')
+            setIsLoading(false);
         } catch (err) {
             setIsLoading(false);
             message.error('Gagal Membeli Paket!')
@@ -155,7 +155,7 @@ const InvestmentPackageDetail = observer(() => {
                     </span>
                 </div>
                 <Button
-                    disabled={profile?.data?.isBought}
+                    // disabled={profile?.data?.isBought}
                     type={'primary'}
                     size={'large'}
                     className={`${profile?.data?.isBought ? '' : 'bg-secondary'} rounded-full border-none mx-2`}
