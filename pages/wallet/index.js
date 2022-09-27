@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Image, Card, Button} from "antd";
+import {Image, Card, Button, message} from "antd";
 import {observer} from "mobx-react-lite";
 import jwtDecode from "jwt-decode";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
@@ -21,12 +21,20 @@ const Wallet = observer(() => {
             setDataUser(decodeJwt)
         }
     }, [])
-
+    const copyToClipboardUSDT = () => {
+        navigator.clipboard.writeText(dataBalanceUSDT?.data?.address)
+        message.info('Menyalin ke clipboard!')
+    }
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(dataBalanceGMP?.data?.address)
+        message.info('Menyalin ke clipboard!')
+    }
     const {data: dataBalanceUSDT} = walletRepository.hooks.useGetBalanceUSDT();
     const {data: dataBalanceGMP} = walletRepository.hooks.useGetBalanceGMP();
     const {data: lastTransactionsUSDT} = walletRepository.hooks.useGetLastTransactions('USDT')
     const {data: lastTransactionsGMP} = walletRepository.hooks.useGetLastTransactions('GMP')
-
+    console.log(dataBalanceGMP, "Ini GMP")
+    console.log(dataBalanceUSDT, 'ini USDT')
     return (
         <>
             <Header2 isEwallet>
@@ -42,13 +50,15 @@ const Wallet = observer(() => {
                 <div className={'flex items-center gap-2 -mt-3'}>
                     <Image src={'/assets/logo/theter.png'} preview={false}/>
                     <span className={'text-white font-semibold text-sm leading-8'}>USDT</span>
+                    <span className={'w-full overflow-hidden text-xs text-white font-bold'}>{dataBalanceUSDT?.data?.address}</span>
+                    <img src="/assets/logo/copy.svg" width={15} height={15} onClick={copyToClipboardUSDT} className={'text-white'} alt=""/>
                 </div>
                 <div className={'absolute'}>
                     <div className={'font-semibold text-sm leading-4 text-white mt-2.5'}>
                         Balance
                     </div>
                     <h2 className={'font-semibold text-3xl text-white z-10'}>
-                        <FormatNumber value={dataBalanceUSDT?.data}/>
+                        <FormatNumber value={dataBalanceUSDT?.data?.balance}/>
                     </h2>
                 </div>
                 <div
@@ -78,13 +88,15 @@ const Wallet = observer(() => {
                 <div className={'flex items-center gap-2 -mt-3'}>
                     <Image src={'/assets/logo/mini-logo.png'} preview={false}/>
                     <span className={'text-white font-semibold text-sm leading-8'}>GMP</span>
+                    <span className={'w-full overflow-hidden text-xs text-white font-bold'}>{dataBalanceUSDT?.data?.address}</span>
+                    <img src="/assets/logo/copy.svg" width={15} height={15} onClick={copyToClipboardUSDT} className={'text-white'} alt=""/>
                 </div>
                 <div className={'absolute'}>
                     <div className={'font-semibold text-sm leading-4 text-white mt-2.5'}>
                         Balance
                     </div>
                     <h2 className={'font-semibold text-3xl text-white z-10'}>
-                        <FormatNumber value={dataBalanceGMP?.data}/>
+                        <FormatNumber value={dataBalanceGMP?.data?.balance}/>
                     </h2>
                 </div>
                 <div
