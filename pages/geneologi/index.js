@@ -11,7 +11,7 @@ const Downline = observer(() => {
     return (
         <>
             <div className={'relative h-screen'}>
-                <Header title={'Downline'}/>
+                <Header title={'Geneologi'}/>
 
                 <div className={'px-8'}>
                     <Card
@@ -27,7 +27,7 @@ const Downline = observer(() => {
                             <Button
                                 size={'large'}
                                 className={'rounded-full bg-[#FCC200] text-white border-none font-semibold w-28'}
-                                onClick={() => router.push(`/downline/binary-tree`)}
+                                onClick={() => router.push(`/geneologi/binary-tree`)}
                             >
                                 Lihat Detail
                             </Button>
@@ -48,7 +48,7 @@ const Downline = observer(() => {
                                 size={'large'}
                                 type={'primary'}
                                 className={'rounded-full text-white border-none font-semibold w-28'}
-                                onClick={() => router.push(`/downline/sun-tree`)}
+                                onClick={() => router.push(`/geneologi/sun-tree`)}
                             >
                                 Lihat Detail
                             </Button>

@@ -11,7 +11,7 @@ export const DesktopLayoutNavigation = () => {
         switch (router.pathname) {
             case '/investment_package':
                 return setSetKeys(['1']);
-            case '/downline':
+            case '/geneologi':
                 return setSetKeys(['2']);
             case '/wallet':
                 return setSetKeys(['3']);
@@ -32,7 +32,7 @@ export const DesktopLayoutNavigation = () => {
         {
             id: 2,
             name: "Geneologi",
-            url: "/downline",
+            url: "/geneologi",
             icon: <MdPeopleAlt style={styles.icon}/>
         },
         {

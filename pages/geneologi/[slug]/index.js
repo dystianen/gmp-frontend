@@ -92,7 +92,7 @@ const DownlineTree = observer(() => {
     return (
         <>
             <div className={'relative h-screen bg-[url("/assets/background/BGDot.png")]'}>
-                <Header title={'Downline'} />
+                <Header title={'Geneologi'} />
 
                 <TransformWrapper
                     initialScale={1}
