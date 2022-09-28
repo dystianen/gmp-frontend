@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Header} from "../../components/Reusable/Header";
 import {observer} from "mobx-react-lite";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import {Button, Card, Image, Modal, Spin, message} from "antd";
+import {Button, Card, Image, Modal, Spin, message, Empty} from "antd";
 import {FormatNumber} from "../../helpers/NumberFormat";
 import {userRepository} from "../../repository/users";
 import moment from "moment";
@@ -51,59 +51,63 @@ const MyPackage = observer(() => {
             <Header title={"Paket Saya"}/>
             <Spin className={'h-full'} spinning={isLoading}>
                 <div className={'px-8 pt-8'}>
-                    <Card className={'rounded-xl'}>
-                        <div className={"flex justify-between"}>
-                            <p className={'font-semibold text-xl'}>Paket Basic</p>
-                            {status ? (
-                                <div className={'flex justify-center bg-[#65dc411a] rounded-2xl w-[70px] h-[29px]'}>
-                                    <span className={'py-1 px-2 tracking-wide font-semibold text-sm text-[#65DC41]'}>Aktif</span>
-                                </div>
-                            ) : (
-                                <div className={'flex justify-center bg-[#f036361a] rounded-2xl w-[90px] h-[29px]'}>
-                                    <span className={'py-1 px-2 tracking-wide font-semibold text-sm text-red-500'}>Nonaktif</span>
-                                </div>
-                            )}
-                        </div>
-                        <hr style={{border: '1px solid rgba(18, 19, 28, 0.1)'}}/>
-                        <div className={'grid grid-cols-2 gap-4 py-4'}>
-                            <div className={'flex gap-4'}>
-                                <Image src={'/assets/icons/users.svg'} preview={false}/>
-                                <div className={'flex flex-col'}>
-                                    <span className={'text-xs font-medium'}>Keuntungan</span>
-                                    <span className={'text-sm font-bold'}>
+                    {myPackage?.data ? (
+                        <Card className={'rounded-xl'}>
+                            <div className={"flex justify-between"}>
+                                <p className={'font-semibold text-xl'}>Paket Basic</p>
+                                {status ? (
+                                    <div className={'flex justify-center bg-[#65dc411a] rounded-2xl w-[70px] h-[29px]'}>
+                                        <span className={'py-1 px-2 tracking-wide font-semibold text-sm text-[#65DC41]'}>Aktif</span>
+                                    </div>
+                                ) : (
+                                    <div className={'flex justify-center bg-[#f036361a] rounded-2xl w-[90px] h-[29px]'}>
+                                        <span className={'py-1 px-2 tracking-wide font-semibold text-sm text-red-500'}>Nonaktif</span>
+                                    </div>
+                                )}
+                            </div>
+                            <hr style={{border: '1px solid rgba(18, 19, 28, 0.1)'}}/>
+                            <div className={'grid grid-cols-2 gap-4 py-4'}>
+                                <div className={'flex gap-4'}>
+                                    <Image src={'/assets/icons/users.svg'} preview={false}/>
+                                    <div className={'flex flex-col'}>
+                                        <span className={'text-xs font-medium'}>Keuntungan</span>
+                                        <span className={'text-sm font-bold'}>
                                     <FormatNumber value={myPackage?.data?.package?.return_percentage}/>
                                 </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className={'flex gap-4'}>
-                                <Image src={'/assets/icons/profit.svg'} preview={false}/>
-                                <div className={'flex flex-col'}>
-                                    <span className={'text-xs font-medium'}>Stake Level</span>
-                                    <span className={'text-sm font-bold'}>
+                                <div className={'flex gap-4'}>
+                                    <Image src={'/assets/icons/profit.svg'} preview={false}/>
+                                    <div className={'flex flex-col'}>
+                                        <span className={'text-xs font-medium'}>Stake Level</span>
+                                        <span className={'text-sm font-bold'}>
                                     <FormatNumber value={myPackage?.data?.package?.reward_level_max} suffix={' Level'}/>
                                 </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className={'bg-[#4461f21a] rounded-xl flex items-center justify-between'}>
-                            <div className={'py-4 px-4'}>
-                                <p className={'text-[#4461F2] text-xs font-medium mb-1'}>Tagihan Biaya Admin</p>
-                                <span
-                                    className={'text-[#4461F2] text-sm font-semibold'}>{moment(myPackage?.data?.createdAt).format('DD MMMM YYYY')}</span>
+                            <div className={'bg-[#4461f21a] rounded-xl flex items-center justify-between'}>
+                                <div className={'py-4 px-4'}>
+                                    <p className={'text-[#4461F2] text-xs font-medium mb-1'}>Tagihan Biaya Admin</p>
+                                    <span
+                                        className={'text-[#4461F2] text-sm font-semibold'}>{moment(myPackage?.data?.createdAt).format('DD MMMM YYYY')}</span>
+                                </div>
+                                <div className={'py-4 px-4 font-semibold text-[#4461F2] text-lg'}>
+                                    <FormatNumber value={myPackage?.data?.fee} prefix={'$ '}/>
+                                </div>
                             </div>
-                            <div className={'py-4 px-4 font-semibold text-[#4461F2] text-lg'}>
-                                <FormatNumber value={myPackage?.data?.fee} prefix={'$ '}/>
-                            </div>
-                        </div>
-                        <Button
-                            block
-                            onClick={showConfirm}
-                            disabled={status}
-                            className={`relative h-11 mt-4 rounded-full ${status ? 'bg-gray-300 text-[#12131C]/[0.5]' : 'bg-[#FFBF00] text-white'} text-base font-semibold border-none`}
-                        >
-                            Bayar Tagihan
-                        </Button>
-                    </Card>
+                            <Button
+                                block
+                                onClick={showConfirm}
+                                disabled={status}
+                                className={`relative h-11 mt-4 rounded-full ${status ? 'bg-gray-300 text-[#12131C]/[0.5]' : 'bg-[#FFBF00] text-white'} text-base font-semibold border-none`}
+                            >
+                                Bayar Tagihan
+                            </Button>
+                        </Card>
+                    ) : (
+                        <Empty className={'mt-20'}/>
+                    )}
                 </div>
             </Spin>
         </>
