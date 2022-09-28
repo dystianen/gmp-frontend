@@ -19,6 +19,8 @@ export const DesktopLayoutNavigation = () => {
                 return setSetKeys(['3']);
             case '/profile':
                 return setSetKeys(['4']);
+            case '/my_package':
+                return setSetKeys(['4']);
         }
     } , [router])
 

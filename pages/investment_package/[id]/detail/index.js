@@ -1,7 +1,6 @@
 import {observer} from "mobx-react-lite";
 import DesktopLayout from "../../../../components/Layout/DesktopLayout/DesktopLayout";
-import {Button, Image, message, Modal, notification, Spin} from "antd";
-import {BiArrowBack} from "react-icons/bi";
+import {Button, Image, message, Modal, Spin} from "antd";
 import {useRouter} from "next/router";
 import React, {useState} from "react";
 import {packageRepository} from "../../../../repository/package";
@@ -32,9 +31,9 @@ const InvestmentPackageDetail = observer(() => {
 
     const showConfirm = async () => {
         Modal.confirm({
-            title: <span className={'font-bold'}>Are you sure want to buy {detail?.data?.name} with price ${totalPrice} USDT? </span>,
+            title: <span>Anda yakin ingin membeli paket {detail?.data?.name} dengan harga ${totalPrice} USDT? </span>,
             okText: "Ok",
-            cancelText: "Cancel",
+            cancelText: "Batal",
             onOk() {
                 handleBuyPackage()
             },

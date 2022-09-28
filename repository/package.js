@@ -6,6 +6,7 @@ const url = {
     getProgress: () => "/transaction/target-progress",
     getDetails: (id) => "/packages/" + id,
     buyPackage: () => "/transaction/buy-package",
+    payBillsPackage: () => "/transaction/pay-bills",
 };
 
 const hooks = {
@@ -23,6 +24,9 @@ const hooks = {
 const api = {
     async buyPackage(data) {
         return await http.post(url.buyPackage(), data)
+    },
+    async payBills(data) {
+        return await http.post(url.payBillsPackage(), data)
     }
 };
 
