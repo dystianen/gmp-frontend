@@ -68,8 +68,8 @@ const Login = observer(() => {
                             </Link>
                         </Form.Item> 
                         <Form.Item className={'text-center'}>
-                            <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl h-[48px] bg-[#FFBF00] border-none mb-2 text-base'} size={'large'} block>Masuk</Button>
-                            <span className={'text-sm font-semibold'}>Belum punya akun? <Link href={'/register'}><a className={'text-[#FFBF00]'}>Registrasi</a></Link></span>
+                            <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl h-[48px] bg-[#FF9900] border-none mb-2 text-base'} size={'large'} block>Masuk</Button>
+                            <span className={'text-sm font-semibold'}>Belum punya akun? <Link href={'/register'}><a className={'text-[#FF9900]'}>Registrasi</a></Link></span>
                         </Form.Item>
                     </Form>
                 </Card>

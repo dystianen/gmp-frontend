@@ -85,8 +85,8 @@ const Register = observer(() => {
                     </Form.Item>
                     <p className="text-sm font-normal">Dengan mendaftar anda menyetujui semua<br/><Link href={'#'}><a className="font-medium text-black">Syarat & Ketentuan</a></Link></p>
                     <Form.Item className={'text-center pt-2'}>
-                        <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl h-[48px] bg-[#FFBF00] border-none mb-2 text-base'} size={'large'} block>Daftar</Button>
-                        <span className={'text-sm font-semibold'}>Sudah punya akun? <Link href={'/login'}><a className={'text-[#FFBF00]'}>Masuk</a></Link></span>
+                        <Button htmlType={'submit'} type={'primary'} className={'rounded-3xl h-[48px] bg-[#FF9900] border-none mb-2 text-base'} size={'large'} block>Daftar</Button>
+                        <span className={'text-sm font-semibold'}>Sudah punya akun? <Link href={'/login'}><a className={'text-[#FF9900]'}>Masuk</a></Link></span>
                      </Form.Item>
                     </Form>
                 </Card>
