@@ -6,8 +6,7 @@ import DesktopLayout from "../../../components/Layout/DesktopLayout/DesktopLayou
 import dynamic from "next/dynamic";
 import {observer} from "mobx-react-lite";
 import {downlineRepository} from "../../../repository/downline";
-import {Avatar, Button, Card, Image} from "antd";
-import {BiArrowBack} from "react-icons/bi";
+import {Avatar, Card} from "antd";
 import {useRouter} from "next/router";
 import clsx from "clsx";
 import {makeStyles} from "@material-ui/core/styles";

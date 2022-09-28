@@ -2,7 +2,7 @@ import React from "react";
 import {Button} from "antd";
 import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from "next/router";
-import {CloseOutlined} from "@ant-design/icons";
+import {MdClose} from "react-icons/md";
 
 export const Header2 = ({isBack = false, isCancel= false, isEwallet = false, children}) => {
     const router = useRouter();
@@ -17,9 +17,9 @@ export const Header2 = ({isBack = false, isCancel= false, isEwallet = false, chi
             )}
 
             {isCancel && (
-                <Button className={'flex justify-center items-center rounded-lg border-none p-0 h-10 w-12'}
+                <Button className={'flex justify-center items-center rounded-lg border-none p-0 h-10 w-14'}
                         onClick={() => router.back()}>
-                    <CloseOutlined className={'text-lg'}/>
+                    <MdClose className={'text-xl'}/>
                 </Button>
             )}
 

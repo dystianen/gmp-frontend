@@ -8,14 +8,17 @@ export const DesktopLayoutNavigation = () => {
     const [setKeys, setSetKeys] = useState(['1']);
 
     useEffect(() => {
-        if (router.pathname === '/investment_package') {
-            setSetKeys(['1'])
-        } else if (router.pathname === '/downline') {
-            setSetKeys(['2'])
-        } else if (router.pathname === '/wallet') {
-            setSetKeys(['3'])
-        } else {
-            setSetKeys(['4'])
+        switch (router.pathname) {
+            case '/investment_package':
+                return setSetKeys(['1']);
+            case '/downline':
+                return setSetKeys(['2']);
+            case '/wallet':
+                return setSetKeys(['3']);
+            case '/wallet_detail/[type]':
+                return setSetKeys(['3']);
+            case '/profile':
+                return setSetKeys(['4']);
         }
     } , [router])
 

@@ -1,35 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {Image, Card, Button} from "antd";
 import {observer} from "mobx-react-lite";
-import jwtDecode from "jwt-decode";
 import DesktopLayout from "../../components/Layout/DesktopLayout/DesktopLayout";
-import {BiArrowBack} from "react-icons/bi";
 import {useRouter} from "next/router";
-import {walletRepository} from "../../repository/wallet";
-import moment from "moment";
-import {FormatNumber} from "../../helpers/NumberFormat";
 import {Header} from "../../components/Reusable/Header";
-import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
-import {DndProvider} from "react-dnd";
-import {HTML5Backend} from "react-dnd-html5-backend";
 
 const Downline = observer(() => {
     const router = useRouter();
-    const [dataUser, setDataUser] = useState([]);
-
-    useEffect(() => {
-        if (typeof window !== undefined) {
-            let token = localStorage.getItem('access_token')
-
-            const decodeJwt = jwtDecode(token)
-            setDataUser(decodeJwt)
-        }
-    }, [])
-
-    const {data: dataBalanceUSDT} = walletRepository.hooks.useGetBalanceUSDT();
-    const {data: dataBalanceGMP} = walletRepository.hooks.useGetBalanceGMP();
-    const {data: lastTransactionsUSDT} = walletRepository.hooks.useGetLastTransactions('USDT')
-    const {data: lastTransactionsGMP} = walletRepository.hooks.useGetLastTransactions('GMP')
 
     return (
         <>

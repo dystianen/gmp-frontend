@@ -111,8 +111,9 @@ const UpdateProfile = observer(() => {
 
                 <div className={'px-8 h-4/5'}>
                     <div className={'flex flex-col justify-center items-center pb-5'}>
-                        <Avatar size={100} className={'flex justify-center items-center border-8 border-gray-50 -mt-[40px] mb-2'}
-                                src={fileList[0]?.url} icon={<UserOutlined />}/>
+                        <Avatar size={100}
+                                className={'flex justify-center items-center border-8 border-gray-50 -mt-[40px] mb-2'}
+                                src={fileList[0]?.url} icon={<UserOutlined/>}/>
                         <Upload
                             name="picPicture"
                             onChange={(args) => imageHandler(args)}
@@ -130,16 +131,20 @@ const UpdateProfile = observer(() => {
                         </Upload>
                     </div>
                     <Form form={form} layout={'vertical'}>
-                        <Form.Item label={label('Nama Pengguna')} name={'username'}>
+                        <Form.Item label={label('Nama Pengguna')} name={'username'} rules={[
+                            {required: true, message: "Silahkan masukan nama pengguna!"}
+                        ]}>
                             <Input className={'h-[50px] rounded-lg'}/>
                         </Form.Item>
                         <Form.Item label={label('Email')} name={'email'} rules={[
-                            {type: 'email', message: "Please input a valid email address!"},
+                            {required: true, message: "Silahkan masukan email!"},
+                            {type: 'email', message: "Silahkan masukan email yang sah!"},
                         ]}>
                             <Input type="email" className={'h-[50px] rounded-lg'}/>
                         </Form.Item>
                         <Form.Item label={label('Nomor Telepon')} name={'phoneNumber'} rules={[
-                            {min: 10, max: 14, message: "Please input a valid phone number!"},
+                            {required: true, message: "Silahkan masukan nomor telepon!"},
+                            {min: 10, max: 14, message: "Silahkan masukan nomor telepon yang sah!"},
                         ]}>
                             <Input type={'number'} className={'h-[50px] rounded-lg'}/>
                         </Form.Item>
