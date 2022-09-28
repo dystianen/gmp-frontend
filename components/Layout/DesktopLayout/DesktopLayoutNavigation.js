@@ -28,7 +28,7 @@ export const DesktopLayoutNavigation = () => {
         },
         {
             id: 2,
-            name: "Downline",
+            name: "Geneologi",
             url: "/downline",
             icon: <MdPeopleAlt style={styles.icon}/>
         },

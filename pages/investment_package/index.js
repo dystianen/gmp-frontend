@@ -15,7 +15,7 @@ const InvestmentPackage = observer(() => {
             <Header2>
                 {
                     <div className="text-center w-full">
-                        <span className={`w-full text-2xl font-bold text-white text-center`}>Paket Investasi</span>
+                        <span className={`w-full text-2xl font-bold text-white text-center`}>Paket Stacking</span>
                         <ProgressInvest data={progress?.data}/>
                     </div>
                 }

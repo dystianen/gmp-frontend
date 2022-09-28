@@ -46,7 +46,7 @@ const Downline = observer(() => {
                         </div>
 
                         <div className={'flex flex-col gap-4'}>
-                            <h2 className={'text-2xl text-white'}>Binary Downline</h2>
+                            <h2 className={'text-2xl text-white'}>Binary Geneologi</h2>
                             <Button
                                 size={'large'}
                                 className={'rounded-full bg-[#FCC200] text-white border-none font-semibold w-28'}
@@ -66,7 +66,7 @@ const Downline = observer(() => {
                         </div>
 
                         <div className={'flex flex-col gap-4'}>
-                            <h2 className={'text-2xl text-white'}>Sun Downline</h2>
+                            <h2 className={'text-2xl text-white'}>Sun Geneologi</h2>
                             <Button
                                 size={'large'}
                                 type={'primary'}
