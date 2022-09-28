@@ -5,6 +5,7 @@ import React from "react";
 import {CardPackage} from "../../components/CardPackage";
 import {Header2} from "../../components/Reusable/Header2";
 import {ProgressInvest} from "../../components/ProgressInvest";
+import {Empty, Image} from "antd";
 
 const InvestmentPackage = observer(() => {
     const {data: packages, isValidating} = packageRepository.hooks.useGetAll();
@@ -12,7 +13,7 @@ const InvestmentPackage = observer(() => {
 
     return (
         <>
-            <Header2>
+            <Header2 progressFull={progress?.data?.percentage === 100}>
                 {
                     <div className="text-center w-full">
                         <span className={`w-full text-2xl font-bold text-white text-center`}>Paket Stacking</span>
@@ -21,12 +22,18 @@ const InvestmentPackage = observer(() => {
                 }
             </Header2>
 
-
-            <div className={'flex flex-col items-center gap-5 pb-28 bg-[#f8f8ff]'}>
-                {packages?.data?.map((it, index) => (
-                    <CardPackage key={index} index={index} isValidating={isValidating} data={it}/>
-                ))}
-            </div>
+            {progress?.data?.percentage !== 100 ? (
+                <div className={'flex flex-col items-center gap-5 pb-28 bg-[#f8f8ff]'}>
+                    {packages?.data?.map((it, index) => (
+                        <CardPackage key={index} index={index} isValidating={isValidating} data={it}/>
+                    ))}
+                </div>
+            ) : (
+                <div className={'w-full flex flex-col items-center mt-24'}>
+                    <Image src={'/assets/images/fulfilled.png'} width={'60%'} preview={false} />
+                    <span className={'text-base text-gray-400 font-semibold pt-4'}>Target Telah Terpenuhi</span>
+                </div>
+            )}
         </>
     )
 })
