@@ -74,7 +74,7 @@ const Profile = observer(() => {
         {
             name: 'Syarat & Ketentuan',
             icon: '/assets/icons/syaratblue.svg',
-            url: '#',
+            url: '/terms_and_condition',
         },
         {
             name: 'Privasi',
