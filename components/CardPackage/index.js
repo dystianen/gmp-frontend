@@ -9,7 +9,7 @@ export const CardPackage = (props) => {
 
     return <Card
         key={index}
-        className={`${(type !='binary') && 'w-11/12'} rounded-2xl ${(index === 0 && type !='binary') && '-mt-5'}`}
+        className={`${(type !='binary') && 'w-11/12'} rounded-2xl ${(index === 0 && type !='binary') && '-mt-10'}`}
         title={<span className={'font-bold text-xl'}>{data?.name}</span>}
         extra={
             <Tag className={'flex items-center py-3 px-4 rounded-full border-none bg-[#4461f2]/[.09]'}>

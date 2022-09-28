@@ -8,7 +8,7 @@ export const Header = observer(({title, isBack = true}) => {
     const router = useRouter();
 
     return (
-        <div className={'relative flex justify-center items-center bg-[url("/assets/background/BG-Header.png")] bg-cover h-1/5 w-full rounded-t'}>
+        <div className={'relative flex justify-center items-center bg-[url("/assets/background/new-background-2.png")] bg-cover h-1/5 w-full rounded-t'}>
             <div className={'flex flex-row items-center w-5/6 z-10'}>
                 {isBack && (
                     <Button className={'flex justify-center items-center rounded-lg border-none p-0 h-10 w-14'}

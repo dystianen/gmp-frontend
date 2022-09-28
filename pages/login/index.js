@@ -42,13 +42,7 @@ const Login = observer(() => {
     return (
         <Spin spinning={isLoading}>
             <div
-                className={'relative flex-col flex justify-center bg-primary bg-center h-screen max-w-lg mx-auto rounded-t'}>
-                <div className="absolute top-0 left-0">
-                    <Image src={'/assets/background/Ellipse1.svg'} alt={'icon'} preview={false}/>
-                </div>
-                <div className="absolute top-28 right-0">
-                    <Image src={'/assets/background/Ellipse4.svg'} alt={'icon'} preview={false}/>
-                </div>
+                className={'relative flex-col flex justify-center bg-[url("/assets/background/new-background.png")] bg-cover bg-center h-screen max-w-lg mx-auto rounded-t'}>
                 <div className={'absolute top-6 left-6'}>
                     <Image src={'/assets/logo/logogmp.svg'} alt={'icon'} preview={false}/>
                 </div>

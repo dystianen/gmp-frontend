@@ -15,7 +15,7 @@ const Downline = observer(() => {
 
                 <div className={'px-8'}>
                     <Card
-                        className={"relative h-36 mt-9 bg-[#4461F2] rounded-xl bg-gradient-to-tr from-primary to-blue-300"}
+                        className={"relative h-36 mt-9 rounded-xl bg-gradient-to-tr from-primary to-blue-400"}
                         bodyStyle={{padding: 20}}
                     >
                         <div className={'absolute bottom-0 right-0 -mb-2'}>
@@ -35,7 +35,7 @@ const Downline = observer(() => {
                     </Card>
 
                     <Card
-                        className={"relative mt-9 h-36 bg-[#FFBF00] rounded-xl bg-gradient-to-tr from-secondary to-yellow-200"}
+                        className={"relative mt-9 h-36 rounded-xl bg-gradient-to-tr from-[#DC3DAA] to-fuchsia-400"}
                         bodyStyle={{padding: 20}}
                     >
                         <div className={'absolute bottom-0 right-0 -mb-2'}>
@@ -46,8 +46,7 @@ const Downline = observer(() => {
                             <h2 className={'text-2xl text-white'}>Sun Geneologi</h2>
                             <Button
                                 size={'large'}
-                                type={'primary'}
-                                className={'rounded-full text-white border-none font-semibold w-28'}
+                                className={'rounded-full bg-[#FCC200] text-white border-none font-semibold w-28'}
                                 onClick={() => router.push(`/geneologi/sun-tree`)}
                             >
                                 Lihat Detail
