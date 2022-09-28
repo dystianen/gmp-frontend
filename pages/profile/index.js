@@ -85,32 +85,37 @@ const Profile = observer(() => {
 
     return (
         <>
-            <Header title={'Profil'} />
+            <Header title={'Profil'}/>
 
             <div className={'px-8 bg-white'}>
-                <Avatar size={80} className={'flex justify-center items-center border-8 border-white -mt-[35px] -ml-2 mb-2'}
-                        src={user?.data?.picProfile} icon={<UserOutlined />}/>
+                <Avatar size={80}
+                        className={'flex justify-center items-center border-8 border-white -mt-[35px] -ml-2 mb-2'}
+                        src={user?.data?.picProfile} icon={<UserOutlined/>}/>
                 <div className={'flex flex-col'}>
                     <Title level={4}>{user?.data?.username}</Title>
                     <span className={'text-sm text-[#7d7d82]'}>{user?.data?.phoneNumber}</span>
                     <span className={'text-sm text-[#7d7d82]'}>{user?.data?.email}</span>
                 </div>
 
-                <div className={'flex flex-col pt-8 pb-28'}>
-                    <div>
-                        <Title level={5}>Kode Rujukan</Title>
-                        <Tag
-                            className={'flex justify-between items-center border-dashed p-3 border-[#4461F2] bg-[#4461F2]/[0.1] rounded-lg text-lg'}>
-                            <span className={'text-primary'}>{user?.data?.referralCode}</span>
-                            <span className={'text-sm hover:cursor-pointer'} onClick={copyToClipboard}>Salin</span>
-                        </Tag>
-                    </div>
+                <div className={'flex flex-col pb-28'}>
+                    {user?.data?.referralCode && (
+                        <div className={'pt-5'}>
+                            <Title level={5}>Kode Rujukan</Title>
+                            <Tag
+                                className={'flex justify-between items-center border-dashed p-3 border-[#4461F2] bg-[#4461F2]/[0.1] rounded-lg text-lg'}>
+                                <span className={'text-primary'}>{user?.data?.referralCode}</span>
+                                <span className={'text-sm hover:cursor-pointer'} onClick={copyToClipboard}>Salin</span>
+                            </Tag>
+                        </div>
+                    )}
 
                     <div className={'pt-5'}>
                         <Title level={5}>Akun</Title>
                         <div className={'flex flex-col gap-4'}>
                             {accountMenu.map((it, index) => {
-                                return <Card key={index} className={'hover:cursor-pointer rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'} bodyStyle={{padding: 12}} onClick={() => router.push(it.url)}>
+                                return <Card key={index}
+                                             className={'hover:cursor-pointer rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'}
+                                             bodyStyle={{padding: 12}} onClick={() => router.push(it.url)}>
                                     <div className={'flex items-center justify-between'}>
                                         <div className={'flex flex-row items-center gap-4'}>
                                             <Image src={it.icon} width={36} height={36} alt={'icon'} preview={false}/>
@@ -118,7 +123,7 @@ const Profile = observer(() => {
                                         </div>
                                         <div className={'text-right'}>
                                             <MdKeyboardArrowRight className={'text-3xl'}
-                                                                  />
+                                            />
                                         </div>
                                     </div>
                                 </Card>
@@ -130,7 +135,9 @@ const Profile = observer(() => {
                         <Title level={5}>Tentang</Title>
                         <div className={'flex flex-col gap-4'}>
                             {aboutMenu.map((it, index) => {
-                                return <Card key={index} className={'hover:cursor-pointer rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'} bodyStyle={{padding: 12}} onClick={() => router.push(it.url)}>
+                                return <Card key={index}
+                                             className={'hover:cursor-pointer rounded-lg shadow-[0px_4px_15px_rgba(18,19,28,0.05)] border-none'}
+                                             bodyStyle={{padding: 12}} onClick={() => router.push(it.url)}>
                                     <div className={'flex items-center justify-between'}>
                                         <div className={'flex flex-row items-center gap-4'}>
                                             <Image src={it.icon} width={36} height={36} alt={'icon'} preview={false}/>
@@ -138,7 +145,7 @@ const Profile = observer(() => {
                                         </div>
                                         <div className={'text-right'}>
                                             <MdKeyboardArrowRight className={'text-3xl'}
-                                                                  />
+                                            />
                                         </div>
                                     </div>
                                 </Card>
