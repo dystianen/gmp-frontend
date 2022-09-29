@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gmp-frontend
+  namespace: gmp-production
+spec:
+  selector:
+    matchLabels:
+      app: gmp-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gmp-frontend
+    spec:
+      containers:
+        - name: gmp-frontend
+          image: registry-harbor.app.bangun-kreatif.com/gmp/gmp-frontend:<VERSION>
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        - name: regcred
+
